@@ -1,6 +1,23 @@
 import pyautogui
 import time
 import re
+from datetime import datetime
+import sys
+import os
+
+
+
+def find_and_hover_image_with_fallback(image_paths, region, confidence=0.95, timeout=10, check_interval=0.2):
+        start_time = time.time()
+        while time.time() - start_time < timeout:
+            for path in image_paths:
+                location = pyautogui.locateOnScreen(path, region=region, confidence=confidence)
+                if location:
+                    pyautogui.moveTo(location.left + location.width // 2, location.top + location.height // 2)
+                    return path  # Found and hovered
+            time.sleep(check_interval)
+        return None
+
 
 def gateway_setup_movement(gateway_name):
     print(f"\033[93m[Gateway Setup] Executing setup for {gateway_name}\033[0m")
@@ -26,16 +43,55 @@ def gateway_setup_movement(gateway_name):
 
 
 def enter_gateway_name(gateway_text):
+    pyautogui.moveTo(299, 245, duration=.1)
+    pyautogui.scroll(500)
+    time.sleep(0.2)
     pyautogui.moveTo(354, 239, duration=.1)
     pyautogui.click()
     time.sleep(0.2)
-    pyautogui.keyDown('delete')
-    time.sleep(3)
-    pyautogui.keyUp('delete')
+    pyautogui.press('backspace')
+    pyautogui.press('backspace')
     time.sleep(0.2)
     pyautogui.write(gateway_text, interval=.1)
     time.sleep(0.2)
     pyautogui.press('enter')
+
+
+
+
+# === Define function (will run LATER) ===
+def find_and_hover_image_in_region(
+    image_path,
+    region,
+    confidence=0.8,
+    timeout=10,
+    check_interval=0.5
+):
+    print(f"Looking for '{image_path}' in region {region} with confidence >= {confidence}...")
+    start_time = time.time()
+
+    while time.time() - start_time < timeout:
+        try:
+            location = pyautogui.locateOnScreen(image_path, region=region, confidence=confidence)
+        except Exception as e:
+            print(f"Error: {e}")
+            location = None
+
+        if location is not None:
+            center = pyautogui.center(location)
+            print(f"Image found at {center}. Moving mouse.")
+            pyautogui.moveTo(center)
+            return
+
+        time.sleep(check_interval)
+
+    print(f"Timeout: '{image_path}' not found in region.")
+    sys.exit()
+
+
+
+    
+
 
 
 
@@ -51,19 +107,81 @@ def add_transaction_details(record):
 
     pyautogui.moveTo(524, 462, duration=.1)  # Order ID field
     pyautogui.click()
+    pyautogui.hotkey('ctrl', 'a')
+    pyautogui.press('delete')
+    time.sleep(0.2)
     pyautogui.write(record["Order ID"], interval=0.05)
 
     pyautogui.moveTo(833, 592, duration=.1)  # Phone Number field
     pyautogui.click()
+    pyautogui.hotkey('ctrl', 'a')
+    pyautogui.press('delete')
+    time.sleep(0.2)
     pyautogui.write(record["Phone Number"], interval=0.05)
 
     pyautogui.moveTo(528, 365, duration=.1)  # Amount field
     pyautogui.click()
+    pyautogui.hotkey('ctrl', 'a')
+    pyautogui.press('delete')
+    time.sleep(0.2)
     pyautogui.write(record["Amount"], interval=0.05)
 
-    pyautogui.moveTo(1340, 914, duration=.1)  # Apply button
+    pyautogui.moveTo(560, 294, duration=.1)  # Transaction time section
+    pyautogui.click()
+    pyautogui.hotkey('ctrl', 'a')
+    pyautogui.press('delete')
+    time.sleep(0.2)
+    time.sleep(0.5)
+
+
+    image_paths = [record.get("Image Path 1"), record.get("Image Path 2")]
+    image_paths = [p for p in image_paths if p and os.path.exists(p)]  # Filter non-existent paths
+
+    if image_paths:
+        matched_path = find_and_hover_image_with_fallback(
+            image_paths,
+            region=(512, 370, 500, 500),  # Adjust if needed
+            confidence=0.95,
+            timeout=10,
+            check_interval=0.2
+        )
+        if matched_path:
+            pyautogui.click()
+        else:
+            print(f"❌ Date not found on screen for {record['Time']}")
+    else:
+        print("⚠️ No valid image paths provided — skipping date selection.")
+
+
+
+
+    # Select Hour
+    pyautogui.moveTo(564, 602, duration=0.1)
+    pyautogui.click()
+    time.sleep(0.2)
+    pyautogui.hotkey('ctrl', 'a')
+    pyautogui.press('delete')
+    time.sleep(1)
+    pyautogui.write(record["Hour"], interval=0.1)
+
+    # Select Minute
+    pyautogui.moveTo(682, 602, duration=0.1)
+    pyautogui.click()
+    time.sleep(0.2)
+    pyautogui.hotkey('ctrl', 'a')
+    pyautogui.press('delete')
+    time.sleep(1)
+    pyautogui.write(record["Minute"], interval=0.1)
+    
+    # Safety feature to ensure calendar receive the date
+    pyautogui.moveTo(943, 618, duration=.1)  
     pyautogui.click()
     time.sleep(0.5)
+
+    # Apply button
+    pyautogui.moveTo(1340, 914, duration=.1)  
+    pyautogui.click()
+    time.sleep(3)
 
 
 
@@ -107,6 +225,7 @@ def parse_and_execute(filename):
                     print(f"\033[91m[Warning] Unsupported gateway '{detected_gateway}' found, skipping setup and records.\033[0m")
                     current_gateway = None  # Reset to ignore records for unsupported gateway
 
+
         elif current_gateway:  # Only parse transaction details if we have a valid gateway active
 
             if line.startswith("Order ID:"):
@@ -121,17 +240,58 @@ def parse_and_execute(filename):
             elif line.startswith("Time:"):
                 time_str = line.split(":", 1)[1].strip()
 
-                # After Time line, append the record
+                try:
+                    dt = datetime.strptime(time_str, "%Y-%m-%d %H:%M:%S")
+                    day_str = str(dt.day)
+                    hour_str = f"{dt.hour:02d}"
+                    minute_str = f"{dt.minute:02d}"
+
+                    # Store both paths
+                    image_folder = os.path.join(os.getcwd(), "rocketgo_date_select")
+                    image_path_1 = os.path.join(image_folder, f"{day_str}.png")
+                    image_path_2 = os.path.join(image_folder, f"{day_str}(1).png")
+
+                except ValueError:
+                    print(f"\033[91m[Error] Invalid date format: '{time_str}'\033[0m")
+                    day_str = None
+                    image_path_1 = None
+                    image_path_2 = None
+
+                # Append the record with both image paths
                 current_records.append({
                     "Order ID": order_id,
                     "Phone Number": phone,
                     "Amount": amount,
-                    "Time": time_str
+                    "Time": time_str,
+                    "Image Path 1": image_path_1,
+                    "Image Path 2": image_path_2,
+                    "Hour": hour_str,
+                    "Minute": minute_str
                 })
+
 
     # Process any remaining records for the last gateway
     for record in current_records:
         add_transaction_details(record)
+
+        # Check done applied
+        check_x, check_y = 786, 188  # <- Replace with your pixel coordinate
+        expected_rgb = (25, 33, 50)  # <- Replace with the RGB value to match
+        timeout = 20                       # seconds
+        interval = 0.2                     # check every 0.2 sec
+
+        print("Waiting for color match...")
+
+        start_time = time.time()
+        while True:
+            current_rgb = pyautogui.pixel(check_x, check_y)
+            if current_rgb == expected_rgb:
+                print("✅ RGB match found. Proceeding.")
+                break
+            elif time.time() - start_time > timeout:
+                print("⛔ Timeout: RGB match not found after 20 seconds.")
+                break
+            time.sleep(interval)
 
 
 

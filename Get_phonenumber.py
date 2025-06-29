@@ -57,28 +57,40 @@ def hover_on_image(image_path, search_region, timeout=10):
 phone_numbers = []
 
 def extract_and_group_by_phone_number():
-    """Extracts only phone numbers from clipboard HTML and stores in phone_numbers list."""
+    """Extracts phone number, email, and affiliate code from clipboard HTML and stores in phone_records list."""
     global phone_numbers
 
     html_data = pyperclip.paste()
     soup = BeautifulSoup(html_data, "html.parser")
     rows = soup.find_all("tr")
 
+    seen_numbers = set()
+
     for row in rows:
         tds = row.find_all("td")
-        if len(tds) < 17:
+        if len(tds) < 19:  # Make sure there's enough columns
             continue
 
         phone_number = tds[16].text.strip()
-        if phone_number and phone_number not in phone_numbers:
-            phone_numbers.append(phone_number)
+        email = tds[18].text.strip()
+        affiliate_code = tds[6].text.strip()
+
+        if phone_number and phone_number not in seen_numbers:
+            phone_numbers.append({
+                "Phone Number": phone_number,
+                "Email": email,
+                "Affiliate Code": affiliate_code
+            })
+            seen_numbers.add(phone_number)
+
 
 def print_grouped_results():
-    """Prints and appends phone numbers to the file."""
+    """Prints and writes phone number, email, and affiliate code to a file."""
     with open("phone_numbers.txt", "w", encoding="utf-8") as f:
-        for number in phone_numbers:
-            print(number)                
-            f.write(number + "\n") 
+        for record in phone_numbers:
+            line = f'{record["Phone Number"]}, {record["Email"]}, {record["Affiliate Code"]}'
+            print(line)
+            f.write(line + "\n")
 
 
 
