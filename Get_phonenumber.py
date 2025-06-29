@@ -74,9 +74,11 @@ def extract_and_group_by_phone_number():
             phone_numbers.append(phone_number)
 
 def print_grouped_results():
-    """Prints only phone numbers from the list."""
-    for number in phone_numbers:
-        print(number)
+    """Prints and appends phone numbers to the file."""
+    with open("phone_numbers.txt", "w", encoding="utf-8") as f:
+        for number in phone_numbers:
+            print(number)                
+            f.write(number + "\n") 
 
 
 

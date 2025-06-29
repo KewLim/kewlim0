@@ -1,10 +1,10 @@
 import pyautogui
 import time
 
-# Step 1: Load phone numbers from the text file
+# Step 1: Load phone numbers from the text file in descending order
 def load_phone_numbers(filename):
     with open(filename, 'r') as file:
-        return [line.strip() for line in file if line.strip()]
+        return [line.strip() for line in file if line.strip()][::-1]
 
 phone_numbers = load_phone_numbers("phone_numbers.txt")
 
@@ -43,7 +43,25 @@ def paste_phone_number_twice(phone_number):
     pyautogui.moveTo(1224, 928, duration=0.1)
     time.sleep(0.1)
     pyautogui.click()
-    time.sleep(5)  # Adjust if the system needs more time to process
+    time.sleep(3)  # Adjust if the system needs more time to process
+
+    check_x, check_y = 786, 188  # <- Replace with your pixel coordinate
+    expected_rgb = (25, 33, 50)  # <- Replace with the RGB value to match
+    timeout = 20                       # seconds
+    interval = 0.2                     # check every 0.2 sec
+
+    print("Waiting for color match...")
+
+    start_time = time.time()
+    while True:
+        current_rgb = pyautogui.pixel(check_x, check_y)
+        if current_rgb == expected_rgb:
+            print("✅ RGB match found. Proceeding.")
+            break
+        elif time.time() - start_time > timeout:
+            print("⛔ Timeout: RGB match not found after 20 seconds.")
+            break
+        time.sleep(interval)
 
 # Step 3: Main loop
 for number in phone_numbers:
