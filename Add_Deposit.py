@@ -1,3 +1,5 @@
+import cv2
+import numpy as np
 import pyautogui
 import time
 import re
@@ -7,15 +9,53 @@ import os
 
 
 
-def find_and_hover_image_with_fallback(image_paths, region, confidence=0.95, timeout=10, check_interval=0.2):
-        start_time = time.time()
-        while time.time() - start_time < timeout:
-            for path in image_paths:
+def find_and_hover_image_with_fallback(
+    image_paths,
+    region,
+    confidence=0.95,
+    timeout=10,
+    check_interval=0.2
+):
+    start_time = time.time()
+    while time.time() - start_time < timeout:
+        for path in image_paths:
+            try:
                 location = pyautogui.locateOnScreen(path, region=region, confidence=confidence)
                 if location:
-                    pyautogui.moveTo(location.left + location.width // 2, location.top + location.height // 2)
-                    return path  # Found and hovered
-            time.sleep(check_interval)
+                    center = pyautogui.center(location)
+                    pyautogui.moveTo(center, duration=0.2)
+                    print(f"✅ Found and hovered: {path}")
+                    return path
+            except Exception as e:
+                print(f"[Error] Matching failed for {path}: {e}")
+        time.sleep(check_interval)
+    return None
+
+
+def match_template_in_region(template_path, region, threshold=0.95):
+    # 1. Take screenshot of the region
+    screenshot = pyautogui.screenshot(region=region)
+    screenshot = cv2.cvtColor(np.array(screenshot), cv2.COLOR_RGB2GRAY)
+
+    # 2. Load and convert template to grayscale
+    template = cv2.imread(template_path, cv2.IMREAD_GRAYSCALE)
+
+    # 3. Edge detection (optional but improves precision)
+    screenshot_edges = cv2.Canny(screenshot, 50, 200)
+    template_edges = cv2.Canny(template, 50, 200)
+
+    # 4. Perform template matching
+    result = cv2.matchTemplate(screenshot_edges, template_edges, cv2.TM_CCOEFF_NORMED)
+    min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(result)
+
+    if max_val >= threshold:
+        print(f"✅ Match found with confidence {max_val:.2f}")
+        # Return coordinates of the center of the matched region
+        template_h, template_w = template.shape
+        match_center = (region[0] + max_loc[0] + template_w // 2, region[1] + max_loc[1] + template_h // 2)
+        return match_center
+    else:
+        print(f"❌ No match found (max confidence: {max_val:.2f})")
         return None
 
 
@@ -63,30 +103,42 @@ def enter_gateway_name(gateway_text):
 def find_and_hover_image_in_region(
     image_path,
     region,
-    confidence=0.8,
+    confidence=0.95,
     timeout=10,
     check_interval=0.5
 ):
-    print(f"Looking for '{image_path}' in region {region} with confidence >= {confidence}...")
     start_time = time.time()
 
     while time.time() - start_time < timeout:
-        try:
-            location = pyautogui.locateOnScreen(image_path, region=region, confidence=confidence)
-        except Exception as e:
-            print(f"Error: {e}")
-            location = None
+        # Take screenshot of the region
+        screenshot = pyautogui.screenshot(region=region)
+        screenshot_gray = cv2.cvtColor(np.array(screenshot), cv2.COLOR_RGB2GRAY)
 
-        if location is not None:
-            center = pyautogui.center(location)
-            print(f"Image found at {center}. Moving mouse.")
-            pyautogui.moveTo(center)
-            return
+        # Load and preprocess template
+        template = cv2.imread(image_path, cv2.IMREAD_GRAYSCALE)
+        if template is None:
+            print(f"\033[91m[Error] Failed to load image: {image_path}\033[0m")
+            return False
+
+        # Edge detection for both images
+        screenshot_edges = cv2.Canny(screenshot_gray, 50, 200)
+        template_edges = cv2.Canny(template, 50, 200)
+
+        # Match template
+        result = cv2.matchTemplate(screenshot_edges, template_edges, cv2.TM_CCOEFF_NORMED)
+        _, max_val, _, max_loc = cv2.minMaxLoc(result)
+
+        if max_val >= confidence:
+            print(f"✅ Match found ({image_path}) with confidence {max_val:.2f}")
+            h, w = template.shape
+            match_center = (region[0] + max_loc[0] + w // 2, region[1] + max_loc[1] + h // 2)
+            pyautogui.moveTo(match_center, duration=0.2)
+            return True
 
         time.sleep(check_interval)
 
-    print(f"Timeout: '{image_path}' not found in region.")
-    sys.exit()
+    print(f"\033[91m❌ Failed to match {image_path} within {timeout} seconds.\033[0m")
+    return False
 
 
 
