@@ -75,7 +75,8 @@ def gateway_setup_movement(gateway_name):
         "BOMBAYPAY": "BOMBAYPAY",
         "EPAY": "EPAY",
         "MOHAMMED AMEER ABBAS": "Karnataka Bank 2",
-        "Test": "Test"
+        "Test": "Test",
+        "Test2" : "Test2"
     }
 
     if gateway_name in gateway_map:
@@ -83,18 +84,35 @@ def gateway_setup_movement(gateway_name):
 
 
 def enter_gateway_name(gateway_text):
-    pyautogui.moveTo(299, 245, duration=.1)
+    pyautogui.moveTo(299, 245, duration=0.1)
     pyautogui.scroll(500)
     time.sleep(0.2)
-    pyautogui.moveTo(354, 239, duration=.1)
+    pyautogui.moveTo(354, 239, duration=0.1)
     pyautogui.click()
     time.sleep(0.2)
     pyautogui.press('backspace')
     pyautogui.press('backspace')
     time.sleep(0.2)
-    pyautogui.write(gateway_text, interval=.1)
+    pyautogui.write(gateway_text, interval=0.1)
     time.sleep(0.2)
     pyautogui.press('enter')
+
+    # --- RGB color match check (wait until matched) ---
+    check_x, check_y = 318, 992
+    expected_rgb = (38, 51, 77)
+    interval = 0.2  # check every 0.2 seconds
+
+    print("Waiting for color match...")
+
+    while True:
+        try:
+            current_rgb = pyautogui.pixel(check_x, check_y)
+            if current_rgb == expected_rgb:
+                print("✅ RGB match found. Proceeding.")
+                break
+        except Exception as e:
+            print(f"⚠️ Error checking pixel color: {e}")
+        time.sleep(interval)
 
 
 
@@ -235,6 +253,26 @@ def add_transaction_details(record):
     pyautogui.click()
     time.sleep(3)
 
+    check_x, check_y = 1103, 193  # <- Replace with your pixel coordinate
+    expected_rgb = (25, 33, 50)  # <- Replace with the RGB value to match
+    timeout = 50                       # seconds
+    interval = 0.2                     # check every 0.2 sec
+
+    print("Waiting for color match...")
+
+    start_time = time.time()
+    while True:
+        current_rgb = pyautogui.pixel(check_x, check_y)
+        if current_rgb == expected_rgb:
+            print("✅ RGB match found. Proceeding.")
+            break
+        elif time.time() - start_time > timeout:
+            print("⛔ Timeout: RGB match not found after 20 seconds.")
+            break
+        time.sleep(interval)
+
+    time.sleep(1)
+
 
 
 def parse_and_execute(filename):
@@ -249,7 +287,7 @@ def parse_and_execute(filename):
     supported_gateways = {
         "XYPAY", "SKPAY", "YTPAY", "OSPAY", "SIMPLYPAY", "VADERPAY",
         "PASSPAY", "MULTIPAY", "U9PAY", "BOMBAYPAY", "EPAY", 
-        "MOHAMMED AMEER ABBAS", "Test"
+        "MOHAMMED AMEER ABBAS", "Test", "Test2"
     }
 
     for line in lines:

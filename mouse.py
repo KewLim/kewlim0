@@ -4,7 +4,6 @@ import time
 
 # python mouse.py
 # python mouse2.py
-# python Deposit_YTpay.py
 # python RocketGO_add_deposit.py
 # python Action_FIND.py
 # python main.py 
