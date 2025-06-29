@@ -93,6 +93,9 @@ def extract_and_group_by_gateway():
             "Time": time_str
         })
 
+
+
+
 def print_grouped_results():
     """Prints all grouped data and writes it to 'transaction_history.txt'."""
     with open("transaction_history.txt", "w", encoding="utf-8") as f:
@@ -113,6 +116,11 @@ def print_grouped_results():
                 )
                 print(f"\033[94m{entry}\033[0m")
                 f.write(entry)
+
+            # Add total at the bottom too
+            footer = f"\n>> Total Amount for {gateway}: Rs {total_amount:,.2f}\n"
+            print(f"\033[93m{footer}\033[0m")
+            f.write(footer)
 
 
 
