@@ -175,28 +175,28 @@ def add_transaction_details(record):
     pyautogui.click()
 
 
-    pyautogui.moveTo(524, 462, duration=.1)  # Order ID field
+    pyautogui.moveTo(530, 432, duration=.1)  # Order ID field
     pyautogui.click()
     pyautogui.hotkey('ctrl', 'a')
     pyautogui.press('delete')
     time.sleep(0.2)
     pyautogui.write(record["Order ID"], interval=0.05)
 
-    pyautogui.moveTo(833, 592, duration=.1)  # Phone Number field
+    pyautogui.moveTo(830, 565, duration=.1)  # Phone Number field
     pyautogui.click()
     pyautogui.hotkey('ctrl', 'a')
     pyautogui.press('delete')
     time.sleep(0.2)
     pyautogui.write(record["Phone Number"], interval=0.05)
 
-    pyautogui.moveTo(528, 365, duration=.1)  # Amount field
+    pyautogui.moveTo(528, 354, duration=.1)  # Amount field
     pyautogui.click()
     pyautogui.hotkey('ctrl', 'a')
     pyautogui.press('delete')
     time.sleep(0.2)
     pyautogui.write(record["Amount"], interval=0.05)
 
-    pyautogui.moveTo(560, 294, duration=.1)  # Transaction time section
+    pyautogui.moveTo(560, 295, duration=.1)  # Transaction time section
     pyautogui.click()
     pyautogui.hotkey('ctrl', 'a')
     pyautogui.press('delete')
@@ -242,14 +242,29 @@ def add_transaction_details(record):
     pyautogui.press('delete')
     time.sleep(1)
     pyautogui.write(record["Minute"], interval=0.1)
-    
+
+
+# ✅ Morning-only action: click if time is before 12 PM
+    try:
+        hour = int(record.get("Hour", "0"))  # Default to 0 if missing
+        if hour < 12:
+            print("🌅 Hour is before 12 PM — performing morning-only action.")
+            pyautogui.moveTo(756, 598, duration=0.1)  # <- Replace with your actual coordinates
+            pyautogui.click()
+        else:
+            print("🌇 Hour is 12 PM or later — skipping morning-only action.")
+    except Exception as e:
+        print(f"⚠️ Hour check failed: {e}")
+
+
+
     # Safety feature to ensure calendar receive the date
     pyautogui.moveTo(943, 618, duration=.1)  
     pyautogui.click()
     time.sleep(0.5)
 
     # Apply button
-    pyautogui.moveTo(1340, 914, duration=.1)  
+    pyautogui.moveTo(1340, 916, duration=.1)  
     pyautogui.click()
     time.sleep(3)
 

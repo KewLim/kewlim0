@@ -120,7 +120,7 @@ def click_if_next_button_found(image_path, search_region, click_x, click_y, conf
 
 
 image_path = 'img/next_button.png'
-search_region = (631, 917, 500, 500)
+search_region = (863, 839, 500, 500)
 
 
 def wait_for_overlay_to_disappear(x=447, y=438, loading_color=(102, 102, 102), timeout=20, check_interval=0.2):
