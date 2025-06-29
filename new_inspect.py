@@ -98,9 +98,12 @@ def extract_and_group_by_gateway():
 
 def print_grouped_results():
     """Prints all grouped data and writes it to 'transaction_history.txt'."""
+    grand_total = 0  # <-- Make sure this is declared at the top
+
     with open("transaction_history.txt", "w", encoding="utf-8") as f:
         for gateway, records in gateway_groups.items():
             total_amount = sum(float(record["Amount"].replace(",", "")) for record in records)
+            grand_total += total_amount  # <-- Accumulate total for grand total
 
             header = f"\n==== {gateway} ({len(records)} record{'s' if len(records) != 1 else ''}) | Total Amount: Rs {total_amount:,.2f} ====\n"
             print(f"\033[92m{header}\033[0m")
@@ -117,10 +120,15 @@ def print_grouped_results():
                 print(f"\033[94m{entry}\033[0m")
                 f.write(entry)
 
-            # Add total at the bottom too
             footer = f"\n>> Total Amount for {gateway}: Rs {total_amount:,.2f}\n"
             print(f"\033[93m{footer}\033[0m")
             f.write(footer)
+
+        # ✅ Add grand total at the end
+        grand_footer = f"\n==== GRAND TOTAL for All Gateways: Rs {grand_total:,.2f} ====\n"
+        print(f"\033[95m{grand_footer}\033[0m")
+        f.write(grand_footer)
+
 
 
 
