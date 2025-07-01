@@ -1,12 +1,222 @@
 
-==== Test (34 records) | Total Amount: Rs 100,254.00 ====
+==== SKPAY (14 records) | Total Amount: Rs 17,654.00 ====
+
+Record #1
+Order ID: LTJPW5641
+Phone Number: 917018798771
+Amount: 800.00
+Time: 2025-06-30 22:17:26
+
+Record #2
+Order ID: LTJPW5633
+Phone Number: 919740735913
+Amount: 1,000.00
+Time: 2025-06-30 20:55:27
+
+Record #3
+Order ID: LTJPW5631
+Phone Number: 919146609223
+Amount: 1,006.00
+Time: 2025-06-30 19:51:54
+
+Record #4
+Order ID: LTJPW5626
+Phone Number: 919909519970
+Amount: 1,000.00
+Time: 2025-06-30 19:51:23
+
+Record #5
+Order ID: LTJPW5628
+Phone Number: 917001254072
+Amount: 500.00
+Time: 2025-06-30 17:44:11
+
+Record #6
+Order ID: LTJPW5627
+Phone Number: 917478393379
+Amount: 600.00
+Time: 2025-06-30 17:11:06
+
+Record #7
+Order ID: LTJPW5624
+Phone Number: 918910460953
+Amount: 748.00
+Time: 2025-06-30 16:15:12
+
+Record #8
+Order ID: LTJPW5623
+Phone Number: 918190084053
+Amount: 1,200.00
+Time: 2025-06-30 15:32:44
+
+Record #9
+Order ID: LTJPW5621
+Phone Number: 918882448066
+Amount: 500.00
+Time: 2025-06-30 12:06:32
+
+Record #10
+Order ID: LTJPW5620
+Phone Number: 919265604354
+Amount: 2,000.00
+Time: 2025-06-30 10:52:02
+
+Record #11
+Order ID: LTJPW5611
+Phone Number: 919265604354
+Amount: 2,000.00
+Time: 2025-06-30 09:53:50
+
+Record #12
+Order ID: LTJPW5617
+Phone Number: 919523640166
+Amount: 1,800.00
+Time: 2025-06-30 09:21:38
+
+Record #13
+Order ID: LTJPW5613
+Phone Number: 919813939027
+Amount: 500.00
+Time: 2025-06-30 08:30:12
+
+Record #14
+Order ID: LTJPW5615
+Phone Number: 919373608381
+Amount: 4,000.00
+Time: 2025-06-30 08:17:10
+
+>> Total Amount for SKPAY: Rs 17,654.00
+
+==== YTPAY (12 records) | Total Amount: Rs 46,600.00 ====
 
 Record #1
 Order ID: LTJPW5639
 Phone Number: 918955116885
 Amount: 2,000.00
-Time: 2025-07-01 23:01:51
+Time: 2025-06-30 23:01:51
 
->> Total Amount for -: Rs 100,254.00
+Record #2
+Order ID: LTJPW5638
+Phone Number: 917490953167
+Amount: 500.00
+Time: 2025-06-30 23:01:50
+
+Record #3
+Order ID: LTJPW5635
+Phone Number: 918306123778
+Amount: 2,000.00
+Time: 2025-06-30 23:01:34
+
+Record #4
+Order ID: LTJPW5634
+Phone Number: 919265400712
+Amount: 1,800.00
+Time: 2025-06-30 23:01:32
+
+Record #5
+Order ID: LTJPW5632
+Phone Number: 918073690532
+Amount: 6,000.00
+Time: 2025-06-30 20:40:44
+
+Record #6
+Order ID: LTJPW5630
+Phone Number: 918667520898
+Amount: 1,500.00
+Time: 2025-06-30 19:24:30
+
+Record #7
+Order ID: LTJPW5622
+Phone Number: 917041506867
+Amount: 500.00
+Time: 2025-06-30 12:15:08
+
+Record #8
+Order ID: LTJPW5614
+Phone Number: 919993746356
+Amount: 500.00
+Time: 2025-06-30 09:54:18
+
+Record #9
+Order ID: LTJPW5616
+Phone Number: 919311971188
+Amount: 30,000.00
+Time: 2025-06-30 09:52:26
+
+Record #10
+Order ID: LTJPW5610
+Phone Number: 918882448066
+Amount: 500.00
+Time: 2025-06-30 09:22:37
+
+Record #11
+Order ID: LTJPW5608
+Phone Number: 917018798771
+Amount: 800.00
+Time: 2025-06-30 09:22:34
+
+Record #12
+Order ID: LTJPW5607
+Phone Number: 917001034784
+Amount: 500.00
+Time: 2025-06-30 00:42:03
+
+>> Total Amount for YTPAY: Rs 46,600.00
+
+==== XYPAY (7 records) | Total Amount: Rs 35,500.00 ====
+
+Record #1
+Order ID: LTJPW5606
+Phone Number: 919742941132
+Amount: 15,000.00
+Time: 2025-06-30 18:11:00
+
+Record #2
+Order ID: LTJPW5618
+Phone Number: 919634222211
+Amount: 1,900.00
+Time: 2025-06-30 18:09:05
+
+Record #3
+Order ID: LTJPW5625
+Phone Number: 919579945568
+Amount: 2,000.00
+Time: 2025-06-30 18:08:25
+
+Record #4
+Order ID: LTJPW5629
+Phone Number: 918667520898
+Amount: 500.00
+Time: 2025-06-30 17:37:23
+
+Record #5
+Order ID: LTJPW5609
+Phone Number: 918121780085
+Amount: 1,100.00
+Time: 2025-06-30 13:33:14
+
+Record #6
+Order ID: LTJPW5612
+Phone Number: 917689936286
+Amount: 10,000.00
+Time: 2025-06-30 10:49:19
+
+Record #7
+Order ID: LTJPW5604
+Phone Number: 917689936286
+Amount: 5,000.00
+Time: 2025-06-30 00:33:22
+
+>> Total Amount for XYPAY: Rs 35,500.00
+
+==== OSPAY (1 record) | Total Amount: Rs 500.00 ====
+
+Record #1
+Order ID: LTJPW5597
+Phone Number: 917208271956
+Amount: 500.00
+Time: 2025-06-30 03:37:39
+
+>> Total Amount for OSPAY: Rs 500.00
 
 ==== GRAND TOTAL for All Gateways: Rs 100,254.00 ====

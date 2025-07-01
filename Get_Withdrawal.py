@@ -94,7 +94,7 @@ def extract_and_group_by_gateway():
         phone_number = tds[8].text.strip()       
         amount = tds[12].text.strip()            
         time_str = tds[18].text.strip()         
-        payment_gateway = tds[24].text.strip()  
+        payment_gateway = tds[23].text.strip()  
 
         # Prevent duplicates (optional: skip if order ID already exists in the same gateway)
         existing_ids = [r["Order ID"] for r in gateway_groups[payment_gateway]]
