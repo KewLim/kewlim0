@@ -174,6 +174,7 @@ def add_transaction_details(record):
     time.sleep(0.2)
     pyautogui.click()
 
+    time.sleep(1)
 
     pyautogui.moveTo(530, 432, duration=.1)  # Order ID field
     pyautogui.click()

@@ -36,7 +36,7 @@ def hover_on_image(image_path, search_region, timeout=10):
 
 
 def copy_table_html_from_devtools():
-    """Automates copying table HTML from Chrome DevTools."""
+    """Automates copying table HTML from Chrome DevTools with RGB color check."""
 
     pyautogui.moveTo(1010, 600, duration=.5)  
     pyautogui.click()
@@ -44,14 +44,29 @@ def copy_table_html_from_devtools():
     pyautogui.write('tbody', interval=.1)
     pyautogui.moveTo(1041, 131, duration=.5)  # Make sure on first row
 
- 
+    # ✅ Wait for expected RGB before proceeding
+    check_x, check_y = 488, 430
+    expected_rgb = (255, 255, 255)  # <- Replace with the actual RGB you expect
+    timeout = 20  # seconds
+    interval = 0.2  # check interval
+
+    print(f"⏳ Waiting for RGB at ({check_x}, {check_y}) to be {expected_rgb}...")
+
+    start_time = time.time()
+    while True:
+        current_rgb = pyautogui.pixel(check_x, check_y)
+        if current_rgb == expected_rgb:
+            print(f"✅ RGB matched: {current_rgb}")
+            break
+        elif time.time() - start_time > timeout:
+            print(f"❌ Timeout! Expected RGB {expected_rgb} not found.")
+            return  # or raise an exception if you want to stop the script
+        time.sleep(interval)
+
+    # ✅ Proceed after RGB is matched
     pyautogui.click()
-
-    # Copy the selected element's HTML
-    pyautogui.hotkey('ctrl', 'c')  
-    # pyautogui.hotkey('ctrl', 'shift', 'c')  # Close DevTools Arrow to prevent blue overlay
-
-    time.sleep(1) 
+    pyautogui.hotkey('ctrl', 'c')  # Copy HTML
+    time.sleep(1)
 
     
 
@@ -109,7 +124,15 @@ def print_grouped_results():
             print(f"\033[92m{header}\033[0m")
             f.write(header)
 
-            for i, record in enumerate(records, 1):
+            # Sort records by time (latest first)
+            sorted_records = sorted(
+                records,
+                key=lambda r: datetime.strptime(r["Time"], "%Y-%m-%d %H:%M:%S"),
+                reverse=True
+            )
+
+            # Enumerate only once per record
+            for i, record in enumerate(sorted_records, 1):
                 entry = (
                     f"\nRecord #{i}\n"
                     f"Order ID: {record['Order ID']}\n"
