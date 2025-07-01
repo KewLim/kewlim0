@@ -1,20 +1,130 @@
-==== Test (6 records) | Total Amount: Rs 6,000.00 ====
+
+==== SKPAY (7 records) | Total Amount: Rs 4,000.00 ====
 
 Record #1
-Order ID: LTJPD72774
-Phone Number: 917795151554
-Amount: 2,000.00
-Time: 2025-06-30 00:28:26
+Order ID: LTJPD72858
+Phone Number: 919311971188
+Amount: 1,000.00
+Time: 2025-06-30 08:19:33
 
 Record #2
-Order ID: LTJPD72754
-Phone Number: 917795151554
+Order ID: LTJPD72857
+Phone Number: 918296857172
+Amount: 500.00
+Time: 2025-06-30 08:12:57
+
+Record #3
+Order ID: LTJPD72849
+Phone Number: 918955116885
+Amount: 500.00
+Time: 2025-06-30 05:14:56
+
+Record #4
+Order ID: LTJPD72843
+Phone Number: 917872574879
+Amount: 500.00
+Time: 2025-06-30 02:46:45
+
+Record #5
+Order ID: LTJPD72842
+Phone Number: 918121780085
+Amount: 500.00
+Time: 2025-06-30 01:44:59
+
+Record #6
+Order ID: LTJPD72837
+Phone Number: 919158304605
+Amount: 500.00
+Time: 2025-06-30 01:09:39
+
+Record #7
+Order ID: LTJPD72828
+Phone Number: 918927415861
+Amount: 500.00
+Time: 2025-06-30 00:35:47
+
+>> Total Amount for SKPAY: Rs 4,000.00
+
+==== YTPAY (5 records) | Total Amount: Rs 1,900.00 ====
+
+Record #1
+Order ID: LTJPD72854
+Phone Number: 919993746356
+Amount: 300.00
+Time: 2025-06-30 07:02:44
+
+Record #2
+Order ID: LTJPD72853
+Phone Number: 919993746356
+Amount: 300.00
+Time: 2025-06-30 06:34:30
+
+Record #3
+Order ID: LTJPD72851
+Phone Number: 918955116885
+Amount: 300.00
+Time: 2025-06-30 05:51:04
+
+Record #4
+Order ID: LTJPD72850
+Phone Number: 918955116885
+Amount: 500.00
+Time: 2025-06-30 05:20:21
+
+Record #5
+Order ID: LTJPD72826
+Phone Number: 919579945568
+Amount: 500.00
+Time: 2025-06-30 00:01:40
+
+>> Total Amount for YTPAY: Rs 1,900.00
+
+==== OSPAY (1 record) | Total Amount: Rs 600.00 ====
+
+Record #1
+Order ID: LTJPD72852
+Phone Number: 919373608381
+Amount: 600.00
+Time: 2025-06-30 06:16:58
+
+>> Total Amount for OSPAY: Rs 600.00
+
+==== PASSPAY (2 records) | Total Amount: Rs 400.00 ====
+
+Record #1
+Order ID: LTJPD72848
+Phone Number: 917018798771
+Amount: 200.00
+Time: 2025-06-30 05:01:44
+
+Record #2
+Order ID: LTJPD72838
+Phone Number: 919810632371
+Amount: 200.00
+Time: 2025-06-30 01:07:45
+
+>> Total Amount for PASSPAY: Rs 400.00
+
+==== XYPAY (3 records) | Total Amount: Rs 4,000.00 ====
+
+Record #1
+Order ID: LTJPD72841
+Phone Number: 919311971188
+Amount: 1,500.00
+Time: 2025-06-30 01:22:13
+
+Record #2
+Order ID: LTJPD72833
+Phone Number: 919311971188
 Amount: 2,000.00
-Time: 2025-06-30 14:49:14
+Time: 2025-06-30 00:37:00
 
+Record #3
+Order ID: LTJPD72830
+Phone Number: 918121780085
+Amount: 500.00
+Time: 2025-06-30 00:48:27
 
->> Total Amount for OSPAY: Rs 6,000.00
+>> Total Amount for XYPAY: Rs 4,000.00
 
-
-
-==== GRAND TOTAL for All Gateways: Rs 143,769.00 ====
+==== GRAND TOTAL for All Gateways: Rs 10,900.00 ====
