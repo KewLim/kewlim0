@@ -176,7 +176,13 @@ def add_transaction_details(record):
 
     time.sleep(1)
 
-    pyautogui.moveTo(530, 432, duration=.1)  # Order ID field
+    pyautogui.moveTo(873, 293, duration=.1)  # Out
+    time.sleep(0.2)
+    pyautogui.click()
+
+    time.sleep(1)
+
+    pyautogui.moveTo(836, 460, duration=.1)  # Order ID field
     pyautogui.click()
     pyautogui.hotkey('ctrl', 'a')
     pyautogui.press('delete')
@@ -415,5 +421,5 @@ pyautogui.keyUp('alt')
 print("Switched window!")
 
 time.sleep(0.5)  
-parse_and_execute("transaction_history.txt")
+parse_and_execute("WD_transaction_history.txt")
 
