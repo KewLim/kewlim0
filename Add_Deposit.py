@@ -176,21 +176,21 @@ def add_transaction_details(record):
 
     time.sleep(1)
 
-    pyautogui.moveTo(530, 432, duration=.1)  # Order ID field
+    pyautogui.moveTo(530, 455, duration=.1)  # Order ID field
     pyautogui.click()
     pyautogui.hotkey('ctrl', 'a')
     pyautogui.press('delete')
     time.sleep(0.2)
     pyautogui.write(record["Order ID"], interval=0.05)
 
-    pyautogui.moveTo(830, 565, duration=.1)  # Phone Number field
+    pyautogui.moveTo(830, 580, duration=.1)  # Phone Number field
     pyautogui.click()
     pyautogui.hotkey('ctrl', 'a')
     pyautogui.press('delete')
     time.sleep(0.2)
     pyautogui.write(record["Phone Number"], interval=0.05)
 
-    pyautogui.moveTo(528, 354, duration=.1)  # Amount field
+    pyautogui.moveTo(528, 370, duration=.1)  # Amount field
     pyautogui.click()
     pyautogui.hotkey('ctrl', 'a')
     pyautogui.press('delete')
@@ -202,26 +202,28 @@ def add_transaction_details(record):
     pyautogui.hotkey('ctrl', 'a')
     pyautogui.press('delete')
     time.sleep(0.2)
-    time.sleep(0.5)
+    time.sleep(2)
 
 
     image_paths = [record.get("Image Path 1"), record.get("Image Path 2")]
     image_paths = [p for p in image_paths if p and os.path.exists(p)]  # Filter non-existent paths
 
-    if image_paths:
-        matched_path = find_and_hover_image_with_fallback(
-            image_paths,
-            region=(512, 370, 500, 500),  # Adjust if needed
-            confidence=0.95,
-            timeout=10,
-            check_interval=0.2
-        )
-        if matched_path:
+    region = (505, 370, 280, 210)  # (left, top, width, height) — adjust as needed
+
+    matched = None
+    for path in image_paths:
+        result = match_template_in_region(path, region, threshold=0.95)
+        if result:
+            pyautogui.moveTo(result)
             pyautogui.click()
-        else:
+            matched = path
+            break
+
+    if not matched:
+        if image_paths:
             print(f"❌ Date not found on screen for {record['Time']}")
-    else:
-        print("⚠️ No valid image paths provided — skipping date selection.")
+        else:
+            print("⚠️ No valid image paths provided — skipping date selection.")
 
 
 
@@ -267,7 +269,7 @@ def add_transaction_details(record):
     # Apply button
     pyautogui.moveTo(1340, 910, duration=.1)  
     pyautogui.click()
-    time.sleep(3)
+    time.sleep(5)
 
     check_x, check_y = 1103, 193  # <- Replace with your pixel coordinate
     expected_rgb = (25, 33, 50)  # <- Replace with the RGB value to match

@@ -45,14 +45,14 @@ def paste_phone_number_twice(record):
     time.sleep(1)
 
     # Enter first phone number field
-    pyautogui.moveTo(987, 271, duration=0.1)
+    pyautogui.moveTo(987, 265, duration=0.1)
     time.sleep(0.1)
     pyautogui.click()
     time.sleep(0.1)
     pyautogui.write(phone_number, interval=0.05)
 
     # Enter second phone number field
-    pyautogui.moveTo(987, 360, duration=0.1)
+    pyautogui.moveTo(987, 355, duration=0.1)
     time.sleep(0.1)
     pyautogui.click()
     time.sleep(0.1)
@@ -67,12 +67,12 @@ def paste_phone_number_twice(record):
         print("⚠️ Email is '-', skipping email input.")
 
     # (📝 Reserved) Enter Affiliate Code
-    pyautogui.moveTo(662, 596, duration=0.1)
+    pyautogui.moveTo(662, 590, duration=0.1)
     pyautogui.click()
     pyautogui.write(affiliate_code, interval=0.05)
 
     # (📝 Reserved) Enter Affiliate Code sec
-    pyautogui.moveTo(662, 685, duration=0.1)
+    pyautogui.moveTo(662, 680, duration=0.1)
     pyautogui.click()
     pyautogui.write(affiliate_code, interval=0.05)
     
