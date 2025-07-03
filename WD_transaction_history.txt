@@ -1,58 +1,50 @@
 
-==== SKPAY (7 records) | Total Amount: Rs 21,920.00 ====
+==== OSPAY (1 record) | Total Amount: Rs 4,000.00 ====
 
 Record #1
-Order ID: LTJPW5702
-Phone Number: 918209888347
+Order ID: LTJPW5761
+Phone Number: 917002877790
+Amount: 4,000.00
+Time: 2025-07-03 08:54:15
+
+>> Total Amount for OSPAY: Rs 4,000.00
+
+==== SKPAY (3 records) | Total Amount: Rs 4,350.00 ====
+
+Record #1
+Order ID: LTJPW5755
+Phone Number: 918722830103
 Amount: 1,000.00
-Time: 2025-07-02 07:10:05
+Time: 2025-07-03 04:23:56
 
 Record #2
-Order ID: LTJPW5718
-Phone Number: 919318334055
-Amount: 3,400.00
-Time: 2025-07-02 06:06:21
+Order ID: LTJPW5756
+Phone Number: 919918043957
+Amount: 1,000.00
+Time: 2025-07-03 04:22:26
 
 Record #3
-Order ID: LTJPW5695
-Phone Number: 918581062770
-Amount: 1,750.00
-Time: 2025-07-02 01:29:33
+Order ID: LTJPW5759
+Phone Number: 919592911117
+Amount: 2,350.00
+Time: 2025-07-03 02:08:20
 
-Record #4
-Order ID: LTJPW5713
-Phone Number: 917795151554
-Amount: 10,000.00
-Time: 2025-07-02 00:57:09
+>> Total Amount for SKPAY: Rs 4,350.00
 
-Record #5
-Order ID: LTJPW5707
-Phone Number: 918059512116
-Amount: 3,500.00
-Time: 2025-07-02 00:45:54
-
-Record #6
-Order ID: LTJPW5715
-Phone Number: 919714706337
-Amount: 500.00
-Time: 2025-07-02 00:35:38
-
-Record #7
-Order ID: LTJPW5714
-Phone Number: 919328851453
-Amount: 1,770.00
-Time: 2025-07-02 00:33:26
-
->> Total Amount for SKPAY: Rs 21,920.00
-
-==== XYPAY (1 record) | Total Amount: Rs 3,500.00 ====
+==== XYPAY (2 records) | Total Amount: Rs 5,300.00 ====
 
 Record #1
-Order ID: LTJPW5673
-Phone Number: 919373608381
-Amount: 3,500.00
-Time: 2025-07-02 05:13:11
+Order ID: LTJPW5754
+Phone Number: 918360239357
+Amount: 3,100.00
+Time: 2025-07-03 00:40:29
 
->> Total Amount for XYPAY: Rs 3,500.00
+Record #2
+Order ID: LTJPW5757
+Phone Number: 919167307948
+Amount: 2,200.00
+Time: 2025-07-03 00:35:04
 
-==== GRAND TOTAL for All Gateways: Rs 25,420.00 ====
+>> Total Amount for XYPAY: Rs 5,300.00
+
+==== GRAND TOTAL for All Gateways: Rs 13,650.00 ====
