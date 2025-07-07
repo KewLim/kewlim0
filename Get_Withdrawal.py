@@ -45,7 +45,7 @@ def copy_table_html_from_devtools():
     pyautogui.moveTo(1041, 131, duration=.5)  # Make sure on first row
 
     # ✅ Wait for expected RGB before proceeding
-    check_x, check_y = 488, 430
+    check_x, check_y = 439, 421
     expected_rgb = (255, 255, 255)  # <- Replace with the actual RGB you expect
     timeout = 20  # seconds
     interval = 0.2  # check interval
