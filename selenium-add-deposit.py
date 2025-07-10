@@ -13,6 +13,7 @@ from datetime import datetime
 from collections import defaultdict
 import re
 from selenium.webdriver import ActionChains
+import pyautogui
 
 
 
@@ -53,6 +54,19 @@ password_input = wait.until(EC.presence_of_element_located((By.NAME, "password")
 password_input.send_keys("json8888"+ Keys.ENTER)
 
 
+
+
+
+def remove_bom(line):
+    BOM = '\ufeff'
+    if line.startswith(BOM):
+        return line.lstrip(BOM)
+    return line
+
+
+
+
+
 def gateway_setup_movement(gateway_name):
     print(f"\033[93m[Gateway Setup] Executing setup for {gateway_name}\033[0m")
 
@@ -79,27 +93,50 @@ def gateway_setup_movement(gateway_name):
 
 
 def enter_gateway_name(gateway_text):
-
+    # Step 1: Wait for preloader to disappear
     WebDriverWait(driver, 30).until(
-    EC.invisibility_of_element_located((By.CLASS_NAME, "app-preloader"))
-)
-    
-    gateway_input = WebDriverWait(driver, 20).until(
-        EC.element_to_be_clickable((By.XPATH, "//input[@placeholder='Select an option...']"))
+        EC.invisibility_of_element_located((By.CLASS_NAME, "app-preloader"))
     )
-    gateway_input.click()
-    gateway_input.clear()
-    gateway_input.send_keys(gateway_text)
+    time.sleep(1)  # slight delay for DOM settle
 
-    entered_value = gateway_input.get_attribute("value")
-    print(f"[DEBUG] Input value after typing: '{entered_value}'")
+    # Step 2: Click container to open dropdown
+    container = WebDriverWait(driver, 20).until(
+        EC.element_to_be_clickable((By.CSS_SELECTOR, "div.ts-control"))
+    )
+    container.click()
+    time.sleep(0.5)
 
-    time.sleep(1)
+    # Step 3: Find actual input (not always interactable)
+    gateway_input = WebDriverWait(driver, 20).until(
+        EC.presence_of_element_located((By.ID, "selectBank-ts-control"))
+    )
+
+    # Optional: Scroll it into view
+    driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", gateway_input)
+    time.sleep(0.3)
+
+    print("Displayed:", gateway_input.is_displayed())
+    print("Enabled:", gateway_input.is_enabled())
+    print("Size:", gateway_input.size)
+    print("Location:", gateway_input.location)
+
+    try:
+        # Try normal input method first
+        gateway_input.send_keys(gateway_text)
+    except Exception as e:
+        print(f"[WARN] Normal input failed, using JS. Reason: {e}")
+        # Fallback to JS-based input
+        driver.execute_script("""
+            arguments[0].value = arguments[1];
+            arguments[0].dispatchEvent(new Event('input', { bubbles: true }));
+        """, gateway_input, gateway_text)
+
+    time.sleep(0.5)  # Wait for dropdown options
+
+    # Step 4: Press Enter to select the first matching option
     gateway_input.send_keys(Keys.ENTER)
-    time.sleep(1) 
-    print("[INFO] Gateway Name Entered")
-    time.sleep(1) 
-
+    print(f"[INFO] Gateway '{gateway_text}' entered and selected.")
+    time.sleep(0.5)
 
 
 
@@ -110,16 +147,19 @@ def enter_gateway_name(gateway_text):
     table_presence = wait.until(EC.presence_of_element_located((By.CLASS_NAME, "gridjs-wrapper")))
     print("[INFO] Table loaded")
 
-    time.sleep(2)
+    time.sleep(1)
 
 
 # ======== Add Details HERE =======
 
 
 def add_transaction_details(record):
+
     """Fill Order ID, Phone Number, and Amount into form."""
     print(f"Processing Record: {record}")
 
+    time.sleep(2)
+    wait = WebDriverWait(driver, 20)  # Add this line
     add_button = wait.until(EC.element_to_be_clickable((
         By.XPATH, "//button[contains(text(), 'Add New Bank Transaction')]"
     )))
@@ -157,7 +197,7 @@ def add_transaction_details(record):
         EC.presence_of_element_located((By.XPATH, "//input[@placeholder='amount']"))
     )
     amount_input.clear()
-    amount_input.send_keys(record["Amount"])
+    amount_input.send_keys(str(record["Amount"]).replace(",", ""))
     print(f"[INFO] Order ID entered: {record['Amount']}")
 
 
@@ -221,16 +261,13 @@ def add_transaction_details(record):
     else:
         print(f"[INFO] AM/PM already set to {ampm_target}")
 
+    time.sleep(1)
+    pyautogui.press('enter')
+    time.sleep(1)
+    pyautogui.press('enter')
+    pyautogui.click()
 
-    # Wait for the button to be clickable
-    apply_button = WebDriverWait(driver, 20).until(
-        EC.element_to_be_clickable((By.XPATH, "//button[normalize-space()='Apply']"))
-    )
-    apply_button.click()
-    print("[INFO] 'Apply' button clicked.")
-
-
-    time.sleep(5)
+    time.sleep(1)
 
 
 
@@ -247,87 +284,98 @@ def parse_and_execute(filename):
 
     current_gateway = None
     current_records = []
-    performed_gateways = set()  # Track gateways already set up
+    performed_gateways = set()
 
-    # Define the list of gateways your program can handle
     supported_gateways = {
         "XYPAY", "SKPAY", "YTPAY", "OSPAY", "SIMPLYPAY", "VADERPAY",
         "PASSPAY", "MULTIPAY", "U9PAY", "BOMBAYPAY", "EPAY", 
         "MOHAMMED AMEER ABBAS", "Test", "Test2"
     }
 
-    for line in lines:
-        line = line.strip()
+    # Temporary variables for one record
+    order_id = phone = amount = time_str = None
+    dt = hour_str = minute_str = None
+
+    for raw_line in lines:
+        line = remove_bom(raw_line.strip())
+
+        if not line:
+            continue
+
+        # Stop condition — flush records first
+        if line.startswith("==== GRAND TOTAL for All Gateways:"):
+            print("[INFO] Reached GRAND TOTAL line. Stopping processing.")
+            break
 
         # Detect gateway header line
         if line.startswith("====") and "Total Amount" in line:
-            # First, process any records collected under the previous gateway
-            for record in current_records:
-                add_transaction_details(record)
+            if current_records:
+                print(f"[DEBUG] Flushing {len(current_records)} records under gateway '{current_gateway}'")
+                for record in current_records:
+                    add_transaction_details(record)
             current_records = []
 
-            # Extract gateway name from the header line
             match = re.match(r"==== (.*?) \(", line)
             if match:
                 detected_gateway = match.group(1)
                 if detected_gateway in supported_gateways:
                     current_gateway = detected_gateway
-
-                    # Run gateway setup if not already done
                     if current_gateway not in performed_gateways:
                         gateway_setup_movement(current_gateway)
                         performed_gateways.add(current_gateway)
                 else:
-                    print(f"\033[91m[Warning] Unsupported gateway '{detected_gateway}' found, skipping setup and records.\033[0m")
-                    current_gateway = None  # Reset to ignore records for unsupported gateway
+                    print(f"[WARNING] Unsupported gateway '{detected_gateway}', skipping records.")
+                    current_gateway = None
+            continue
+
+        # Skip if gateway not set
+        if not current_gateway:
+            continue
+
+        # Parse record fields
+        if line.startswith("Order ID:"):
+            order_id = line.split(":", 1)[1].strip()
+        elif line.startswith("Phone Number:"):
+            phone = line.split(":", 1)[1].strip()
+        elif line.startswith("Amount:"):
+            amount = line.split(":", 1)[1].strip()
+        elif line.startswith("Time:"):
+            time_str = line.split(":", 1)[1].strip()
+            try:
+                dt = datetime.strptime(time_str, "%Y-%m-%d %H:%M:%S")
+                hour_str = f"{dt.hour:02d}"
+                minute_str = f"{dt.minute:02d}"
+
+                # ✅ Only append once all fields are known
+                if all([order_id, phone, amount, time_str]):
+                    current_records.append({
+                        "Order ID": order_id,
+                        "Phone Number": phone,
+                        "Amount": amount,
+                        "Time": time_str,
+                        "Hour": hour_str,
+                        "Minute": minute_str,
+                        "Datetime": dt
+                    })
+                    # Reset vars for next record
+                    order_id = phone = amount = time_str = None
+                    dt = hour_str = minute_str = None
+            except ValueError:
+                print(f"[ERROR] Invalid datetime: {time_str}")
+                continue
+
+    # ✅ Final flush at EOF
+    if current_records:
+        print(f"[DEBUG] Final flush: {len(current_records)} records under gateway '{current_gateway}'")
+        for record in current_records:
+            add_transaction_details(record)
 
 
-        elif current_gateway:  # Only parse transaction details if we have a valid gateway active
-
-            if line.startswith("Order ID:"):
-                order_id = line.split(":", 1)[1].strip()
-
-            elif line.startswith("Phone Number:"):
-                phone = line.split(":", 1)[1].strip()
-
-            elif line.startswith("Amount:"):
-                amount = line.split(":", 1)[1].strip()
-
-            elif line.startswith("Time:"):
-                time_str = line.split(":", 1)[1].strip()
-
-                try:
-                    dt = datetime.strptime(time_str, "%Y-%m-%d %H:%M:%S")
-                    day_str = str(dt.day)
-                    hour_str = f"{dt.hour:02d}"
-                    minute_str = f"{dt.minute:02d}"
-
-                except ValueError:
-                    print(f"\033[91m[Error] Invalid date format: '{time_str}'\033[0m")
-                    day_str = None
-                    image_path_1 = None
-                    image_path_2 = None
-
-                # Append the record with both image paths
-                current_records.append({
-                    "Order ID": order_id,
-                    "Phone Number": phone,
-                    "Amount": amount,
-                    "Time": time_str,
-                    "Hour": hour_str,
-                    "Minute": minute_str
-                })
 
 
 
-
+# ===== Function call HERE =====
 parse_and_execute("selenium-transaction_history.txt")
-
-
-
-
-
-
-time.sleep(5)  
+time.sleep(2)  
 driver.quit()
 

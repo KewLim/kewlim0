@@ -167,7 +167,7 @@ for idx, row in enumerate(rows, 1):
         "Gateway": cols[21].text.strip(),
         "Order ID": cols[0].text.strip(),
         "Phone Number": cols[6].text.strip(),
-        "Amount": cols[10].text.strip().replace("Rs", "").strip(),
+        "Amount": float(cols[10].text.strip().replace("Rs", "").replace(",", "").strip()),
         "Time": cols[20].text.strip()
     }
     gateway_groups[record["Gateway"]].append(record)
@@ -175,13 +175,13 @@ for idx, row in enumerate(rows, 1):
 
 
 def print_grouped_results():
-    """Prints all grouped data and writes it to 'transaction_history.txt'."""
+    """Prints all grouped data and writes it to 'selenium-transaction_history.txt'."""
     grand_total = 0
 
     with open("selenium-transaction_history.txt", "w", encoding="utf-8") as f:
         for gateway, records in gateway_groups.items():
             
-            total_amount = sum(float(record["Amount"].replace(",", "")) for record in records)
+            total_amount = sum(record["Amount"] if isinstance(record["Amount"], (int, float)) else float(record["Amount"].replace(",", "")) for record in records)
             grand_total += total_amount
 
             header = f"\n==== {gateway} ({len(records)} record{'s' if len(records) != 1 else ''}) | Total Amount: Rs {total_amount:,.2f} ====\n"
@@ -196,13 +196,13 @@ def print_grouped_results():
             )
 
             for i, record in enumerate(sorted_records, 1):
-                print(f"[DEBUG] Record {i} in {gateway}: {record}")  # ✅ Keep for debugging
+                # print(f"[DEBUG] Record {i} in {gateway}: {record}")  # ✅ Keep for debugging
 
                 entry = (
                     f"\nRecord #{i}\n"
                     f"Order ID: {record['Order ID']}\n"
                     f"Phone Number: {record['Phone Number']}\n"
-                    f"Amount: {record['Amount']}\n"
+                    f"Amount: {record['Amount']:,.2f}\n"
                     f"Time: {record['Time']}\n"
                 )
                 print(f"\033[94m{entry}\033[0m")
@@ -222,5 +222,5 @@ def print_grouped_results():
 
 print_grouped_results()
 
-time.sleep(10)  
+time.sleep(5)  
 driver.quit()

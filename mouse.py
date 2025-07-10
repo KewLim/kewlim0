@@ -69,11 +69,3 @@ import time
 #pyautogui.press('tab')
 #pyautogui.keyUp('alt')
 
-# Select YT Pay PG
-pyautogui.moveTo(460, 240, duration=.5)
-time.sleep(0.5)  
-pyautogui.click() 
-time.sleep(0.5)  
-pyautogui.moveTo(460, 520, duration=.5)
-time.sleep(0.5)  
-pyautogui.scroll(-100) # Select YTpay
