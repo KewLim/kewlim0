@@ -265,7 +265,7 @@ def add_transaction_details(record):
     pyautogui.press('enter')
     time.sleep(1)
     pyautogui.press('enter')
-    pyautogui.click()
+
 
     time.sleep(1)
 
