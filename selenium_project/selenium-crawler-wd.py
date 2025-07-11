@@ -183,7 +183,7 @@ def print_grouped_results():
     grand_total = 0
     grand_tax_total = 0
 
-    with open("selenium-transaction_history.txt", "w", encoding="utf-8") as f:
+    with open("wd-selenium-transaction_history.txt", "w", encoding="utf-8") as f:
         for gateway, records in gateway_groups.items():
             
             total_amount = sum(record["Amount"] if isinstance(record["Amount"], (int, float)) else float(record["Amount"].replace(",", "")) for record in records)
