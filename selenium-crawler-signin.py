@@ -109,7 +109,7 @@ WebDriverWait(driver, 20).until(
 print("[INFO] Panel load complete")
 
 
-time.sleep(3)
+time.sleep(2)
 
 # Wait for ajax loader loading
 WebDriverWait(driver, 20).until(
@@ -117,7 +117,7 @@ WebDriverWait(driver, 20).until(
 )
 print("\033[94m[INFO] ajaxLoader complete\033[0m")
 
-time.sleep(3)
+time.sleep(2)
 
 # Wait for the <select> element to be present
 status_select_element = WebDriverWait(driver, 20).until(
@@ -129,8 +129,13 @@ select.select_by_visible_text("Approved")
 
 # Select date section
 
-select_date = wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, 'div[data-type="today"]')))
-select_date.click()
+# select_date = wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, 'div[data-type="today"]')))
+# select_date.click()
+
+# Manual date selection pause
+print("⏸️ Paused for manual date selection.")
+input("👉 Please select the date manually in the browser, then press ENTER here to continue...")
+print("✅ Date selected, continuing...")
 
 # Wait for 'No Record' Icon dissapeared
 
@@ -142,49 +147,60 @@ print("\033[94m[INFO] Table load complete\033[0m")
 
 # ======= Print Logic Here =======
 
-# Wait for table to be visible (adjust selector if needed)
-# Wait until at least one row is present inside the table
-WebDriverWait(driver, 20).until(
-    lambda d: len(d.find_elements(By.CSS_SELECTOR, "table.tableInfo tbody tr")) > 0
-)
+def extract_transaction_data(driver, wait_timeout=20):
+    """Waits for transaction table rows to appear and extracts structured data."""
+    
+    # Wait until at least one row exists
+    WebDriverWait(driver, wait_timeout).until(
+        lambda d: len(d.find_elements(By.CSS_SELECTOR, "table.tableInfo tbody tr")) > 0
+    )
 
-rows = driver.find_elements(By.CSS_SELECTOR, "table.tableInfo tbody tr")
-print(f"[INFO] Total rows found: {len(rows)}")
+    rows = driver.find_elements(By.CSS_SELECTOR, "table.tableInfo tbody tr")
+    print(f"[INFO] Total rows found: {len(rows)}")
 
+    gateway_groups = defaultdict(list)
 
-gateway_groups = defaultdict(list)
+    for idx, row in enumerate(rows, 1):
+        cols = row.find_elements(By.TAG_NAME, 'td')
+        
+        if len(cols) < 22:
+            print(f"[WARNING] Row {idx} has only {len(cols)} columns. Skipping.")
+            continue
 
-rows = driver.find_elements(By.CSS_SELECTOR, 'table tbody tr')
+        try:
+            record = {
+                "Gateway": cols[21].text.strip(),
+                "Order ID": cols[0].text.strip(),
+                "Phone Number": cols[6].text.strip(),
+                "Amount": float(cols[10].text.strip().replace("Rs", "").replace(",", "").strip()),
+                "Time": cols[20].text.strip(),
+                "Tax Fee": float(cols[13].text.strip())
+            }
+            gateway_groups[record["Gateway"]].append(record)
 
+        except ValueError as ve:
+            print(f"[ERROR] Failed to parse data in row {idx}: {ve}")
+            continue
 
-for idx, row in enumerate(rows, 1):
-    cols = row.find_elements(By.TAG_NAME, 'td')
-    if len(cols) < 22:
-        print(f"[WARNING] Row {idx} has only {len(cols)} columns. Skipping.")
-        continue  # Skip rows that don't have enough columns
-
-    record = {
-        "Gateway": cols[21].text.strip(),
-        "Order ID": cols[0].text.strip(),
-        "Phone Number": cols[6].text.strip(),
-        "Amount": float(cols[10].text.strip().replace("Rs", "").replace(",", "").strip()),
-        "Time": cols[20].text.strip()
-    }
-    gateway_groups[record["Gateway"]].append(record)
+    return gateway_groups
 
 
 
 def print_grouped_results():
-    """Prints all grouped data and writes it to 'selenium-transaction_history.txt'."""
+
     grand_total = 0
+    grand_tax_total = 0
 
     with open("selenium-transaction_history.txt", "w", encoding="utf-8") as f:
         for gateway, records in gateway_groups.items():
             
             total_amount = sum(record["Amount"] if isinstance(record["Amount"], (int, float)) else float(record["Amount"].replace(",", "")) for record in records)
-            grand_total += total_amount
+            grand_total += total_amount 
 
-            header = f"\n==== {gateway} ({len(records)} record{'s' if len(records) != 1 else ''}) | Total Amount: Rs {total_amount:,.2f} ====\n"
+            total_tax_amount = sum(float(record["Tax Fee"]) for record in records)
+            grand_tax_total += total_tax_amount
+
+            header = f"\n==== {gateway} ({len(records)} record{'s' if len(records) != 1 else ''}) | Total Amount: Rs {total_amount:,.2f} | Total Fee: Rs {total_tax_amount:.2f} ====\n"
             print(f"\033[92m{header}\033[0m")
             f.write(header)
 
@@ -196,7 +212,7 @@ def print_grouped_results():
             )
 
             for i, record in enumerate(sorted_records, 1):
-                # print(f"[DEBUG] Record {i} in {gateway}: {record}")  # ✅ Keep for debugging
+                # print(f"[DEBUG] Record {i} in {gateway}: {record}")  
 
                 entry = (
                     f"\nRecord #{i}\n"
@@ -220,7 +236,47 @@ def print_grouped_results():
         f.write(grand_footer)
 
 
-print_grouped_results()
+
+def click_next_page(driver, wait_timeout=10):
+    try:
+        next_button = WebDriverWait(driver, wait_timeout).until(
+            EC.element_to_be_clickable((By.CSS_SELECTOR, "a.page-link.next"))
+        )
+        next_button.click()
+        print("[INFO] Clicked on the Next button.")
+        return True
+    except Exception as e:
+        print(f"[WARNING] Could not click Next button: {e}")
+        return False
+
+
+
+gateway_groups = defaultdict(list)  # Global collector
+
+def run_full_transaction_extraction(driver):
+    page_counter = 1
+    while True:
+        print(f"\033[92m[INFO] Scraping page {page_counter}...\033[0m")
+
+        # Extract data from current page
+        current_page_data = extract_transaction_data(driver)
+
+        # Merge current data into the global group
+        for gateway, records in current_page_data.items():
+            gateway_groups[gateway].extend(records)
+
+        # Try to go to next page
+        has_next = click_next_page(driver)
+        if not has_next:
+            print("[INFO] No more pages found. Finishing extraction.")
+            break
+
+        page_counter += 1
+        time.sleep(1)  
+
+    print_grouped_results()
+    
+run_full_transaction_extraction(driver)
 
 time.sleep(5)  
 driver.quit()

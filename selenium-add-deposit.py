@@ -97,7 +97,7 @@ def enter_gateway_name(gateway_text):
     WebDriverWait(driver, 30).until(
         EC.invisibility_of_element_located((By.CLASS_NAME, "app-preloader"))
     )
-    time.sleep(1)  # slight delay for DOM settle
+    time.sleep(2)  # slight delay for DOM settle
 
     # Step 2: Click container to open dropdown
     container = WebDriverWait(driver, 20).until(
@@ -263,11 +263,9 @@ def add_transaction_details(record):
 
     time.sleep(1)
     pyautogui.press('enter')
-    time.sleep(1)
+    time.sleep(.5)
     pyautogui.press('enter')
-
-
-    time.sleep(1)
+    time.sleep(.5)
 
 
 
