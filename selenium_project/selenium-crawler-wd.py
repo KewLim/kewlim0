@@ -178,12 +178,12 @@ def extract_transaction_data(driver, wait_timeout=20):
 
 
 
-def print_grouped_results():
+def print_grouped_results(gateway_groups):
 
     grand_total = 0
     grand_tax_total = 0
 
-    with open("wd-selenium-transaction_history.txt", "w", encoding="utf-8") as f:
+    with open("selenium_project/wd-selenium-transaction_history.txt", "w", encoding="utf-8") as f:
         for gateway, records in gateway_groups.items():
             
             total_amount = sum(record["Amount"] if isinstance(record["Amount"], (int, float)) else float(record["Amount"].replace(",", "")) for record in records)
@@ -221,6 +221,8 @@ def print_grouped_results():
             f.write(footer)
 
         total_records = sum(len(records) for records in gateway_groups.values())
+        f.flush()
+        os.fsync(f.fileno())
 
         # ✅ Only once at the end
         grand_footer = f"\n==== GRAND TOTAL for All Gateways: Rs {grand_total:,.2f} | Total Records: {total_records} ====\n"
@@ -266,7 +268,7 @@ def run_full_transaction_extraction(driver):
         page_counter += 1
         time.sleep(1)  
 
-    print_grouped_results()
+    print_grouped_results(gateway_groups)
     
 run_full_transaction_extraction(driver)
 

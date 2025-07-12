@@ -55,15 +55,11 @@ password_input.send_keys("json8888"+ Keys.ENTER)
 
 
 
-
-
 def remove_bom(line):
     BOM = '\ufeff'
     if line.startswith(BOM):
         return line.lstrip(BOM)
     return line
-
-
 
 
 
@@ -167,6 +163,17 @@ def add_transaction_details(record):
     print("[INFO] Add Transaction button clicked")
 
     time.sleep(1)
+
+
+    # ===== Transaction Out =====
+
+    out_radio = WebDriverWait(driver, 10).until(
+        EC.element_to_be_clickable((By.CSS_SELECTOR, 'input[type="radio"][value="out"]'))
+    )
+    out_radio.click()
+    print("[INFO] Clicked on the 'out' radio button.")
+    time.sleep(.5)
+
 
 
     # ===== Order ID =====
@@ -371,7 +378,7 @@ def parse_and_execute(filename):
 
 
 # ===== Function call HERE =====
-parse_and_execute("selenium_project/selenium-transaction_history.txt")
+parse_and_execute("selenium_project/wd-selenium-transaction_history.txt")
 time.sleep(2)  
 driver.quit()
 

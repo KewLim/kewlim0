@@ -1,0 +1,13 @@
+
+==== Test (23 records) | Total Amount: Rs 45,842.00 | Total Fee: Rs 1513.26 ====
+
+Record #1
+Order ID: LTJPW6202
+Phone Number: 919918043957
+Amount: 500.00
+Time: 2025-07-11 23:56:20
+
+
+>> Total Amount for XYPAY: Rs 2,980.00
+
+==== GRAND TOTAL for All Gateways: Rs 57,847.00 | Total Records: 34 ====
