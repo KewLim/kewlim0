@@ -1,1116 +1,202 @@
 
-==== SKPAY (97 records) | Total Amount: Rs 68,300.00 | Total Fee: Rs 3278.40 ====
+==== YTPAY (3 records) | Total Amount: Rs 1,300.00 | Total Fee: Rs 78.00 ====
 
 Record #1
-Order ID: LTJPD79845
-Phone Number: 917339954381
-Amount: 500.00
-Time: 2025-07-12 23:55:59
+Order ID: LTJPD79981
+Phone Number: 917038123570
+Amount: 300.00
+Time: 2025-07-13 09:02:45
 
 Record #2
-Order ID: LTJPD79830
-Phone Number: 919023192854
-Amount: 1,000.00
-Time: 2025-07-12 23:41:10
+Order ID: LTJPD79976
+Phone Number: 918955116885
+Amount: 500.00
+Time: 2025-07-13 08:50:16
 
 Record #3
-Order ID: LTJPD79826
-Phone Number: 919735657437
+Order ID: LTJPD79967
+Phone Number: 918955116885
 Amount: 500.00
-Time: 2025-07-12 23:27:05
+Time: 2025-07-13 08:36:47
+
+>> Total Amount for YTPAY: Rs 1,300.00
+
+==== SKPAY (13 records) | Total Amount: Rs 8,000.00 | Total Fee: Rs 384.00 ====
+
+Record #1
+Order ID: LTJPD79972
+Phone Number: 919265638422
+Amount: 500.00
+Time: 2025-07-13 08:58:50
+
+Record #2
+Order ID: LTJPD79974
+Phone Number: 919917828829
+Amount: 500.00
+Time: 2025-07-13 08:50:05
+
+Record #3
+Order ID: LTJPD79964
+Phone Number: 919934666447
+Amount: 1,000.00
+Time: 2025-07-13 08:43:13
 
 Record #4
-Order ID: LTJPD79814
-Phone Number: 917896841757
+Order ID: LTJPD79961
+Phone Number: 917359201364
 Amount: 500.00
-Time: 2025-07-12 23:15:03
+Time: 2025-07-13 07:57:22
 
 Record #5
-Order ID: LTJPD79813
-Phone Number: 917829022705
-Amount: 1,500.00
-Time: 2025-07-12 23:11:10
+Order ID: LTJPD79959
+Phone Number: 917817085554
+Amount: 1,000.00
+Time: 2025-07-13 07:47:25
 
 Record #6
-Order ID: LTJPD79811
-Phone Number: 916001812998
+Order ID: LTJPD79939
+Phone Number: 917247387707
 Amount: 500.00
-Time: 2025-07-12 23:05:03
+Time: 2025-07-13 04:57:18
 
 Record #7
-Order ID: LTJPD79804
-Phone Number: 917896841757
-Amount: 500.00
-Time: 2025-07-12 23:01:29
-
-Record #8
-Order ID: LTJPD79801
-Phone Number: 916001812998
-Amount: 500.00
-Time: 2025-07-12 22:43:11
-
-Record #9
-Order ID: LTJPD79799
-Phone Number: 917702508980
-Amount: 500.00
-Time: 2025-07-12 22:42:21
-
-Record #10
-Order ID: LTJPD79798
-Phone Number: 919572445108
-Amount: 1,000.00
-Time: 2025-07-12 22:39:04
-
-Record #11
-Order ID: LTJPD79797
-Phone Number: 916003463423
-Amount: 1,000.00
-Time: 2025-07-12 22:36:58
-
-Record #12
-Order ID: LTJPD79792
-Phone Number: 919572445108
-Amount: 1,000.00
-Time: 2025-07-12 22:29:06
-
-Record #13
-Order ID: LTJPD79791
-Phone Number: 919824603942
-Amount: 500.00
-Time: 2025-07-12 22:24:54
-
-Record #14
-Order ID: LTJPD79790
-Phone Number: 917452062222
-Amount: 500.00
-Time: 2025-07-12 22:23:03
-
-Record #15
-Order ID: LTJPD79787
-Phone Number: 916202229878
-Amount: 500.00
-Time: 2025-07-12 22:11:07
-
-Record #16
-Order ID: LTJPD79788
-Phone Number: 919356924652
-Amount: 500.00
-Time: 2025-07-12 22:11:04
-
-Record #17
-Order ID: LTJPD79784
-Phone Number: 917702508980
-Amount: 500.00
-Time: 2025-07-12 21:49:03
-
-Record #18
-Order ID: LTJPD79777
-Phone Number: 917899324184
-Amount: 1,000.00
-Time: 2025-07-12 21:43:06
-
-Record #19
-Order ID: LTJPD79751
-Phone Number: 919510749715
-Amount: 500.00
-Time: 2025-07-12 21:17:56
-
-Record #20
-Order ID: LTJPD79750
-Phone Number: 919945031547
-Amount: 500.00
-Time: 2025-07-12 21:17:49
-
-Record #21
-Order ID: LTJPD79741
-Phone Number: 919169558111
-Amount: 1,000.00
-Time: 2025-07-12 21:07:00
-
-Record #22
-Order ID: LTJPD79729
-Phone Number: 918279698793
-Amount: 500.00
-Time: 2025-07-12 20:59:31
-
-Record #23
-Order ID: LTJPD79713
-Phone Number: 919922235030
-Amount: 500.00
-Time: 2025-07-12 20:19:04
-
-Record #24
-Order ID: LTJPD79715
-Phone Number: 916001683682
-Amount: 500.00
-Time: 2025-07-12 20:18:54
-
-Record #25
-Order ID: LTJPD79709
-Phone Number: 919101710236
-Amount: 500.00
-Time: 2025-07-12 20:15:07
-
-Record #26
-Order ID: LTJPD79707
-Phone Number: 919800459320
-Amount: 500.00
-Time: 2025-07-12 20:14:55
-
-Record #27
-Order ID: LTJPD79704
-Phone Number: 919649239155
-Amount: 1,000.00
-Time: 2025-07-12 20:07:21
-
-Record #28
-Order ID: LTJPD79694
-Phone Number: 917895414706
-Amount: 500.00
-Time: 2025-07-12 19:44:59
-
-Record #29
-Order ID: LTJPD79688
-Phone Number: 919166502862
-Amount: 500.00
-Time: 2025-07-12 19:33:04
-
-Record #30
-Order ID: LTJPD79684
-Phone Number: 917780127369
-Amount: 1,000.00
-Time: 2025-07-12 19:14:52
-
-Record #31
-Order ID: LTJPD79682
-Phone Number: 919911357689
-Amount: 500.00
-Time: 2025-07-12 19:13:27
-
-Record #32
-Order ID: LTJPD79676
-Phone Number: 919800060776
-Amount: 500.00
-Time: 2025-07-12 19:09:00
-
-Record #33
-Order ID: LTJPD79673
-Phone Number: 919511526269
-Amount: 500.00
-Time: 2025-07-12 19:02:01
-
-Record #34
-Order ID: LTJPD79669
-Phone Number: 919877779461
-Amount: 500.00
-Time: 2025-07-12 18:48:42
-
-Record #35
-Order ID: LTJPD79667
-Phone Number: 919437307683
-Amount: 500.00
-Time: 2025-07-12 18:43:01
-
-Record #36
-Order ID: LTJPD79655
-Phone Number: 919032728297
-Amount: 500.00
-Time: 2025-07-12 18:36:04
-
-Record #37
-Order ID: LTJPD79634
-Phone Number: 918219068365
-Amount: 500.00
-Time: 2025-07-12 18:04:05
-
-Record #38
-Order ID: LTJPD79649
-Phone Number: 917676152056
-Amount: 500.00
-Time: 2025-07-12 17:58:33
-
-Record #39
-Order ID: LTJPD79646
-Phone Number: 917676152056
-Amount: 1,000.00
-Time: 2025-07-12 17:50:54
-
-Record #40
-Order ID: LTJPD79641
-Phone Number: 919437307683
-Amount: 500.00
-Time: 2025-07-12 17:46:53
-
-Record #41
-Order ID: LTJPD79635
-Phone Number: 919877779461
-Amount: 500.00
-Time: 2025-07-12 17:46:12
-
-Record #42
-Order ID: LTJPD79633
-Phone Number: 919250964199
-Amount: 500.00
-Time: 2025-07-12 17:38:51
-
-Record #43
-Order ID: LTJPD79627
-Phone Number: 919250964199
-Amount: 500.00
-Time: 2025-07-12 17:10:06
-
-Record #44
-Order ID: LTJPD79626
-Phone Number: 918130108036
-Amount: 500.00
-Time: 2025-07-12 16:56:52
-
-Record #45
-Order ID: LTJPD79616
-Phone Number: 919904461695
-Amount: 500.00
-Time: 2025-07-12 16:42:55
-
-Record #46
-Order ID: LTJPD79609
-Phone Number: 919571854371
-Amount: 500.00
-Time: 2025-07-12 16:42:02
-
-Record #47
-Order ID: LTJPD79614
-Phone Number: 919509999657
-Amount: 500.00
-Time: 2025-07-12 16:35:11
-
-Record #48
-Order ID: LTJPD79612
-Phone Number: 917340491499
-Amount: 500.00
-Time: 2025-07-12 16:24:53
-
-Record #49
-Order ID: LTJPD78386
-Phone Number: 918940010112
-Amount: 500.00
-Time: 2025-07-12 16:17:25
-
-Record #50
-Order ID: LTJPD79604
-Phone Number: 919087937623
-Amount: 500.00
-Time: 2025-07-12 16:10:46
-
-Record #51
-Order ID: LTJPD79595
-Phone Number: 918940010112
-Amount: 500.00
-Time: 2025-07-12 15:58:51
-
-Record #52
-Order ID: LTJPD79591
-Phone Number: 918513807964
-Amount: 500.00
-Time: 2025-07-12 15:48:44
-
-Record #53
-Order ID: LTJPD79582
-Phone Number: 919461582203
-Amount: 2,000.00
-Time: 2025-07-12 15:41:50
-
-Record #54
-Order ID: LTJPD79579
-Phone Number: 916003463423
-Amount: 700.00
-Time: 2025-07-12 15:38:44
-
-Record #55
-Order ID: LTJPD79562
-Phone Number: 919877779461
-Amount: 500.00
-Time: 2025-07-12 15:11:59
-
-Record #56
-Order ID: LTJPD79556
-Phone Number: 917277559024
-Amount: 2,200.00
-Time: 2025-07-12 14:50:45
-
-Record #57
-Order ID: LTJPD79552
-Phone Number: 919571854371
-Amount: 500.00
-Time: 2025-07-12 14:45:42
-
-Record #58
-Order ID: LTJPD79546
-Phone Number: 916303532443
-Amount: 500.00
-Time: 2025-07-12 14:32:42
-
-Record #59
-Order ID: LTJPD79528
-Phone Number: 917277559024
-Amount: 2,000.00
-Time: 2025-07-12 14:14:34
-
-Record #60
-Order ID: LTJPD79505
-Phone Number: 919699410014
-Amount: 500.00
-Time: 2025-07-12 13:38:38
-
-Record #61
-Order ID: LTJPD79502
-Phone Number: 918011269780
-Amount: 1,000.00
-Time: 2025-07-12 13:36:30
-
-Record #62
-Order ID: LTJPD79493
-Phone Number: 917023726670
-Amount: 500.00
-Time: 2025-07-12 13:22:31
-
-Record #63
-Order ID: LTJPD79489
-Phone Number: 919510190811
-Amount: 500.00
-Time: 2025-07-12 13:20:36
-
-Record #64
-Order ID: LTJPD79480
-Phone Number: 919301435377
-Amount: 2,000.00
-Time: 2025-07-12 12:58:30
-
-Record #65
-Order ID: LTJPD79468
-Phone Number: 919033568976
-Amount: 500.00
-Time: 2025-07-12 12:26:37
-
-Record #66
-Order ID: LTJPD79469
-Phone Number: 919572445108
-Amount: 1,000.00
-Time: 2025-07-12 12:24:47
-
-Record #67
-Order ID: LTJPD79462
-Phone Number: 919257002677
-Amount: 500.00
-Time: 2025-07-12 12:16:15
-
-Record #68
-Order ID: LTJPD79464
-Phone Number: 919572445108
-Amount: 500.00
-Time: 2025-07-12 12:14:29
-
-Record #69
-Order ID: LTJPD79453
-Phone Number: 917022892971
-Amount: 500.00
-Time: 2025-07-12 11:42:29
-
-Record #70
-Order ID: LTJPD79441
-Phone Number: 917277559024
-Amount: 2,000.00
-Time: 2025-07-12 10:48:32
-
-Record #71
-Order ID: LTJPD79435
-Phone Number: 919955452525
-Amount: 500.00
-Time: 2025-07-12 10:38:28
-
-Record #72
-Order ID: LTJPD79434
-Phone Number: 919510190811
-Amount: 600.00
-Time: 2025-07-12 10:35:46
-
-Record #73
-Order ID: LTJPD79429
-Phone Number: 917056547990
-Amount: 500.00
-Time: 2025-07-12 10:28:31
-
-Record #74
-Order ID: LTJPD79426
-Phone Number: 918511249465
-Amount: 500.00
-Time: 2025-07-12 10:20:20
-
-Record #75
-Order ID: LTJPD79421
+Order ID: LTJPD79928
 Phone Number: 917817085554
 Amount: 500.00
-Time: 2025-07-12 09:56:26
+Time: 2025-07-13 04:23:14
 
-Record #76
-Order ID: LTJPD79411
-Phone Number: 919145739958
-Amount: 500.00
-Time: 2025-07-12 09:24:26
+Record #8
+Order ID: LTJPD79920
+Phone Number: 917340491499
+Amount: 1,000.00
+Time: 2025-07-13 02:43:10
 
-Record #77
-Order ID: LTJPD79407
-Phone Number: 918200359877
-Amount: 800.00
-Time: 2025-07-12 09:01:42
-
-Record #78
-Order ID: LTJPD79400
-Phone Number: 919087937623
-Amount: 500.00
-Time: 2025-07-12 08:48:24
-
-Record #79
-Order ID: LTJPD79389
-Phone Number: 919311971188
-Amount: 2,000.00
-Time: 2025-07-12 08:08:19
-
-Record #80
-Order ID: LTJPD79386
-Phone Number: 917817936738
-Amount: 500.00
-Time: 2025-07-12 08:06:25
-
-Record #81
-Order ID: LTJPD79381
-Phone Number: 919087937623
-Amount: 500.00
-Time: 2025-07-12 07:45:40
-
-Record #82
-Order ID: LTJPD79380
-Phone Number: 919905959697
-Amount: 500.00
-Time: 2025-07-12 07:43:52
-
-Record #83
-Order ID: LTJPD79379
-Phone Number: 919510190811
-Amount: 500.00
-Time: 2025-07-12 07:38:28
-
-Record #84
-Order ID: LTJPD79373
-Phone Number: 917708196525
-Amount: 500.00
-Time: 2025-07-12 05:57:36
-
-Record #85
-Order ID: LTJPD79359
+Record #9
+Order ID: LTJPD79909
 Phone Number: 917340491499
 Amount: 500.00
-Time: 2025-07-12 03:46:42
-
-Record #86
-Order ID: LTJPD79343
-Phone Number: 919373608381
-Amount: 500.00
-Time: 2025-07-12 01:19:28
-
-Record #87
-Order ID: LTJPD79342
-Phone Number: 917662045283
-Amount: 500.00
-Time: 2025-07-12 01:18:12
-
-Record #88
-Order ID: LTJPD79340
-Phone Number: 919671663842
-Amount: 500.00
-Time: 2025-07-12 01:15:32
-
-Record #89
-Order ID: LTJPD79337
-Phone Number: 916003463423
-Amount: 2,000.00
-Time: 2025-07-12 01:12:17
-
-Record #90
-Order ID: LTJPD79332
-Phone Number: 917662045283
-Amount: 500.00
-Time: 2025-07-12 01:04:55
-
-Record #91
-Order ID: LTJPD79329
-Phone Number: 918545038535
-Amount: 1,000.00
-Time: 2025-07-12 00:31:31
-
-Record #92
-Order ID: LTJPD79328
-Phone Number: 918430526650
-Amount: 500.00
-Time: 2025-07-12 00:27:03
-
-Record #93
-Order ID: LTJPD79325
-Phone Number: 918545038535
-Amount: 1,000.00
-Time: 2025-07-12 00:25:16
-
-Record #94
-Order ID: LTJPD79324
-Phone Number: 917662045283
-Amount: 500.00
-Time: 2025-07-12 00:24:20
-
-Record #95
-Order ID: LTJPD79309
-Phone Number: 918545038535
-Amount: 1,000.00
-Time: 2025-07-12 00:13:54
-
-Record #96
-Order ID: LTJPD79305
-Phone Number: 919836999121
-Amount: 500.00
-Time: 2025-07-12 00:09:08
-
-Record #97
-Order ID: LTJPD79304
-Phone Number: 917797254963
-Amount: 1,000.00
-Time: 2025-07-12 00:07:40
-
->> Total Amount for SKPAY: Rs 68,300.00
-
-==== BOMBAYPAY (3 records) | Total Amount: Rs 5,000.00 | Total Fee: Rs 275.00 ====
-
-Record #1
-Order ID: LTJPD79839
-Phone Number: 919311971188
-Amount: 2,000.00
-Time: 2025-07-12 23:51:23
-
-Record #2
-Order ID: LTJPD79823
-Phone Number: 919108838841
-Amount: 1,000.00
-Time: 2025-07-12 23:20:03
-
-Record #3
-Order ID: LTJPD79802
-Phone Number: 919311971188
-Amount: 2,000.00
-Time: 2025-07-12 22:49:23
-
->> Total Amount for BOMBAYPAY: Rs 5,000.00
-
-==== XYPAY (6 records) | Total Amount: Rs 3,600.00 | Total Fee: Rs 172.80 ====
-
-Record #1
-Order ID: LTJPD79838
-Phone Number: 917970410097
-Amount: 500.00
-Time: 2025-07-12 23:49:32
-
-Record #2
-Order ID: LTJPD79819
-Phone Number: 919592911117
-Amount: 600.00
-Time: 2025-07-12 23:17:46
-
-Record #3
-Order ID: LTJPD79668
-Phone Number: 917895414706
-Amount: 500.00
-Time: 2025-07-12 18:53:35
-
-Record #4
-Order ID: LTJPD79473
-Phone Number: 918552817886
-Amount: 500.00
-Time: 2025-07-12 12:31:21
-
-Record #5
-Order ID: LTJPD79331
-Phone Number: 918685029172
-Amount: 1,000.00
-Time: 2025-07-12 00:33:20
-
-Record #6
-Order ID: LTJPD79314
-Phone Number: 917662045283
-Amount: 500.00
-Time: 2025-07-12 00:17:09
-
->> Total Amount for XYPAY: Rs 3,600.00
-
-==== PASSPAY (41 records) | Total Amount: Rs 24,600.00 | Total Fee: Rs 1303.80 ====
-
-Record #1
-Order ID: LTJPD79818
-Phone Number: 919325845957
-Amount: 300.00
-Time: 2025-07-12 23:16:59
-
-Record #2
-Order ID: LTJPD79810
-Phone Number: 918930747771
-Amount: 300.00
-Time: 2025-07-12 23:04:03
-
-Record #3
-Order ID: LTJPD79786
-Phone Number: 919334814629
-Amount: 300.00
-Time: 2025-07-12 22:03:51
-
-Record #4
-Order ID: LTJPD79785
-Phone Number: 918749062884
-Amount: 450.00
-Time: 2025-07-12 21:52:35
-
-Record #5
-Order ID: LTJPD79770
-Phone Number: 918749062884
-Amount: 300.00
-Time: 2025-07-12 21:40:40
-
-Record #6
-Order ID: LTJPD79756
-Phone Number: 919775127384
-Amount: 300.00
-Time: 2025-07-12 21:23:55
-
-Record #7
-Order ID: LTJPD79748
-Phone Number: 918524927414
-Amount: 2,000.00
-Time: 2025-07-12 21:13:51
-
-Record #8
-Order ID: LTJPD79744
-Phone Number: 918436341064
-Amount: 300.00
-Time: 2025-07-12 21:10:02
-
-Record #9
-Order ID: LTJPD79739
-Phone Number: 918524927414
-Amount: 1,000.00
-Time: 2025-07-12 21:02:26
+Time: 2025-07-13 02:06:57
 
 Record #10
-Order ID: LTJPD79731
-Phone Number: 917970410097
-Amount: 300.00
-Time: 2025-07-12 20:53:24
+Order ID: LTJPD79901
+Phone Number: 917340491499
+Amount: 500.00
+Time: 2025-07-13 01:52:05
 
 Record #11
-Order ID: LTJPD79720
-Phone Number: 918792331540
-Amount: 300.00
-Time: 2025-07-12 20:32:43
+Order ID: LTJPD79872
+Phone Number: 918436341064
+Amount: 500.00
+Time: 2025-07-13 00:43:10
 
 Record #12
-Order ID: LTJPD79718
-Phone Number: 918580471918
-Amount: 300.00
-Time: 2025-07-12 20:21:25
+Order ID: LTJPD79871
+Phone Number: 918436341064
+Amount: 500.00
+Time: 2025-07-13 00:35:05
 
 Record #13
-Order ID: LTJPD79705
-Phone Number: 918749062884
-Amount: 300.00
-Time: 2025-07-12 20:03:55
-
-Record #14
-Order ID: LTJPD79697
-Phone Number: 918524927414
-Amount: 1,000.00
-Time: 2025-07-12 19:44:25
-
-Record #15
-Order ID: LTJPD79695
-Phone Number: 918436341064
-Amount: 300.00
-Time: 2025-07-12 19:43:02
-
-Record #16
-Order ID: LTJPD79690
-Phone Number: 916204941221
-Amount: 300.00
-Time: 2025-07-12 19:35:03
-
-Record #17
-Order ID: LTJPD79687
-Phone Number: 916351544944
-Amount: 300.00
-Time: 2025-07-12 19:31:56
-
-Record #18
-Order ID: LTJPD79685
-Phone Number: 919353983566
-Amount: 2,000.00
-Time: 2025-07-12 19:13:34
-
-Record #19
-Order ID: LTJPD79681
-Phone Number: 918461832350
-Amount: 300.00
-Time: 2025-07-12 19:12:22
-
-Record #20
-Order ID: LTJPD79654
-Phone Number: 917976858425
+Order ID: LTJPD79849
+Phone Number: 919495770385
 Amount: 500.00
-Time: 2025-07-12 18:13:29
+Time: 2025-07-13 00:00:14
 
-Record #21
-Order ID: LTJPD79650
-Phone Number: 917976858425
-Amount: 500.00
-Time: 2025-07-12 18:02:01
+>> Total Amount for SKPAY: Rs 8,000.00
 
-Record #22
-Order ID: LTJPD79647
-Phone Number: 917976858425
-Amount: 1,000.00
-Time: 2025-07-12 17:52:53
+==== PASSPAY (10 records) | Total Amount: Rs 3,600.00 | Total Fee: Rs 190.80 ====
 
-Record #23
-Order ID: LTJPD79630
-Phone Number: 917976858425
-Amount: 500.00
-Time: 2025-07-12 17:31:44
-
-Record #24
-Order ID: LTJPD79629
-Phone Number: 918749062884
+Record #1
+Order ID: LTJPD79960
+Phone Number: 919528254045
 Amount: 300.00
-Time: 2025-07-12 17:18:42
+Time: 2025-07-13 07:54:14
 
-Record #25
-Order ID: LTJPD79618
-Phone Number: 918524927414
-Amount: 800.00
-Time: 2025-07-12 16:42:18
-
-Record #26
-Order ID: LTJPD79611
-Phone Number: 918749062884
-Amount: 300.00
-Time: 2025-07-12 16:20:56
-
-Record #27
-Order ID: LTJPD79610
-Phone Number: 918822566052
-Amount: 300.00
-Time: 2025-07-12 16:17:48
-
-Record #28
-Order ID: LTJPD79575
-Phone Number: 918817587791
-Amount: 1,000.00
-Time: 2025-07-12 15:41:37
-
-Record #29
-Order ID: LTJPD79567
-Phone Number: 918209888347
-Amount: 1,000.00
-Time: 2025-07-12 15:12:15
-
-Record #30
-Order ID: LTJPD79561
-Phone Number: 919832191688
-Amount: 500.00
-Time: 2025-07-12 15:07:41
-
-Record #31
-Order ID: LTJPD79548
-Phone Number: 916289366094
-Amount: 500.00
-Time: 2025-07-12 14:32:41
-
-Record #32
-Order ID: LTJPD79525
-Phone Number: 918749062884
-Amount: 350.00
-Time: 2025-07-12 14:10:12
-
-Record #33
-Order ID: LTJPD79524
-Phone Number: 919834723918
-Amount: 400.00
-Time: 2025-07-12 14:07:07
-
-Record #34
-Order ID: LTJPD79492
-Phone Number: 916392452001
-Amount: 300.00
-Time: 2025-07-12 13:21:16
-
-Record #35
-Order ID: LTJPD79486
-Phone Number: 918978599343
-Amount: 300.00
-Time: 2025-07-12 13:09:44
-
-Record #36
-Order ID: LTJPD79482
-Phone Number: 918524927414
-Amount: 500.00
-Time: 2025-07-12 12:59:26
-
-Record #37
-Order ID: LTJPD79470
-Phone Number: 918749062884
-Amount: 300.00
-Time: 2025-07-12 12:28:35
-
-Record #38
-Order ID: LTJPD79460
-Phone Number: 919353983566
-Amount: 2,000.00
-Time: 2025-07-12 12:14:35
-
-Record #39
-Order ID: LTJPD79452
-Phone Number: 919334814629
-Amount: 300.00
-Time: 2025-07-12 11:40:57
-
-Record #40
-Order ID: LTJPD79451
-Phone Number: 919353983566
-Amount: 2,000.00
-Time: 2025-07-12 11:37:07
-
-Record #41
-Order ID: LTJPD79399
+Record #2
+Order ID: LTJPD79943
 Phone Number: 919993746356
 Amount: 300.00
-Time: 2025-07-12 08:38:33
-
->> Total Amount for PASSPAY: Rs 24,600.00
-
-==== YTPAY (6 records) | Total Amount: Rs 3,500.00 | Total Fee: Rs 210.00 ====
-
-Record #1
-Order ID: LTJPD79796
-Phone Number: 918392083750
-Amount: 1,800.00
-Time: 2025-07-12 22:35:50
-
-Record #2
-Order ID: LTJPD79544
-Phone Number: 916202229878
-Amount: 300.00
-Time: 2025-07-12 14:30:46
+Time: 2025-07-13 05:44:27
 
 Record #3
-Order ID: LTJPD79385
-Phone Number: 916392452001
-Amount: 500.00
-Time: 2025-07-12 12:23:17
+Order ID: LTJPD79936
+Phone Number: 918749062884
+Amount: 300.00
+Time: 2025-07-13 04:55:49
 
 Record #4
-Order ID: LTJPD79382
-Phone Number: 918950844964
+Order ID: LTJPD79935
+Phone Number: 919723149037
 Amount: 300.00
-Time: 2025-07-12 07:47:05
+Time: 2025-07-13 04:49:42
 
 Record #5
-Order ID: LTJPD79348
-Phone Number: 919392322691
+Order ID: LTJPD79929
+Phone Number: 918978599343
 Amount: 300.00
-Time: 2025-07-12 02:30:26
+Time: 2025-07-13 04:28:46
 
 Record #6
-Order ID: LTJPD79347
-Phone Number: 919392322691
+Order ID: LTJPD79897
+Phone Number: 918436341064
 Amount: 300.00
-Time: 2025-07-12 02:24:44
-
->> Total Amount for YTPAY: Rs 3,500.00
-
-==== MOHAMMED AMEER ABBAS (1 record) | Total Amount: Rs 500.00 | Total Fee: Rs 0.00 ====
-
-Record #1
-Order ID: 79765
-Phone Number: 918279698793
-Amount: 500.00
-Time: 2025-07-12 21:41:25
-
->> Total Amount for MOHAMMED AMEER ABBAS: Rs 500.00
-
-==== VADERPAY (18 records) | Total Amount: Rs 12,600.00 | Total Fee: Rs 705.60 ====
-
-Record #1
-Order ID: LTJPD79708
-Phone Number: 919311971188
-Amount: 2,000.00
-Time: 2025-07-12 20:16:22
-
-Record #2
-Order ID: LTJPD79702
-Phone Number: 919311971188
-Amount: 2,000.00
-Time: 2025-07-12 20:01:38
-
-Record #3
-Order ID: LTJPD79693
-Phone Number: 917487064219
-Amount: 300.00
-Time: 2025-07-12 19:41:52
-
-Record #4
-Order ID: LTJPD79675
-Phone Number: 919311971188
-Amount: 2,000.00
-Time: 2025-07-12 19:07:08
-
-Record #5
-Order ID: LTJPD79608
-Phone Number: 919939294221
-Amount: 300.00
-Time: 2025-07-12 16:18:22
-
-Record #6
-Order ID: LTJPD79585
-Phone Number: 916200665032
-Amount: 300.00
-Time: 2025-07-12 15:46:23
+Time: 2025-07-13 01:40:25
 
 Record #7
-Order ID: LTJPD79570
-Phone Number: 917057396234
+Order ID: LTJPD79893
+Phone Number: 918436341064
 Amount: 500.00
-Time: 2025-07-12 15:24:51
+Time: 2025-07-13 01:14:56
 
 Record #8
-Order ID: LTJPD79551
-Phone Number: 917057396234
+Order ID: LTJPD79888
+Phone Number: 918436341064
 Amount: 500.00
-Time: 2025-07-12 14:37:52
+Time: 2025-07-13 01:05:54
 
 Record #9
-Order ID: LTJPD79527
-Phone Number: 919561293223
-Amount: 300.00
-Time: 2025-07-12 14:15:08
+Order ID: LTJPD79886
+Phone Number: 918436341064
+Amount: 500.00
+Time: 2025-07-13 00:54:02
 
 Record #10
-Order ID: LTJPD79504
-Phone Number: 917096285116
+Order ID: LTJPD79885
+Phone Number: 919624035603
 Amount: 300.00
-Time: 2025-07-12 13:40:37
+Time: 2025-07-13 00:53:10
 
-Record #11
-Order ID: LTJPD79474
-Phone Number: 919954124485
-Amount: 300.00
-Time: 2025-07-12 12:42:37
+>> Total Amount for PASSPAY: Rs 3,600.00
 
-Record #12
-Order ID: LTJPD79444
-Phone Number: 919368904154
-Amount: 300.00
-Time: 2025-07-12 11:18:07
+==== XYPAY (1 record) | Total Amount: Rs 600.00 | Total Fee: Rs 28.80 ====
 
-Record #13
-Order ID: LTJPD79438
-Phone Number: 919706849668
-Amount: 300.00
-Time: 2025-07-12 10:44:54
+Record #1
+Order ID: LTJPD79924
+Phone Number: 919988121815
+Amount: 600.00
+Time: 2025-07-13 03:38:06
 
-Record #14
-Order ID: LTJPD79436
-Phone Number: 918840549869
-Amount: 300.00
-Time: 2025-07-12 10:40:51
+>> Total Amount for XYPAY: Rs 600.00
 
-Record #15
-Order ID: LTJPD79428
-Phone Number: 918866727262
-Amount: 300.00
-Time: 2025-07-12 10:28:37
+==== BOMBAYPAY (3 records) | Total Amount: Rs 9,000.00 | Total Fee: Rs 495.00 ====
 
-Record #16
-Order ID: LTJPD79378
+Record #1
+Order ID: LTJPD79919
 Phone Number: 919311971188
 Amount: 2,000.00
-Time: 2025-07-12 07:10:37
-
-Record #17
-Order ID: LTJPD79369
-Phone Number: 917610680934
-Amount: 300.00
-Time: 2025-07-12 05:16:51
-
-Record #18
-Order ID: LTJPD79346
-Phone Number: 916366259525
-Amount: 300.00
-Time: 2025-07-12 01:56:37
-
->> Total Amount for VADERPAY: Rs 12,600.00
-
-==== OSPAY (4 records) | Total Amount: Rs 2,000.00 | Total Fee: Rs 90.00 ====
-
-Record #1
-Order ID: LTJPD79652
-Phone Number: 918360239357
-Amount: 500.00
-Time: 2025-07-12 18:07:27
+Time: 2025-07-13 02:16:43
 
 Record #2
-Order ID: LTJPD79638
-Phone Number: 918102211876
-Amount: 500.00
-Time: 2025-07-12 17:43:39
+Order ID: LTJPD79913
+Phone Number: 919311971188
+Amount: 2,000.00
+Time: 2025-07-13 02:09:43
 
 Record #3
-Order ID: LTJPD79628
-Phone Number: 918102211876
-Amount: 500.00
-Time: 2025-07-12 17:06:39
+Order ID: LTJPD79903
+Phone Number: 919311971188
+Amount: 5,000.00
+Time: 2025-07-13 01:56:43
 
-Record #4
-Order ID: LTJPD79500
-Phone Number: 919572728751
-Amount: 500.00
-Time: 2025-07-12 13:36:39
+>> Total Amount for BOMBAYPAY: Rs 9,000.00
 
->> Total Amount for OSPAY: Rs 2,000.00
-
-==== XCPAY (2 records) | Total Amount: Rs 1,000.00 | Total Fee: Rs 55.00 ====
-
-Record #1
-Order ID: LTJPD79637
-Phone Number: 917976858425
-Amount: 500.00
-Time: 2025-07-12 17:43:08
-
-Record #2
-Order ID: LTJPD79463
-Phone Number: 917976858425
-Amount: 500.00
-Time: 2025-07-12 12:12:37
-
->> Total Amount for XCPAY: Rs 1,000.00
-
-==== U9PAY (1 record) | Total Amount: Rs 500.00 | Total Fee: Rs 22.50 ====
-
-Record #1
-Order ID: LTJPD79512
-Phone Number: 918619128266
-Amount: 500.00
-Time: 2025-07-12 13:41:39
-
->> Total Amount for U9PAY: Rs 500.00
-
-==== GRAND TOTAL for All Gateways: Rs 121,600.00 | Total Records: 179 ====
+==== GRAND TOTAL for All Gateways: Rs 22,500.00 | Total Records: 30 ====

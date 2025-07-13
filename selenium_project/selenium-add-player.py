@@ -83,12 +83,7 @@ print("[INFO] Table loaded")
 
 
 def load_phone_records_from_file():
-    """
-    Loads phone records from 'selenium-phone-number.txt' in descending order.
-    Expects lines like:
-    #1 - Phone: 919123456789, Email: -, Affiliate: APK006
-    Returns a list of dicts: [{Phone Number, Email, Affiliate Code}, ...]
-    """
+
     filename = "selenium_project/selenium-phone-number.txt"
     pattern = re.compile(r"#\d+\s+-\s+Phone:\s+(\d+),\s+Email:\s+(.*?),\s+Affiliate:\s+(.*)", re.IGNORECASE)
     records = []
