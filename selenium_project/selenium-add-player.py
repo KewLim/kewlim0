@@ -118,7 +118,7 @@ def add_player_details(record):
 
         # Wait for overlay to disappear
 
-    time.sleep(2)
+    time.sleep(3)
     wait = WebDriverWait(driver, 20)  # Add this line
     add_button = wait.until(EC.element_to_be_clickable((
         By.XPATH, "//button[contains(text(), 'Add New Player')]"

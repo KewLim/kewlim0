@@ -72,6 +72,7 @@ def gateway_setup_movement(gateway_name):
 
     gateway_map = {
         "XYPAY": "XYPAY",
+        "XCPAY": "XCPAY",
         "SKPAY": "SKPAY",
         "YTPAY": "YTPAY",
         "OSPAY": "OSPAY",
@@ -287,7 +288,7 @@ def parse_and_execute(filename):
     supported_gateways = {
         "XYPAY", "SKPAY", "YTPAY", "OSPAY", "SIMPLYPAY", "VADERPAY",
         "PASSPAY", "MULTIPAY", "U9PAY", "BOMBAYPAY", "EPAY", 
-        "MOHAMMED AMEER ABBAS", "Test", "Test2"
+        "MOHAMMED AMEER ABBAS", "Test", "Test2", "XCPAY"
     }
 
     # Temporary variables for one record
