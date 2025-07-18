@@ -164,6 +164,7 @@ def add_transaction_details(record):
     add_button = wait.until(EC.element_to_be_clickable((
         By.XPATH, "//button[contains(text(), 'Add New Bank Transaction')]"
     )))
+    time.sleep(2)
     add_button.click()
     print("[INFO] Add Transaction button clicked")
 
