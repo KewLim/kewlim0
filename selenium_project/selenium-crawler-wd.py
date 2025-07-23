@@ -225,9 +225,18 @@ def print_grouped_results(gateway_groups):
         os.fsync(f.fileno())
 
         # ✅ Only once at the end
-        grand_footer = f"\n==== GRAND TOTAL for All Gateways: Rs {grand_total:,.2f} | Total Records: {total_records} ====\n"
+        grand_footer = f"\n==== GRAND TOTAL for All Gateways: Rs {grand_total:,.2f} | Total Records: {total_records} ====\n\n"
         print(f"\033[95m{grand_footer}\033[0m")
         f.write(grand_footer)
+        
+        # Print individual gateway tax amounts
+        for gateway, records in gateway_groups.items():
+            total_tax_amount = round(sum(float(record["Tax Fee"]) for record in records), 2)
+            # Extract date from the first record's time (assuming all records are from same date)
+            transaction_date = datetime.strptime(records[0]["Time"], "%Y-%m-%d %H:%M:%S").strftime("%d/%m/%Y")
+            gateway_tax_line = f"pg {gateway} {transaction_date} | Total Fee: Rs {total_tax_amount:.2f}\n"
+            print(f"\033[95m{gateway_tax_line}\033[0m")
+            f.write(gateway_tax_line)
 
 
 
