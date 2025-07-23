@@ -16,6 +16,170 @@ from selenium.webdriver import ActionChains
 import pyautogui
 
 
+def wait_for_overlay_to_disappear(driver, max_wait=10):
+    """Wait for modal overlays to disappear"""
+    try:
+        overlay_selectors = [
+            "div.absolute.inset-0.transition-opacity.duration-300.bg-slate-900\\/60",
+            ".bg-slate-900\\/60",
+            ".modal-overlay",
+            ".overlay",
+            "[class*='bg-slate-900']",
+            ".app-preloader"
+        ]
+        
+        for selector in overlay_selectors:
+            try:
+                WebDriverWait(driver, max_wait).until(
+                    EC.invisibility_of_element_located((By.CSS_SELECTOR, selector))
+                )
+                print(f"[INFO] Overlay disappeared: {selector}")
+            except:
+                continue
+    except:
+        pass
+
+
+def reliable_click_with_locator(locator, max_attempts=3, delay=1, verify_callback=None):
+    """
+    Click element using locator to handle stale elements
+    """
+    for attempt in range(max_attempts):
+        try:
+            print(f"[INFO] Attempting click with locator (attempt {attempt + 1}/{max_attempts})")
+            
+            # Wait for any overlays to disappear
+            wait_for_overlay_to_disappear(driver, max_wait=3)
+            
+            # Re-find element to avoid stale reference
+            element = WebDriverWait(driver, 20).until(
+                EC.element_to_be_clickable(locator)
+            )
+            
+            # Scroll element into view
+            driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", element)
+            time.sleep(0.3)
+            
+            # Try normal click first
+            try:
+                element.click()
+                print("[INFO] Normal click successful")
+            except Exception as click_error:
+                print(f"[WARN] Normal click failed: {click_error}")
+                # Fallback to JavaScript click
+                print("[INFO] Trying JavaScript click...")
+                driver.execute_script("arguments[0].click();", element)
+                print("[INFO] JavaScript click successful")
+            
+            time.sleep(0.5)
+            
+            # If verification callback provided, use it
+            if verify_callback and not verify_callback():
+                if attempt < max_attempts - 1:
+                    print(f"[WARN] Click verification failed, retrying in {delay} seconds...")
+                    time.sleep(delay)
+                    continue
+                else:
+                    print("[ERROR] Click verification failed after all attempts")
+                    return False
+            
+            print("[INFO] Click successful")
+            return True
+            
+        except Exception as e:
+            print(f"[WARN] Click attempt {attempt + 1} failed: {e}")
+            if attempt < max_attempts - 1:
+                time.sleep(delay)
+            else:
+                print(f"[ERROR] All click attempts failed: {e}")
+                raise e
+    return False
+
+
+def reliable_click(element, max_attempts=3, delay=1, verify_callback=None):
+    """
+    Click element with retry mechanism, overlay handling, and stale element recovery
+    """
+    for attempt in range(max_attempts):
+        try:
+            print(f"[INFO] Attempting click (attempt {attempt + 1}/{max_attempts})")
+            
+            # Wait for any overlays to disappear
+            wait_for_overlay_to_disappear(driver, max_wait=3)
+            
+            # Scroll element into view
+            driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", element)
+            time.sleep(0.3)
+            
+            # Try normal click first
+            try:
+                element.click()
+                print("[INFO] Normal click successful")
+            except Exception as click_error:
+                print(f"[WARN] Normal click failed: {click_error}")
+                # Fallback to JavaScript click
+                print("[INFO] Trying JavaScript click...")
+                driver.execute_script("arguments[0].click();", element)
+                print("[INFO] JavaScript click successful")
+            
+            time.sleep(0.5)
+            
+            # If verification callback provided, use it
+            if verify_callback and not verify_callback():
+                if attempt < max_attempts - 1:
+                    print(f"[WARN] Click verification failed, retrying in {delay} seconds...")
+                    time.sleep(delay)
+                    continue
+                else:
+                    print("[ERROR] Click verification failed after all attempts")
+                    return False
+            
+            print("[INFO] Click successful")
+            return True
+            
+        except Exception as e:
+            error_msg = str(e)
+            print(f"[WARN] Click attempt {attempt + 1} failed: {e}")
+            
+            # Check if it's a stale element error
+            if "stale" in error_msg.lower() or "not connected to the DOM" in error_msg:
+                print("[WARN] Stale element detected - element needs to be re-found")
+                
+            if attempt < max_attempts - 1:
+                time.sleep(delay)
+            else:
+                print(f"[ERROR] All click attempts failed: {e}")
+                raise e
+    return False
+
+
+def verify_dropdown_opened(driver):
+    """Verify dropdown is opened by checking for dropdown options"""
+    try:
+        dropdown_options = driver.find_elements(By.CSS_SELECTOR, ".ts-dropdown, .dropdown-menu, [role='listbox']")
+        return len(dropdown_options) > 0
+    except:
+        return False
+
+
+def verify_modal_opened(driver):
+    """Verify modal/popup window is opened"""
+    try:
+        modal = driver.find_elements(By.CSS_SELECTOR, ".flex.justify-between.px-4.py-3.rounded-t-lg.bg-slate-200.dark\\:bg-navy-800.sm\\:px-5")
+        return len(modal) > 0 and modal[0].is_displayed()
+    except:
+        return False
+
+
+def verify_calendar_opened(driver):
+    """Verify calendar popup is opened"""
+    try:
+        calendar = driver.find_elements(By.CLASS_NAME, "flatpickr-calendar")
+        return len(calendar) > 0 and "open" in calendar[0].get_attribute("class")
+    except:
+        return False
+
+
 
 
 
@@ -85,7 +249,8 @@ def gateway_setup_movement(gateway_name):
         "EPAY": "EPAY",
         "MOHAMMED AMEER ABBAS": "Karnataka Bank 2",
         "Test": "Test",
-        "Test2" : "Test2"
+        "Test2" : "Test2",
+        "BOPAY": "BOPAY"
     }
 
     if gateway_name in gateway_map:
@@ -98,13 +263,15 @@ def enter_gateway_name(gateway_text):
     WebDriverWait(driver, 30).until(
         EC.invisibility_of_element_located((By.CLASS_NAME, "app-preloader"))
     )
-    time.sleep(2)  # slight delay for DOM settle
 
-    # Step 2: Click container to open dropdown
-    container = WebDriverWait(driver, 20).until(
-        EC.element_to_be_clickable((By.CSS_SELECTOR, "div.ts-control"))
-    )
-    container.click()
+    # Step 2: Click container to open dropdown using locator-based approach
+    time.sleep(0.5)
+    driver.execute_script("window.scrollTo(0, 0);")
+    time.sleep(1)  # Optional: wait for any sticky headers to settle
+    
+    # Use locator-based reliable click to handle stale elements
+    container_locator = (By.CSS_SELECTOR, "div.ts-control")
+    reliable_click_with_locator(container_locator, max_attempts=3, delay=1, verify_callback=lambda: verify_dropdown_opened(driver))
     time.sleep(0.5)
 
     # Step 3: Find actual input (not always interactable)
@@ -132,23 +299,84 @@ def enter_gateway_name(gateway_text):
             arguments[0].dispatchEvent(new Event('input', { bubbles: true }));
         """, gateway_input, gateway_text)
 
-    time.sleep(0.5)  # Wait for dropdown options
+    time.sleep(2)  # Wait for dropdown options
 
-    # Step 4: Press Enter to select the first matching option
-    gateway_input.send_keys(Keys.ENTER)
-    print(f"[INFO] Gateway '{gateway_text}' entered and selected.")
+    # Step 4: Check if dropdown has valid options before selection
+    try:
+        # Check for dropdown options
+        dropdown_options = driver.find_elements(By.CSS_SELECTOR, ".ts-dropdown .option, .ts-dropdown-content .option, [data-selectable='true'], .dropdown-item")
+        
+        if len(dropdown_options) == 0:
+            print("[WARN] No dropdown options found, checking for alternative selectors...")
+            # Try alternative selectors for dropdown options
+            alternative_selectors = [
+                ".ts-dropdown [data-value]",
+                ".dropdown-menu li",
+                ".select-dropdown li",
+                "[role='option']",
+                ".ts-dropdown > div"
+            ]
+            
+            for selector in alternative_selectors:
+                dropdown_options = driver.find_elements(By.CSS_SELECTOR, selector)
+                if len(dropdown_options) > 0:
+                    print(f"[INFO] Found {len(dropdown_options)} options with selector: {selector}")
+                    break
+        
+        if len(dropdown_options) > 0:
+            print(f"[INFO] Found {len(dropdown_options)} dropdown options")
+            # Press Enter to select the first matching option
+            gateway_input.send_keys(Keys.ENTER)
+            print(f"[INFO] Gateway '{gateway_text}' entered and selected.")
+        else:
+            print("[WARN] No dropdown options available - the dropdown might be undefined/empty")
+            print("[INFO] Trying to proceed without selection...")
+            # Try pressing Enter anyway in case the input is accepted
+            gateway_input.send_keys(Keys.ENTER)
+            print(f"[INFO] Attempted to enter '{gateway_text}' without dropdown options.")
+            
+    except Exception as e:
+        print(f"[WARN] Error checking dropdown options: {e}")
+        # Fallback - try pressing Enter anyway
+        gateway_input.send_keys(Keys.ENTER)
+        print(f"[INFO] Fallback: Attempted to enter '{gateway_text}'.")
+    
     time.sleep(0.5)
 
 
 
 
 
-    # --- Check Table load ---
-    wait = WebDriverWait(driver, 30)
-    table_presence = wait.until(EC.presence_of_element_located((By.CLASS_NAME, "gridjs-wrapper")))
-    print("[INFO] Table loaded")
+    # --- Check Table load with multiple selectors ---
+    print("[INFO] Waiting for table to load...")
+    table_selectors = [
+        (By.CLASS_NAME, "gridjs-wrapper"),
+        (By.CSS_SELECTOR, ".gridjs-wrapper"),
+        (By.CSS_SELECTOR, "table"),
+        (By.CSS_SELECTOR, ".table"),
+        (By.CSS_SELECTOR, "[role='table']"),
+        (By.CSS_SELECTOR, ".data-table"),
+        (By.CSS_SELECTOR, ".grid-table")
+    ]
+    
+    table_loaded = False
+    wait = WebDriverWait(driver, 45)  # Increased timeout
+    
+    for selector in table_selectors:
+        try:
+            wait.until(EC.presence_of_element_located(selector))
+            print(f"[INFO] Table loaded with selector: {selector}")
+            table_loaded = True
+            break
+        except Exception as e:
+            print(f"[DEBUG] Table selector {selector} failed: {e}")
+            continue
+    
+    if not table_loaded:
+        print("[WARN] Table loading timeout - proceeding anyway")
+    
+    time.sleep(2)  # Additional wait for table content to populate
 
-    time.sleep(1)
 
 
 # ======== Add Details HERE =======
@@ -159,27 +387,37 @@ def add_transaction_details(record):
     """Fill Order ID, Phone Number, and Amount into form."""
     print(f"Processing Record: {record}")
 
-    time.sleep(2)
-    wait = WebDriverWait(driver, 20)  # Add this line
+    wait = WebDriverWait(driver, 20, poll_frequency=0.2)
     add_button = wait.until(EC.element_to_be_clickable((
         By.XPATH, "//button[contains(text(), 'Add New Bank Transaction')]"
     )))
-    time.sleep(2)
-    add_button.click()
+    
+    # Use reliable click with modal verification
+    reliable_click(add_button, max_attempts=3, delay=1, verify_callback=lambda: verify_modal_opened(driver))
     print("[INFO] Add Transaction button clicked")
 
-    time.sleep(1)
+    time.sleep(.5)
 
+    # === Wait for the window UI to appear ===
+    WebDriverWait(driver, 20, poll_frequency=0.2).until(
+        EC.presence_of_element_located((
+            By.CSS_SELECTOR, ".flex.justify-between.px-4.py-3.rounded-t-lg.bg-slate-200.dark\\:bg-navy-800.sm\\:px-5"
+        ))
+    )
+    print("[INFO] Target Window element appeared — proceeding...")
 
     # ===== Order ID =====
-
     order_id_input = WebDriverWait(driver, 20).until(
         EC.presence_of_element_located((By.XPATH, "//input[@placeholder='Bank Reference']"))
     )
+
+    # Force scroll into view before clear and type
+    driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", order_id_input)
+    time.sleep(0.3)
+
     order_id_input.clear()
     order_id_input.send_keys(record["Order ID"])
     print(f"[INFO] Order ID entered: {record['Order ID']}")
-
 
 
     # ===== Phone Number =====
@@ -208,7 +446,9 @@ def add_transaction_details(record):
     calendar_input = WebDriverWait(driver, 20).until(
         EC.presence_of_element_located((By.XPATH, "//input[@placeholder='Choose datetime...']"))
     )
-    calendar_input.click()
+    
+    # Use reliable click with calendar verification
+    reliable_click(calendar_input, max_attempts=3, delay=1, verify_callback=lambda: verify_calendar_opened(driver))
     print(f"[INFO] Calendar input clicked...")
 
     calendar_popup = WebDriverWait(driver, 10).until(
@@ -224,7 +464,8 @@ def add_transaction_details(record):
         for day in all_days:
             if day.get_attribute("aria-label") == target_date:
                 driver.execute_script("arguments[0].scrollIntoView(true);", day)
-                day.click()
+                # Use reliable click for date selection
+                reliable_click(day, max_attempts=3, delay=1)
                 print(f"[INFO] Clicked date: {target_date}")
                 break
         else:
@@ -258,7 +499,8 @@ def add_transaction_details(record):
     # Check and click if needed
     current_ampm = ampm_toggle.text.strip().upper()
     if current_ampm != ampm_target:
-        ampm_toggle.click()
+        # Use reliable click for AM/PM toggle
+        reliable_click(ampm_toggle, max_attempts=3, delay=1)
         print(f"[INFO] AM/PM toggled to {ampm_target}")
     else:
         print(f"[INFO] AM/PM already set to {ampm_target}")
@@ -289,7 +531,7 @@ def parse_and_execute(filename):
     supported_gateways = {
         "XYPAY", "SKPAY", "YTPAY", "OSPAY", "SIMPLYPAY", "VADERPAY",
         "PASSPAY", "MULTIPAY", "U9PAY", "BOMBAYPAY", "EPAY", 
-        "MOHAMMED AMEER ABBAS", "Test", "Test2", "XCPAY"
+        "MOHAMMED AMEER ABBAS", "Test", "Test2", "XCPAY", "BOPAY"
     }
 
     # Temporary variables for one record
