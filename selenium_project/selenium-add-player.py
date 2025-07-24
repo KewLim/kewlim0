@@ -180,25 +180,16 @@ def add_player_details(record):
 
     time.sleep(1)
     
-    # Submit the form by finding and clicking the submit button
+    # Submit the form using Enter key
     try:
-        submit_button = WebDriverWait(driver, 10).until(
-            EC.element_to_be_clickable((By.XPATH, "//button[contains(text(), 'Submit') or contains(text(), 'Save') or contains(text(), 'Add') or @type='submit']"))
-        )
-        submit_button.click()
-        print("[INFO] Form submitted via submit button")
+        # Find the last input field (affiliate ID) and press Enter
+        last_input = driver.find_element(By.XPATH, "//input[@placeholder='Enter affiliate ID']")
+        last_input.send_keys(Keys.ENTER)
+        print("[INFO] Form submitted via Enter key")
     except Exception as e:
-        print(f"[WARN] Could not find submit button, trying alternative approaches: {e}")
-        # Fallback: try to submit form using Enter key on a form element
-        try:
-            form_inputs = driver.find_elements(By.CSS_SELECTOR, "input, textarea")
-            if form_inputs:
-                form_inputs[0].send_keys(Keys.ENTER)
-                print("[INFO] Form submitted via Enter key on input")
-        except Exception as e2:
-            print(f"[ERROR] Could not submit form: {e2}")
+        print(f"[ERROR] Could not submit form with Enter key: {e}")
     
-    time.sleep(.5)
+    time.sleep(2)
 
 
 
