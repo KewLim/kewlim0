@@ -13,7 +13,6 @@ from datetime import datetime
 from collections import defaultdict
 import re
 from selenium.webdriver import ActionChains
-import pyautogui
 
 
 def wait_for_overlay_to_disappear(driver, max_wait=10):
@@ -515,9 +514,41 @@ def add_transaction_details(record):
     else:
         print(f"[INFO] AM/PM already set to {ampm_target}")
 
-    pyautogui.press('enter')
-    time.sleep(.5)
-    pyautogui.press('enter')
+    # Confirm calendar selection by pressing Enter on the calendar input or body
+    try:
+        # First try to press Enter on the calendar input to confirm the datetime selection
+        calendar_input = driver.find_element(By.XPATH, "//input[@placeholder='Choose datetime...']")
+        calendar_input.send_keys(Keys.ENTER)
+        print("[INFO] Calendar selection confirmed via Enter on calendar input")
+    except Exception as e:
+        print(f"[WARN] Could not confirm calendar via input: {e}")
+        # Fallback: press Enter on body to confirm calendar
+        try:
+            driver.find_element(By.TAG_NAME, "body").send_keys(Keys.ENTER)
+            print("[INFO] Calendar selection confirmed via Enter on body")
+        except Exception as e2:
+            print(f"[WARN] Could not confirm calendar: {e2}")
+    
+    time.sleep(0.5)
+    
+    # Submit the form by finding and clicking the submit button
+    try:
+        submit_button = WebDriverWait(driver, 10).until(
+            EC.element_to_be_clickable((By.XPATH, "//button[contains(text(), 'Submit') or contains(text(), 'Save') or contains(text(), 'Add') or @type='submit']"))
+        )
+        reliable_click(submit_button, max_attempts=3, delay=1)
+        print("[INFO] Form submitted via submit button")
+    except Exception as e:
+        print(f"[WARN] Could not find submit button, trying alternative approaches: {e}")
+        # Fallback: try to submit form using Enter key on a form element
+        try:
+            form_inputs = driver.find_elements(By.CSS_SELECTOR, "input, textarea")
+            if form_inputs:
+                form_inputs[0].send_keys(Keys.ENTER)
+                print("[INFO] Form submitted via Enter key on input")
+        except Exception as e2:
+            print(f"[ERROR] Could not submit form: {e2}")
+    
     time.sleep(.5)
 
 
