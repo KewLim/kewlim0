@@ -118,10 +118,17 @@ def add_player_details(record):
     """Fill Order ID, Phone Number, and Amount into form."""
     print(f"Processing Record: {record}")
 
-        # Wait for overlay to disappear
+    # Wait for any overlay to disappear
+    try:
+        WebDriverWait(driver, 10).until_not(
+            EC.presence_of_element_located((By.CSS_SELECTOR, "div.absolute.inset-0"))
+        )
+        print("[INFO] Overlay disappeared")
+    except TimeoutException:
+        print("[WARN] Overlay still present, trying to proceed")
 
     time.sleep(3)
-    wait = WebDriverWait(driver, 20)  # Add this line
+    wait = WebDriverWait(driver, 20)
     add_button = wait.until(EC.element_to_be_clickable((
         By.XPATH, "//button[contains(text(), 'Add New Player')]"
     )))
