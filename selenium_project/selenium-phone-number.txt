@@ -1,34 +1,22 @@
 
-==== All (30 records) ====
-#1 - Phone: 919127085043, Email: -, Affiliate: APK006
-#2 - Phone: 918617867352, Email: -, Affiliate: APK006
-#3 - Phone: 917679348293, Email: -, Affiliate: APK006
-#4 - Phone: 917303440935, Email: -, Affiliate: APK005
-#5 - Phone: 918949588323, Email: -, Affiliate: APK006
-#6 - Phone: 919523176428, Email: -, Affiliate: APK006
-#7 - Phone: 918109744804, Email: -, Affiliate: APK006
-#8 - Phone: 918979908484, Email: -, Affiliate: APK006
-#9 - Phone: 917001892168, Email: -, Affiliate: APK006
-#10 - Phone: 916356301965, Email: -, Affiliate: APK006
-#11 - Phone: 919313151536, Email: -, Affiliate: APK006
-#12 - Phone: 917901916793, Email: -, Affiliate: APK006
-#13 - Phone: 918099231229, Email: -, Affiliate: APK006
-#14 - Phone: 919414587364, Email: -, Affiliate: APK006
-#15 - Phone: 917600098671, Email: -, Affiliate: APK005
-#16 - Phone: 916202823604, Email: -, Affiliate: APK005
-#17 - Phone: 917999317436, Email: -, Affiliate: APK006
-#18 - Phone: 917976739144, Email: -, Affiliate: APK006
-#19 - Phone: 917568559207, Email: -, Affiliate: APK006
-#20 - Phone: 919024075794, Email: -, Affiliate: APK005
-#21 - Phone: 917007331964, Email: -, Affiliate: APK006
-#22 - Phone: 918681982301, Email: -, Affiliate: APK006
-#23 - Phone: 918638443255, Email: -, Affiliate: Melody01
-#24 - Phone: 919834563305, Email: -, Affiliate: APK006
-#25 - Phone: 919019272474, Email: -, Affiliate: APK006
-#26 - Phone: 918168270972, Email: -, Affiliate: APK005
-#27 - Phone: 917010042008, Email: -, Affiliate: APK005
-#28 - Phone: 919972393979, Email: -, Affiliate: Fbftd001
-#29 - Phone: 919265390685, Email: -, Affiliate: APK005
-
-
-==== TOTAL: 30 phone numbers collected ====
+==== All (118 records) ====
+#1 - Phone: 919998658139, Email: -, Affiliate: APK006
+#2 - Phone: 918141981816, Email: -, Affiliate: APK005
+#3 - Phone: 917020509190, Email: -, Affiliate: APK005
+#4 - Phone: 918910503194, Email: -, Affiliate: APK006
+#5 - Phone: 918290855510, Email: -, Affiliate: APK005
+#6 - Phone: 917063891989, Email: -, Affiliate: APK005
+#7 - Phone: 918516041078, Email: -, Affiliate: APK006
+#8 - Phone: 919307896323, Email: zaidwalikar6@gmail.com, Affiliate: APK006
+#9 - Phone: 919234676306, Email: -, Affiliate: APK006
+#10 - Phone: 917001023439, Email: -, Affiliate: APK006
+#11 - Phone: 917003503971, Email: -, Affiliate: APK006
+#12 - Phone: 919004226522, Email: -, Affiliate: APK006
+#13 - Phone: 918975814858, Email: -, Affiliate: APK005
+#14 - Phone: 919899017003, Email: -, Affiliate: APK005
+#15 - Phone: 916003219139, Email: -, Affiliate: APK006
+#16 - Phone: 919174968199, Email: -, Affiliate: -
+#17 - Phone: 918878092863, Email: -, Affiliate: APK005
+#18 - Phone: 918003433870, Email: -, Affiliate: APK005
+#19 - Phone: 917017830467, Email: -, Affiliate: APK006
+#20 - Phone: 918075873195, Email: -, Affiliate: APK006

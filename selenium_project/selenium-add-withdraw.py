@@ -293,7 +293,7 @@ def enter_gateway_name(gateway_text):
             arguments[0].dispatchEvent(new Event('input', { bubbles: true }));
         """, gateway_input, gateway_text)
 
-    time.sleep(2)  # Wait for dropdown options
+    time.sleep(1)  # Wait for dropdown options
 
     # Step 4: Check if dropdown has valid options before selection
     try:

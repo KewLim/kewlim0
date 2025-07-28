@@ -59,7 +59,7 @@ try:
 except TimeoutException:
     print("[WARN] Preloader still visible. Trying to proceed anyway...")
 
-    time.sleep(3)
+    time.sleep(1)
 
 
 try:
@@ -127,7 +127,7 @@ def add_player_details(record):
     except TimeoutException:
         print("[WARN] Overlay still present, trying to proceed")
 
-    time.sleep(3)
+    time.sleep(1)
     wait = WebDriverWait(driver, 20)
     add_button = wait.until(EC.element_to_be_clickable((
         By.XPATH, "//button[contains(text(), 'Add New Player')]"

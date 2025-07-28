@@ -166,7 +166,7 @@ def extract_transaction_data(driver, wait_timeout=20):
                 "Phone Number": cols[8].text.strip(),
                 "Amount": float(cols[12].text.strip().replace("Rs", "").replace(",", "").strip()),
                 "Time": cols[18].text.strip(),
-                "Tax Fee": float(cols[13].text.strip())
+                "Tax Fee": float(cols[13].text.strip().replace(",", ""))
             }
             gateway_groups[record["Gateway"]].append(record)
 
