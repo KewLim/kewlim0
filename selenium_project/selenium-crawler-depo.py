@@ -240,7 +240,7 @@ def print_grouped_results(gateway_groups):
             total_tax_amount = round(sum(float(record["Tax Fee"]) for record in records), 2)
             # Extract date from the first record's time (assuming all records are from same date)
             transaction_date = datetime.strptime(records[0]["Time"], "%Y-%m-%d %H:%M:%S").strftime("%d/%m/%Y")
-            gateway_tax_line = f"pg {gateway} {transaction_date} | Total Fee: Rs {total_tax_amount:.2f}\n"
+            gateway_tax_line = f"(depo) pg {gateway} {transaction_date} | Total Fee: Rs {total_tax_amount:.2f}\n"
             print(f"\033[95m{gateway_tax_line}\033[0m")
             f.write(gateway_tax_line)
 
