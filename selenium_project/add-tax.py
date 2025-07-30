@@ -15,28 +15,87 @@ import re
 from selenium.webdriver import ActionChains
 
 
-def wait_for_overlay_to_disappear(driver, max_wait=10):
-    """Wait for modal overlays to disappear"""
-    try:
-        overlay_selectors = [
-            "div.absolute.inset-0.transition-opacity.duration-300.bg-slate-900\\/60",
-            ".bg-slate-900\\/60",
-            ".modal-overlay",
-            ".overlay",
-            "[class*='bg-slate-900']",
-            ".app-preloader"
-        ]
-        
-        for selector in overlay_selectors:
-            try:
+def wait_for_overlay_to_disappear(driver, max_wait=5):
+    """Fast overlay detection - only wait if overlay actually exists"""
+    overlay_selectors = [
+        "div.absolute.inset-0.transition-opacity.duration-300.bg-slate-900\\/60",
+        ".app-preloader",
+        "div.app-preloader"
+    ]
+    
+    overlay_found = False
+    for selector in overlay_selectors:
+        try:
+            # Quick check if overlay exists
+            overlays = driver.find_elements(By.CSS_SELECTOR, selector)
+            if overlays and overlays[0].is_displayed():
+                print(f"[INFO] {selector} overlay detected, waiting...")
                 WebDriverWait(driver, max_wait).until(
                     EC.invisibility_of_element_located((By.CSS_SELECTOR, selector))
                 )
-                print(f"[INFO] Overlay disappeared: {selector}")
-            except:
-                continue
-    except:
-        pass
+                overlay_found = True
+                print(f"[INFO] {selector} overlay disappeared")
+        except:
+            continue
+    
+    if overlay_found:
+        time.sleep(0.3)  # Brief wait for DOM stability
+        return True
+    return False
+
+
+def smart_click(element, verify_callback=None):
+    """
+    Smart click with minimal retries - only retry if overlay blocks
+    """
+    try:
+        # Try normal click first
+        element.click()
+        
+        # Quick verification if callback provided
+        if verify_callback:
+            time.sleep(0.3)
+            if verify_callback():
+                return True
+            else:
+                # Only retry if overlay is blocking
+                if wait_for_overlay_to_disappear(driver, max_wait=5):
+                    element.click()
+                    time.sleep(0.3)
+                    return verify_callback()
+                return False
+        return True
+        
+    except Exception as click_error:
+        error_msg = str(click_error)
+        # Check for overlay blocking issues
+        if ("obscures it" in error_msg or "not clickable" in error_msg or 
+            "app-preloader" in error_msg or "ElementClickInterceptedException" in str(type(click_error))):
+            print(f"[INFO] Overlay blocking click: {error_msg}")
+            
+            # Wait for overlays to disappear
+            if wait_for_overlay_to_disappear(driver, max_wait=10):
+                print("[INFO] Overlays cleared, trying JS click...")
+                try:
+                    driver.execute_script("arguments[0].click();", element)
+                    if verify_callback:
+                        time.sleep(0.3)
+                        return verify_callback()
+                    return True
+                except Exception as js_error:
+                    print(f"[WARN] JS click also failed: {js_error}")
+                    # Final fallback - scroll and try again
+                    driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", element)
+                    time.sleep(0.5)
+                    element.click()
+                    if verify_callback:
+                        time.sleep(0.3)
+                        return verify_callback()
+                    return True
+            else:
+                print("[WARN] No overlays found but click still blocked")
+        
+        raise click_error
 
 
 def reliable_click_with_locator(locator, max_attempts=3, delay=1, verify_callback=None):
@@ -162,29 +221,11 @@ def verify_dropdown_opened(driver):
 
 
 def verify_modal_opened(driver):
-    """Verify modal/popup window is opened"""
+    """Quick modal verification"""
     try:
-        # Try multiple selectors for modal detection
-        modal_selectors = [
-            ".flex.justify-between.px-4.py-3.rounded-t-lg.bg-slate-200.dark\\:bg-navy-800.sm\\:px-5",
-            "[role='dialog']",
-            ".modal",
-            ".popup",
-            "[class*='modal']",
-            "[class*='dialog']"
-        ]
-        
-        for selector in modal_selectors:
-            modal = driver.find_elements(By.CSS_SELECTOR, selector)
-            if len(modal) > 0 and modal[0].is_displayed():
-                return True
-        
-        # Also check for radio buttons as indicator modal is open
-        radio_buttons = driver.find_elements(By.CSS_SELECTOR, 'input[type="radio"][value="out"]')
-        if len(radio_buttons) > 0:
-            return True
-            
-        return False
+        modal = driver.find_elements(By.CSS_SELECTOR, 
+            ".flex.justify-between.px-4.py-3.rounded-t-lg.bg-slate-200.dark\\:bg-navy-800.sm\\:px-5")
+        return len(modal) > 0 and modal[0].is_displayed()
     except:
         return False
 
@@ -284,7 +325,11 @@ def enter_gateway_name(gateway_text):
     
     # Use locator-based reliable click to handle stale elements
     container_locator = (By.CSS_SELECTOR, "div.ts-control")
-    reliable_click_with_locator(container_locator, max_attempts=2, delay=0.3, verify_callback=lambda: verify_dropdown_opened(driver))
+    # Click dropdown container to open it
+    container = WebDriverWait(driver, 20).until(
+        EC.element_to_be_clickable((By.CSS_SELECTOR, "div.ts-control"))
+    )
+    smart_click(container, verify_callback=lambda: verify_dropdown_opened(driver))
     time.sleep(0.2)
 
     # Step 3: Find actual input (not always interactable)
@@ -398,71 +443,29 @@ def add_transaction_details(record):
     """Fill transaction details for tax records with Bank Charge selection."""
     print(f"Processing Tax Record: {record}")
 
-    time.sleep(0.2)
-    wait = WebDriverWait(driver, 10, poll_frequency=0.1)
+    # Wait briefly for page load
+    time.sleep(1)
+    
+    # Find Add button quickly
+    wait = WebDriverWait(driver, 20)
     add_button = wait.until(EC.element_to_be_clickable((
         By.XPATH, "//button[contains(text(), 'Add New Bank Transaction')]"
     )))
-    time.sleep(0.2)
     
-    # Use reliable click without verification first
-    reliable_click(add_button, max_attempts=3, delay=1)
+    # Single smart click with modal verification
+    smart_click(add_button, verify_callback=lambda: verify_modal_opened(driver))
     print("[INFO] Add Transaction button clicked")
 
-    time.sleep(.5)
-
-    # Wait for modal to appear with multiple possible selectors
-    modal_appeared = False
-    modal_selectors = [
-        ".flex.justify-between.px-4.py-3.rounded-t-lg.bg-slate-200.dark\\:bg-navy-800.sm\\:px-5",
-        "[role='dialog']",
-        ".modal",
-        "[class*='modal']"
-    ]
-    
-    for selector in modal_selectors:
-        try:
-            WebDriverWait(driver, 5).until(
-                EC.presence_of_element_located((By.CSS_SELECTOR, selector))
-            )
-            print(f"[INFO] Modal appeared with selector: {selector}")
-            modal_appeared = True
-            break
-        except:
-            continue
-    
-    if not modal_appeared:
-        print("[WARN] Modal might not have appeared, but continuing...")
-    
-    time.sleep(1)
-
     # ===== Transaction Out =====
-    # Try multiple approaches to find the out radio button
-    out_radio = None
-    radio_selectors = [
-        'input[type="radio"][value="out"]',
-        'input[value="out"]',
-        '[value="out"]'
-    ]
     
-    for selector in radio_selectors:
-        try:
-            out_radio = WebDriverWait(driver, 10).until(
-                EC.element_to_be_clickable((By.CSS_SELECTOR, selector))
-            )
-            print(f"[INFO] Found out radio with selector: {selector}")
-            break
-        except:
-            continue
+    # Find and click radio button quickly
+    wait = WebDriverWait(driver, 15)
+    out_radio = wait.until(
+        EC.element_to_be_clickable((By.CSS_SELECTOR, 'input[type="radio"][value="out"]'))
+    )
     
-    if not out_radio:
-        print("[ERROR] Could not find out radio button")
-        return
-    
-    # Use reliable click for radio button
-    reliable_click(out_radio, max_attempts=2, delay=0.3)
-    print("[INFO] Clicked on the 'out' radio button.")
-    time.sleep(0.2)
+    smart_click(out_radio)
+    print("[INFO] Clicked 'out' radio button")
 
     # ===== Bank Charge Selection (NEW) =====
     try:
@@ -482,7 +485,7 @@ def add_transaction_details(record):
                 game_item = WebDriverWait(driver, 3).until(
                     EC.element_to_be_clickable((By.CSS_SELECTOR, selector))
                 )
-                reliable_click(game_item, max_attempts=2, delay=0.3)
+                smart_click(game_item)
                 print(f"[INFO] Clicked GAME item using selector: {selector}")
                 dropdown_opened = True
                 time.sleep(.5)
@@ -496,7 +499,7 @@ def add_transaction_details(record):
                 ts_control = WebDriverWait(driver, 5).until(
                     EC.element_to_be_clickable((By.CSS_SELECTOR, ".ts-control"))
                 )
-                reliable_click(ts_control, max_attempts=2, delay=0.3)
+                smart_click(ts_control)
                 print("[INFO] Clicked .ts-control to open dropdown")
                 dropdown_opened = True
                 time.sleep(.5)
@@ -509,7 +512,7 @@ def add_transaction_details(record):
                 input_field = WebDriverWait(driver, 5).until(
                     EC.element_to_be_clickable((By.CSS_SELECTOR, "#tomselect-3-ts-control"))
                 )
-                reliable_click(input_field, max_attempts=2, delay=0.3)
+                smart_click(input_field)
                 print("[INFO] Clicked input field to open dropdown")
                 time.sleep(.5)
             except:
@@ -552,11 +555,11 @@ def add_transaction_details(record):
                     bank_charge_option = WebDriverWait(driver, 2).until(
                         EC.element_to_be_clickable((By.CSS_SELECTOR, selector))
                     )
-                
-                reliable_click(bank_charge_option, max_attempts=2, delay=0.3)
+                time.sleep(1.5)
+                smart_click(bank_charge_option)
                 print(f"[INFO] ✅ Selected Bank Charge using selector: {selector}")
                 bank_charge_selected = True
-                time.sleep(0.5)
+                time.sleep(.5)
                 break
             except:
                 continue
@@ -574,7 +577,7 @@ def add_transaction_details(record):
 
     # Force scroll into view before clear and type
     driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", bank_reference_input)
-    time.sleep(0.1)
+    time.sleep(2.1)
 
     bank_reference_input.clear()
     bank_reference_input.send_keys(record["Bank Reference"])
@@ -631,7 +634,7 @@ def add_transaction_details(record):
     )
     
     # Use reliable click with calendar verification
-    reliable_click(calendar_input, max_attempts=2, delay=0.3, verify_callback=lambda: verify_calendar_opened(driver))
+    smart_click(calendar_input, verify_callback=lambda: verify_calendar_opened(driver))
     print(f"[INFO] Calendar input clicked...")
 
     calendar_popup = WebDriverWait(driver, 5).until(
@@ -648,7 +651,7 @@ def add_transaction_details(record):
             if day.get_attribute("aria-label") == target_date:
                 driver.execute_script("arguments[0].scrollIntoView(true);", day)
                 # Use reliable click for date selection
-                reliable_click(day, max_attempts=2, delay=0.3)
+                smart_click(day)
                 print(f"[INFO] Clicked date: {target_date}")
                 break
         else:
@@ -678,7 +681,7 @@ def add_transaction_details(record):
     current_ampm = ampm_toggle.text.strip().upper()
     if current_ampm != ampm_target:
         # Use reliable click for AM/PM toggle
-        reliable_click(ampm_toggle, max_attempts=2, delay=0.3)
+        smart_click(ampm_toggle)
         print(f"[INFO] AM/PM toggled to {ampm_target}")
     else:
         print(f"[INFO] AM/PM already set to {ampm_target}")
@@ -705,7 +708,7 @@ def add_transaction_details(record):
         submit_button = WebDriverWait(driver, 5).until(
             EC.element_to_be_clickable((By.XPATH, "//button[contains(text(), 'Submit') or contains(text(), 'Save') or contains(text(), 'Add') or @type='submit']"))
         )
-        reliable_click(submit_button, max_attempts=2, delay=0.3)
+        smart_click(submit_button)
         print("[INFO] Form submitted via submit button")
     except Exception as e:
         print(f"[WARN] Could not find submit button, trying alternative approaches: {e}")
