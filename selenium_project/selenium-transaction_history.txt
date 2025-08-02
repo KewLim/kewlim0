@@ -1,178 +1,163 @@
 
-==== SKPAY (104 records) | Total Amount: Rs 97,530.00 | Total Fee: Rs 4681.44 ====
+==== YTPAY (5 records) | Total Amount: Rs 4,300.00 | Total Fee: Rs 258.00 ====
 
 Record #1
-Order ID: LTJPD89732
-Phone Number: 919307896323
+Order ID: LTJPD92724
+Phone Number: 919947307823
 Amount: 500.00
-Time: 2025-07-27 23:52:31
+Time: 2025-08-01 23:42:46
 
 Record #2
-Order ID: LTJPD89735
-Phone Number: 919933546160
+Order ID: LTJPD92681
+Phone Number: 919090088420
+Amount: 1,000.00
+Time: 2025-08-01 22:37:36
+
+==== SKPAY (60 records) | Total Amount: Rs 73,500.00 | Total Fee: Rs 3528.00 ====
+
+Record #1
+Order ID: LTJPD92712
+Phone Number: 919725929334
 Amount: 500.00
-Time: 2025-07-27 23:41:10
+Time: 2025-08-01 23:39:06
+
+Record #2
+Order ID: LTJPD92706
+Phone Number: 919373608381
+Amount: 500.00
+Time: 2025-08-01 23:37:17
 
 Record #3
-Order ID: LTJPD89714
-Phone Number: 918975814858
+Order ID: LTJPD92705
+Phone Number: 918955418232
 Amount: 500.00
-Time: 2025-07-27 23:28:42
+Time: 2025-08-01 23:24:07
 
 Record #4
-Order ID: LTJPD89722
-Phone Number: 918247819853
-Amount: 10,000.00
-Time: 2025-07-27 23:27:22
+Order ID: LTJPD92694
+Phone Number: 919090088420
+Amount: 1,000.00
+Time: 2025-08-01 23:01:05
 
 Record #5
-Order ID: LTJPD89709
-Phone Number: 919933546160
+Order ID: LTJPD92688
+Phone Number: 919166270330
 Amount: 500.00
-Time: 2025-07-27 23:21:54
+Time: 2025-08-01 22:45:17
 
 Record #6
-Order ID: LTJPD89693
-Phone Number: 919352657047
-Amount: 500.00
-Time: 2025-07-27 23:08:32
+Order ID: LTJPD92677
+Phone Number: 919090088420
+Amount: 1,000.00
+Time: 2025-08-01 22:29:35
 
 Record #7
-Order ID: LTJPD89685
-Phone Number: 919301114652
-Amount: 500.00
-Time: 2025-07-27 22:59:06
+Order ID: LTJPD92658
+Phone Number: 919691037396
+Amount: 5,000.00
+Time: 2025-08-01 21:51:06
 
 Record #8
-Order ID: LTJPD89678
-Phone Number: 918975814858
+Order ID: LTJPD92655
+Phone Number: 918652640771
 Amount: 500.00
-Time: 2025-07-27 22:51:27
-
-Record #9
-Order ID: LTJPD89673
-Phone Number: 919899017003
-Amount: 500.00
-Time: 2025-07-27 22:47:48
-
-Record #10
-Order ID: LTJPD89656
-Phone Number: 916305207242
-Amount: 2,500.00
-Time: 2025-07-27 22:26:56
-
-Record #11
-Order ID: LTJPD89643
-Phone Number: 918683989755
-Amount: 500.00
-Time: 2025-07-27 22:07:38
-
-Record #12
-Order ID: LTJPD89644
-Phone Number: 919922463647
-Amount: 500.00
-Time: 2025-07-27 22:05:16
-
-Record #13
-Order ID: LTJPD89631
-Phone Number: 918160126613
-Amount: 500.00
-Time: 2025-07-27 21:45:26
+Time: 2025-08-01 21:49:30
 
 
-
-==== VADERPAY (34 records) | Total Amount: Rs 12,630.00 | Total Fee: Rs 707.28 ====
+==== PASSPAY (35 records) | Total Amount: Rs 14,890.00 | Total Fee: Rs 789.17 ====
 
 Record #1
-Order ID: LTJPD89721
-Phone Number: 917001023439
-Amount: 300.00
-Time: 2025-07-27 23:26:50
+Order ID: LTJPD92698
+Phone Number: 918011050795
+Amount: 1,000.00
+Time: 2025-08-01 23:13:08
 
 Record #2
-Order ID: LTJPD89688
-Phone Number: 919352657047
+Order ID: LTJPD92693
+Phone Number: 917008031353
 Amount: 300.00
-Time: 2025-07-27 22:56:00
+Time: 2025-08-01 22:59:14
 
 Record #3
-Order ID: LTJPD89674
-Phone Number: 919352657047
+Order ID: LTJPD92692
+Phone Number: 918749062884
 Amount: 300.00
-Time: 2025-07-27 22:47:50
+Time: 2025-08-01 22:59:12
 
 Record #4
-Order ID: LTJPD89648
-Phone Number: 919773429084
-Amount: 500.00
-Time: 2025-07-27 22:09:37
+Order ID: LTJPD92683
+Phone Number: 918104438127
+Amount: 300.00
+Time: 2025-08-01 22:39:17
 
 Record #5
-Order ID: LTJPD89645
-Phone Number: 919352657047
+Order ID: LTJPD92682
+Phone Number: 917008031353
 Amount: 300.00
-Time: 2025-07-27 22:05:00
+Time: 2025-08-01 22:37:46
 
 Record #6
-Order ID: LTJPD89641
-Phone Number: 917715024722
+Order ID: LTJPD92667
+Phone Number: 917008031353
 Amount: 300.00
-Time: 2025-07-27 22:03:50
+Time: 2025-08-01 22:11:35
+
+Record #7
+Order ID: LTJPD92661
+Phone Number: 917008031353
+Amount: 300.00
+Time: 2025-08-01 21:55:36
 
 
-
-==== OSPAY (7 records) | Total Amount: Rs 3,500.00 | Total Fee: Rs 157.50 ====
+==== VINOTH SAKTHIVEL (1 record) | Total Amount: Rs 500.00 | Total Fee: Rs 0.00 ====
 
 Record #1
-Order ID: LTJPD89715
-Phone Number: 918763182851
+Order ID: 92690
+Phone Number: 918552817886
 Amount: 500.00
-Time: 2025-07-27 23:23:00
+Time: 2025-08-01 22:48:31
 
+>> Total Amount for VINOTH SAKTHIVEL: Rs 500.00
 
-
-==== BOMBAYPAY (7 records) | Total Amount: Rs 7,500.00 | Total Fee: Rs 412.50 ====
-
-Record #1
-Order ID: LTJPD89700
-Phone Number: 918949834574
-Amount: 1,000.00
-Time: 2025-07-27 23:10:23
-
-
-
-==== XYPAY (11 records) | Total Amount: Rs 13,500.00 | Total Fee: Rs 648.00 ====
+==== XYPAY (12 records) | Total Amount: Rs 6,000.00 | Total Fee: Rs 288.00 ====
 
 Record #1
-Order ID: LTJPD89679
-Phone Number: 916377611219
-Amount: 2,000.00
-Time: 2025-07-27 22:52:08
+Order ID: LTJPD92678
+Phone Number: 919496196186
+Amount: 500.00
+Time: 2025-08-01 22:37:14
 
 Record #2
-Order ID: LTJPD89672
-Phone Number: 916377611219
-Amount: 2,000.00
-Time: 2025-07-27 22:43:43
+Order ID: LTJPD92672
+Phone Number: 918190084053
+Amount: 500.00
+Time: 2025-08-01 22:18:36
 
-Record #3
-Order ID: LTJPD89642
-Phone Number: 918890466371
-Amount: 1,000.00
-Time: 2025-07-27 22:04:26
+==== OSPAY (7 records) | Total Amount: Rs 8,500.00 | Total Fee: Rs 382.50 ====
+
+Record #1
+Order ID: LTJPD92674
+Phone Number: 918763182851
+Amount: 500.00
+Time: 2025-08-01 22:27:45
+
+Record #2
+Order ID: LTJPD92659
+Phone Number: 917984024737
+Amount: 500.00
+Time: 2025-08-01 21:52:15
 
 
 
+==== GRAND TOTAL for All Gateways: Rs 125,690.00 | Total Records: 146 ====
 
-
-
-==== GRAND TOTAL for All Gateways: Rs 145,111.00 | Total Records: 177 ====
-
-pg SKPAY 27/07/2025 | Total Fee: Rs 4681.44
-pg VADERPAY 27/07/2025 | Total Fee: Rs 707.28
-pg OSPAY 27/07/2025 | Total Fee: Rs 157.50
-pg BOMBAYPAY 27/07/2025 | Total Fee: Rs 412.50
-pg XYPAY 27/07/2025 | Total Fee: Rs 648.00
-pg YTPAY 27/07/2025 | Total Fee: Rs 525.00
-pg PASSPAY 27/07/2025 | Total Fee: Rs 53.00
-pg MULTIPAY 27/07/2025 | Total Fee: Rs 42.06
+(depo) pg YTPAY 01/08/2025 | Total Fee: Rs 258.00
+(depo) pg SKPAY 01/08/2025 | Total Fee: Rs 3528.00
+(depo) pg PASSPAY 01/08/2025 | Total Fee: Rs 789.17
+(depo) pg VINOTH SAKTHIVEL 01/08/2025 | Total Fee: Rs 0.00
+(depo) pg XYPAY 01/08/2025 | Total Fee: Rs 288.00
+(depo) pg OSPAY 01/08/2025 | Total Fee: Rs 382.50
+(depo) pg MULTIPAY 01/08/2025 | Total Fee: Rs 126.00
+(depo) pg VADERPAY 01/08/2025 | Total Fee: Rs 442.40
+(depo) pg U9PAY 01/08/2025 | Total Fee: Rs 22.50
+(depo) pg BOMBAYPAY 01/08/2025 | Total Fee: Rs 412.50

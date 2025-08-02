@@ -291,6 +291,7 @@ def gateway_setup_movement(gateway_name):
 
     gateway_map = {
         "XYPAY": "XYPAY",
+        "XCPAY": "XCPAY",
         "SKPAY": "SKPAY",
         "YTPAY": "YTPAY",
         "OSPAY": "OSPAY",

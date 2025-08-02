@@ -529,13 +529,19 @@ def add_transaction_details(record):
     # ===== Hour =====
     wait = WebDriverWait(driver, 40)
     merchant_input = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "input.flatpickr-hour")))
+    merchant_input.clear()
     merchant_input.send_keys(record["Hour"])
+
+    time.sleep(.5)
 
 
     # ===== Minutes =====
     wait = WebDriverWait(driver, 40)
     merchant_input = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "input.flatpickr-minute")))
+    merchant_input.clear()
     merchant_input.send_keys(record["Minute"])
+
+    time.sleep(.5)
 
 
 
@@ -555,6 +561,18 @@ def add_transaction_details(record):
         print(f"[INFO] AM/PM toggled to {ampm_target}")
     else:
         print(f"[INFO] AM/PM already set to {ampm_target}")
+
+    time.sleep(1)
+
+    # Select Player ID field (do nothing with it)
+    player_id_input = WebDriverWait(driver, 20).until(
+        EC.presence_of_element_located((By.XPATH, "//input[@placeholder='Player ID']"))
+    )
+    player_id_input.click()
+
+    time.sleep(1)
+
+
 
     # Confirm calendar selection by pressing Enter on the calendar input or body
     try:
