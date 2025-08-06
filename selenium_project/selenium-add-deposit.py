@@ -257,7 +257,7 @@ wait = WebDriverWait(driver, 40)
 password_input = wait.until(EC.presence_of_element_located((By.NAME, "password")))
 password_input.send_keys("json8888"+ Keys.ENTER)
 
-
+time.sleep(3)
 
 
 
