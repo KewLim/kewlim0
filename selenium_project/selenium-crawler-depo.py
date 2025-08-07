@@ -290,18 +290,27 @@ def click_next_page(driver, wait_timeout=10):
 
 
 gateway_groups = defaultdict(list)  # Global collector
+seen_order_ids = set()  # Track seen Order IDs to prevent duplicates
 
 def run_full_transaction_extraction(driver):
     page_counter = 1
+    duplicate_count = 0
     while True:
         print(f"\033[92m[INFO] Scraping page {page_counter}...\033[0m")
 
         # Extract data from current page
         current_page_data = extract_transaction_data(driver)
 
-        # Merge current data into the global group
+        # Merge current data into the global group, checking for duplicates
         for gateway, records in current_page_data.items():
-            gateway_groups[gateway].extend(records)
+            for record in records:
+                order_id = record["Order ID"]
+                if order_id not in seen_order_ids:
+                    gateway_groups[gateway].append(record)
+                    seen_order_ids.add(order_id)
+                else:
+                    duplicate_count += 1
+                    print(f"\033[93m[WARNING] Duplicate Order ID '{order_id}' found on page {page_counter}. Skipping.\033[0m")
 
         # Try to go to next page
         time.sleep(1)
@@ -313,6 +322,9 @@ def run_full_transaction_extraction(driver):
         page_counter += 1
         time.sleep(1)  
 
+    if duplicate_count > 0:
+        print(f"\033[93m[INFO] Total duplicates skipped: {duplicate_count}\033[0m")
+    
     print_grouped_results(gateway_groups)
     
 run_full_transaction_extraction(driver)
