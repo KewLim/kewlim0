@@ -1,14 +1,10 @@
 
-==== All (85 records) ====
-#1 - Phone: 918860865830, Email: -, Affiliate: APK006
-#2 - Phone: 918780602007, Email: -, Affiliate: APK006
-#3 - Phone: 919265938632, Email: -, Affiliate: APK006
-#4 - Phone: 919024513932, Email: -, Affiliate: APK006
-#5 - Phone: 919322295686, Email: -, Affiliate: APK006
-#6 - Phone: 919601985233, Email: -, Affiliate: APK006
-#7 - Phone: 917002472712, Email: -, Affiliate: APK006
-#8 - Phone: 919530008972, Email: -, Affiliate: APK006
-#9 - Phone: 919123804371, Email: -, Affiliate: APK006
-#10 - Phone: 919106118067, Email: -, Affiliate: APK005
-#11 - Phone: 917738506945, Email: -, Affiliate: APK005
-#12 - Phone: 917389447531, Email: -, Affiliate: APK006
+==== All (28 records) ====
+#1 - Phone: 919740021623, Email: -, Affiliate: APK006
+#2 - Phone: 919099464347, Email: -, Affiliate: -
+#3 - Phone: 919279075832, Email: -, Affiliate: APK006
+#4 - Phone: 918209473831, Email: -, Affiliate: APK005
+#5 - Phone: 918339059083, Email: -, Affiliate: APK006
+#6 - Phone: 919875877936, Email: -, Affiliate: -
+#7 - Phone: 917764991433, Email: -, Affiliate: APK006
+#8 - Phone: 917250059330, Email: -, Affiliate: APK005

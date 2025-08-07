@@ -1,0 +1,9 @@
+selenium>=4.0.0
+webdriver-manager>=3.8.0
+pyautogui>=0.9.54
+opencv-python>=4.5.0
+numpy>=1.21.0
+beautifulsoup4>=4.9.0
+pyperclip>=1.8.0
+pytz>=2021.1
+pillow>=8.0.0

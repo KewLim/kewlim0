@@ -1,146 +1,78 @@
 
-==== VADERPAY (3 records) | Total Amount: Rs 4,420.00 | Total Fee: Rs 177.12 ====
+==== OSPAY (5 records) | Total Amount: Rs 19,300.00 | Total Fee: Rs 609.00 ====
 
 Record #1
-Order ID: LTJPW7320
-Phone Number: 919767448222
-Amount: 700.00
-Time: 2025-08-06 17:13:30
+Order ID: LTJPW7330
+Phone Number: 919179543098
+Amount: 500.00
+Time: 2025-08-06 21:09:25
 
 Record #2
-Order ID: LTJPW7317
-Phone Number: 918441058753
-Amount: 1,000.00
-Time: 2025-08-06 16:09:31
+Order ID: LTJPW7326
+Phone Number: 917076907680
+Amount: 7,000.00
+Time: 2025-08-06 20:38:34
 
 Record #3
-Order ID: LTJPW7305
-Phone Number: 919328851453
-Amount: 2,720.00
-Time: 2025-08-06 13:19:31
+Order ID: LTJPW7318
+Phone Number: 916366100615
+Amount: 2,000.00
+Time: 2025-08-06 17:53:38
 
->> Total Amount for VADERPAY: Rs 4,420.00
-
-==== OSPAY (2 records) | Total Amount: Rs 9,800.00 | Total Fee: Rs 306.00 ====
+==== XYPAY (13 records) | Total Amount: Rs 21,960.00 | Total Fee: Rs 592.92 ====
 
 Record #1
-Order ID: LTJPW7319
-Phone Number: 918685029172
-Amount: 1,800.00
-Time: 2025-08-06 17:23:28
+Order ID: LTJPW7329
+Phone Number: 919179543098
+Amount: 1,500.00
+Time: 2025-08-06 20:31:06
 
 
-
-==== XYPAY (12 records) | Total Amount: Rs 20,460.00 | Total Fee: Rs 552.42 ====
+==== SKPAY (20 records) | Total Amount: Rs 36,330.00 | Total Fee: Rs 1209.90 ====
 
 Record #1
-Order ID: LTJPW7313
+Order ID: LTJPW7327
+Phone Number: 917970036598
+Amount: 2,100.00
+Time: 2025-08-06 20:51:05
+
+Record #2
+Order ID: LTJPW7322
+Phone Number: 918957235380
+Amount: 500.00
+Time: 2025-08-06 20:15:04
+
+Record #3
+Order ID: LTJPW7321
+Phone Number: 918921248266
+Amount: 500.00
+Time: 2025-08-06 20:15:04
+
+Record #4
+Order ID: LTJPW7316
+Phone Number: 918104438127
+Amount: 1,500.00
+Time: 2025-08-06 19:48:36
+
+Record #5
+Order ID: LTJPW7323
 Phone Number: 917304145310
 Amount: 1,500.00
-Time: 2025-08-06 16:30:09
+Time: 2025-08-06 19:32:08
 
-Record #2
-Order ID: LTJPW7315
-Phone Number: 919121600347
-Amount: 1,500.00
-Time: 2025-08-06 16:13:03
 
-Record #3
-Order ID: LTJPW7310
-Phone Number: 918940684434
-Amount: 1,200.00
-Time: 2025-08-06 15:27:10
-
-Record #4
-Order ID: LTJPW7302
-Phone Number: 919954311322
-Amount: 3,500.00
-Time: 2025-08-06 14:28:08
-
-Record #5
-Order ID: LTJPW7306
-Phone Number: 916301848063
-Amount: 3,000.00
-Time: 2025-08-06 13:41:02
-
-Record #6
-Order ID: LTJPW7300
-Phone Number: 918000712708
-Amount: 1,400.00
-Time: 2025-08-06 13:29:03
-
-Record #7
-Order ID: LTJPW7298
-Phone Number: 919368904154
-Amount: 960.00
-Time: 2025-08-06 13:24:08
-
-==== SKPAY (15 records) | Total Amount: Rs 30,230.00 | Total Fee: Rs 996.90 ====
+==== VADERPAY (4 records) | Total Amount: Rs 5,920.00 | Total Fee: Rs 237.12 ====
 
 Record #1
-Order ID: LTJPW7307
-Phone Number: 917488085201
-Amount: 6,000.00
-Time: 2025-08-06 17:28:24
-
-Record #2
-Order ID: LTJPW7312
-Phone Number: 918591657940
-Amount: 500.00
-Time: 2025-08-06 16:12:15
-
-Record #3
-Order ID: LTJPW7311
-Phone Number: 917022011750
-Amount: 800.00
-Time: 2025-08-06 16:03:08
-
-Record #4
-Order ID: LTJPW7308
-Phone Number: 918000550016
-Amount: 500.00
-Time: 2025-08-06 15:57:15
-
-Record #5
-Order ID: LTJPW7314
-Phone Number: 918696810361
-Amount: 1,000.00
-Time: 2025-08-06 15:57:13
-
-Record #6
-Order ID: LTJPW7309
-Phone Number: 918210177203
-Amount: 954.00
-Time: 2025-08-06 15:57:13
-
-Record #7
-Order ID: LTJPW7304
-Phone Number: 918104438127
-Amount: 1,000.00
-Time: 2025-08-06 14:34:52
-
-Record #8
-Order ID: LTJPW7303
-Phone Number: 917005797191
-Amount: 500.00
-Time: 2025-08-06 14:18:59
-
-Record #9
-Order ID: LTJPW7285
-Phone Number: 918247819853
-Amount: 576.00
-Time: 2025-08-06 13:36:52
-
-Record #10
-Order ID: LTJPW7301
-Phone Number: 918552817886
+Order ID: LTJPW7325
+Phone Number: 917970036598
 Amount: 1,500.00
-Time: 2025-08-06 12:51:06
+Time: 2025-08-06 19:44:55
 
 
-==== GRAND TOTAL for All Gateways: Rs 64,910.00 | Total Records: 32 ====
+==== GRAND TOTAL for All Gateways: Rs 83,510.00 | Total Records: 42 ====
 
-(wd) pg VADERPAY 06/08/2025 | Total Fee: Rs 177.12
-(wd) pg OSPAY 06/08/2025 | Total Fee: Rs 306.00
-(wd) pg XYPAY 06/08/2025 | Total Fee: Rs 552.42
-(wd) pg SKPAY 06/08/2025 | Total Fee: Rs 996.90
+(wd) pg OSPAY 06/08/2025 | Total Fee: Rs 609.00
+(wd) pg XYPAY 06/08/2025 | Total Fee: Rs 592.92
+(wd) pg SKPAY 06/08/2025 | Total Fee: Rs 1209.90
+(wd) pg VADERPAY 06/08/2025 | Total Fee: Rs 237.12

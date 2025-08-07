@@ -160,26 +160,54 @@ def extract_transaction_data(driver, wait_timeout=20):
 
     gateway_groups = defaultdict(list)
 
-    for idx, row in enumerate(rows, 1):
-        cols = row.find_elements(By.TAG_NAME, 'td')
-        
-        if len(cols) < 22:
-            print(f"[WARNING] Row {idx} has only {len(cols)} columns. Skipping.")
-            continue
-
+    for idx in range(len(rows)):
         try:
-            record = {
-                "Gateway": cols[21].text.strip(),
-                "Order ID": cols[0].text.strip(),
-                "Phone Number": cols[6].text.strip(),
-                "Amount": float(cols[10].text.strip().replace("Rs", "").replace(",", "").strip()),
-                "Time": cols[20].text.strip(),
-                "Tax Fee": float(cols[13].text.strip().replace(",", ""))
-            }
-            gateway_groups[record["Gateway"]].append(record)
+            # Re-find rows to avoid stale element reference
+            current_rows = driver.find_elements(By.CSS_SELECTOR, "table.tableInfo tbody tr")
+            if idx >= len(current_rows):
+                print(f"[WARNING] Row {idx + 1} no longer exists. Skipping.")
+                continue
+                
+            row = current_rows[idx]
+            cols = row.find_elements(By.TAG_NAME, 'td')
+            
+            if len(cols) < 22:
+                print(f"[WARNING] Row {idx + 1} has only {len(cols)} columns. Skipping.")
+                continue
 
-        except ValueError as ve:
-            print(f"[ERROR] Failed to parse data in row {idx}: {ve}")
+            try:
+                # Parse amount with soft error handling
+                amount_text = cols[10].text.strip().replace("Rs", "").replace(",", "").strip()
+                try:
+                    amount = float(amount_text) if amount_text else 0.0
+                except ValueError:
+                    print(f"[WARNING] Invalid amount '{amount_text}' in row {idx + 1}, setting to 0.0")
+                    amount = 0.0
+                
+                # Parse tax fee with soft error handling
+                tax_text = cols[13].text.strip().replace(",", "")
+                try:
+                    tax_fee = float(tax_text) if tax_text else 0.0
+                except ValueError:
+                    print(f"[WARNING] Invalid tax fee '{tax_text}' in row {idx + 1}, setting to 0.0")
+                    tax_fee = 0.0
+                
+                record = {
+                    "Gateway": cols[21].text.strip() if len(cols) > 21 else "Unknown",
+                    "Order ID": cols[0].text.strip(),
+                    "Phone Number": cols[6].text.strip(),
+                    "Amount": amount,
+                    "Time": cols[20].text.strip() if len(cols) > 20 else "",
+                    "Tax Fee": tax_fee
+                }
+                gateway_groups[record["Gateway"]].append(record)
+
+            except Exception as e:
+                print(f"[ERROR] Failed to parse data in row {idx + 1}: {e}")
+                continue
+                
+        except Exception as e:
+            print(f"[ERROR] Stale element or other error in row {idx + 1}: {e}")
             continue
 
     return gateway_groups
@@ -257,6 +285,7 @@ def click_next_page(driver, wait_timeout=10):
     except Exception as e:
         print(f"[WARNING] Could not click Next button: {e}")
         return False
+    
 
 
 
@@ -275,6 +304,7 @@ def run_full_transaction_extraction(driver):
             gateway_groups[gateway].extend(records)
 
         # Try to go to next page
+        time.sleep(1)
         has_next = click_next_page(driver)
         if not has_next:
             print("[INFO] No more pages found. Finishing extraction.")
