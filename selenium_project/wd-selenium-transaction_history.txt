@@ -1,59 +1,190 @@
 
-==== VADERPAY (1 record) | Total Amount: Rs 851.00 | Total Fee: Rs 36.64 ====
+==== YTPAY (3 records) | Total Amount: Rs 1,600.00 | Total Fee: Rs 66.00 ====
 
 Record #1
-Order ID: LTJPW7410
-Phone Number: 917905034227
-Amount: 851.00
-Time: 2025-08-08 19:09:41
-
->> Total Amount for VADERPAY: Rs 851.00
-
-==== XYPAY (9 records) | Total Amount: Rs 27,633.00 | Total Fee: Rs 746.09 ====
-
-Record #1
-Order ID: LTJPW7409
-Phone Number: 918102211876
-Amount: 2,000.00
-Time: 2025-08-08 20:03:10
-
-
-==== SKPAY (17 records) | Total Amount: Rs 38,461.00 | Total Fee: Rs 1255.83 ====
-
-Record #1
-Order ID: LTJPW7405
-Phone Number: 918511771250
-Amount: 8,800.00
-Time: 2025-08-08 20:15:46
+Order ID: LTJPW7524
+Phone Number: 918077284446
+Amount: 500.00
+Time: 2025-08-11 20:18:09
 
 Record #2
-Order ID: LTJPW7408
-Phone Number: 916376138900
-Amount: 4,000.00
-Time: 2025-08-08 19:12:51
+Order ID: LTJPW7515
+Phone Number: 919179543098
+Amount: 500.00
+Time: 2025-08-11 14:51:04
 
 Record #3
-Order ID: LTJPW7407
-Phone Number: 916306985670
-Amount: 519.00
-Time: 2025-08-08 19:12:34
+Order ID: LTJPW7506
+Phone Number: 918749062884
+Amount: 600.00
+Time: 2025-08-11 12:58:23
+
+>> Total Amount for YTPAY: Rs 1,600.00
+
+==== XYPAY (6 records) | Total Amount: Rs 11,200.00 | Total Fee: Rs 302.40 ====
+
+Record #1
+Order ID: LTJPW7523
+Phone Number: 919215996264
+Amount: 1,000.00
+Time: 2025-08-11 19:47:08
+
+Record #2
+Order ID: LTJPW7522
+Phone Number: 919910315462
+Amount: 3,000.00
+Time: 2025-08-11 19:19:07
+
+Record #3
+Order ID: LTJPW7520
+Phone Number: 917005797191
+Amount: 4,000.00
+Time: 2025-08-11 19:07:05
 
 Record #4
-Order ID: LTJPW7406
-Phone Number: 917340242739
-Amount: 500.00
-Time: 2025-08-08 19:09:07
+Order ID: LTJPW7519
+Phone Number: 919896308891
+Amount: 1,000.00
+Time: 2025-08-11 18:29:06
 
 Record #5
-Order ID: LTJPW7404
-Phone Number: 917861849372
+Order ID: LTJPW7518
+Phone Number: 916294501960
+Amount: 1,000.00
+Time: 2025-08-11 16:03:04
+
+Record #6
+Order ID: LTJPW7500
+Phone Number: 918005561635
+Amount: 1,200.00
+Time: 2025-08-11 01:21:08
+
+>> Total Amount for XYPAY: Rs 11,200.00
+
+==== OSPAY (4 records) | Total Amount: Rs 3,500.00 | Total Fee: Rs 129.00 ====
+
+Record #1
+Order ID: LTJPW7517
+Phone Number: 917990442044
+Amount: 1,000.00
+Time: 2025-08-11 15:50:25
+
+Record #2
+Order ID: LTJPW7511
+Phone Number: 916351985115
+Amount: 1,000.00
+Time: 2025-08-11 14:19:03
+
+Record #3
+Order ID: LTJPW7496
+Phone Number: 919071924932
+Amount: 1,000.00
+Time: 2025-08-11 02:25:03
+
+Record #4
+Order ID: LTJPW7499
+Phone Number: 916282744372
+Amount: 500.00
+Time: 2025-08-11 02:23:38
+
+>> Total Amount for OSPAY: Rs 3,500.00
+
+==== SKPAY (13 records) | Total Amount: Rs 29,705.00 | Total Fee: Rs 969.15 ====
+
+Record #1
+Order ID: LTJPW7512
+Phone Number: 919646337109
+Amount: 1,000.00
+Time: 2025-08-11 17:31:56
+
+Record #2
+Order ID: LTJPW7513
+Phone Number: 919896308891
+Amount: 2,500.00
+Time: 2025-08-11 17:29:18
+
+Record #3
+Order ID: LTJPW7508
+Phone Number: 919922463647
+Amount: 11,800.00
+Time: 2025-08-11 17:28:09
+
+Record #4
+Order ID: LTJPW7516
+Phone Number: 917073866870
+Amount: 1,000.00
+Time: 2025-08-11 16:44:16
+
+Record #5
+Order ID: LTJPW7509
+Phone Number: 919694964212
+Amount: 2,900.00
+Time: 2025-08-11 15:59:25
+
+Record #6
+Order ID: LTJPW7510
+Phone Number: 919896308891
+Amount: 1,500.00
+Time: 2025-08-11 12:46:17
+
+Record #7
+Order ID: LTJPW7507
+Phone Number: 918130108036
+Amount: 2,000.00
+Time: 2025-08-11 12:15:06
+
+Record #8
+Order ID: LTJPW7505
+Phone Number: 919099464347
+Amount: 1,000.00
+Time: 2025-08-11 10:11:28
+
+Record #9
+Order ID: LTJPW7504
+Phone Number: 919179543098
+Amount: 500.00
+Time: 2025-08-11 06:35:24
+
+Record #10
+Order ID: LTJPW7503
+Phone Number: 918763182851
+Amount: 500.00
+Time: 2025-08-11 06:35:19
+
+Record #11
+Order ID: LTJPW7497
+Phone Number: 917410821718
+Amount: 1,005.00
+Time: 2025-08-11 05:35:31
+
+Record #12
+Order ID: LTJPW7501
+Phone Number: 919599831473
+Amount: 1,000.00
+Time: 2025-08-11 05:24:05
+
+Record #13
+Order ID: LTJPW7498
+Phone Number: 917005797191
 Amount: 3,000.00
-Time: 2025-08-08 18:55:56
+Time: 2025-08-11 01:06:58
 
+>> Total Amount for SKPAY: Rs 29,705.00
 
-==== GRAND TOTAL for All Gateways: Rs 69,455.00 | Total Records: 30 ====
+==== VADERPAY (1 record) | Total Amount: Rs 1,000.00 | Total Fee: Rs 42.00 ====
 
-(wd) pg VADERPAY 08/08/2025 | Total Fee: Rs 36.64
-(wd) pg XYPAY 08/08/2025 | Total Fee: Rs 746.09
-(wd) pg SKPAY 08/08/2025 | Total Fee: Rs 1255.83
-(wd) pg OSPAY 08/08/2025 | Total Fee: Rs 93.30
+Record #1
+Order ID: LTJPW7514
+Phone Number: 919257002677
+Amount: 1,000.00
+Time: 2025-08-11 13:56:51
+
+>> Total Amount for VADERPAY: Rs 1,000.00
+
+==== GRAND TOTAL for All Gateways: Rs 47,005.00 | Total Records: 27 ====
+
+(wd) pg YTPAY 11/08/2025 | Total Fee: Rs 66.00
+(wd) pg XYPAY 11/08/2025 | Total Fee: Rs 302.40
+(wd) pg OSPAY 11/08/2025 | Total Fee: Rs 129.00
+(wd) pg SKPAY 11/08/2025 | Total Fee: Rs 969.15
+(wd) pg VADERPAY 11/08/2025 | Total Fee: Rs 42.00
