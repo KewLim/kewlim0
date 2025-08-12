@@ -72,11 +72,20 @@ def smart_click(element, verify_callback=None):
         if "obscures it" in error_msg or "not clickable" in error_msg:
             print("[INFO] Overlay blocking click, trying JS click...")
             if wait_for_overlay_to_disappear(driver, max_wait=3):
-                driver.execute_script("arguments[0].click();", element)
-                if verify_callback:
-                    time.sleep(0.3)
-                    return verify_callback()
-                return True
+                try:
+                    driver.execute_script("arguments[0].click();", element)
+                    if verify_callback:
+                        time.sleep(0.3)
+                        return verify_callback()
+                    return True
+                except Exception as js_click_error:
+                    print(f"[INFO] JS click also failed: {js_click_error}")
+                    print("[INFO] Pressing Enter to dismiss modal/overlay...")
+                    element.send_keys(Keys.ENTER)
+                    time.sleep(0.5)
+                    if verify_callback:
+                        return verify_callback()
+                    return True
         raise click_error
 
 
@@ -290,7 +299,8 @@ def gateway_setup_movement(gateway_name):
         "MOHAMMED AMEER ABBAS": "Karnataka Bank 2",
         "Test": "Test",
         "Test2" : "Test2",
-        "BOPAY": "BOPAY"
+        "BOPAY": "BOPAY",
+        "CPUPAY": "CPUPAY"
     }
 
     if gateway_name in gateway_map:
@@ -620,7 +630,7 @@ def parse_and_execute(filename):
     supported_gateways = {
         "XYPAY", "SKPAY", "YTPAY", "OSPAY", "SIMPLYPAY", "VADERPAY",
         "PASSPAY", "MULTIPAY", "U9PAY", "BOMBAYPAY", "EPAY", 
-        "MOHAMMED AMEER ABBAS", "Test", "Test2", "XCPAY", "BOPAY"
+        "MOHAMMED AMEER ABBAS", "Test", "Test2", "XCPAY", "BOPAY", "CPUPAY"
     }
 
     # Temporary variables for one record

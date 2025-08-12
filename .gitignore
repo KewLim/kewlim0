@@ -1,0 +1,31 @@
+# Transaction history files
+selenium_project/selenium-transaction_history.txt
+selenium_project/wd-selenium-transaction_history.txt
+selenium_project/phone-selenium-transaction_history.txt
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+
+# Virtual environment
+.venv/
+venv/
+ENV/
+env/
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log

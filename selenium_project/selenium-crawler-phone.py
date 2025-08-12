@@ -226,7 +226,7 @@ def click_next_page(driver, wait_timeout=10):
             EC.element_to_be_clickable((By.CSS_SELECTOR, "div:not([data-v-2b4fab24]) div.ml-3 button"))
         )
         next_button.click()
-        time.sleep(1)
+        time.sleep(2)
         print("[INFO] Clicked on the Next button.")
         return True
     except Exception as e:
