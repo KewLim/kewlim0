@@ -8,7 +8,6 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 import os
-from selenium.webdriver.support.ui import Select
 from datetime import datetime
 from collections import defaultdict
 
@@ -35,33 +34,36 @@ driver.maximize_window()
 
 
 
-driver.get("https://bo.backofficeltaj.com/")
+driver.get("https://v3-bo.backofficeltaj.com/en-us")
 
 wait = WebDriverWait(driver, 40)
-merchant_input = wait.until(EC.presence_of_element_located((By.ID, "mer_code")))
+merchant_input = wait.until(EC.presence_of_element_located((By.XPATH, "//input[@placeholder='Merchant Code']")))
 merchant_input.send_keys("lucky")
 
 wait = WebDriverWait(driver, 40)
-username_input = wait.until(EC.presence_of_element_located((By.ID, "username")))
-username_input.send_keys("test_8899")
+merchant_input = wait.until(EC.presence_of_element_located((By.XPATH, "//input[@placeholder='Username']")))
+merchant_input.send_keys("test_8899")
 
 wait = WebDriverWait(driver, 40)
-password_input = wait.until(EC.presence_of_element_located((By.ID, "password")))
-password_input.send_keys("Mcd6033035!")
+merchant_input = wait.until(EC.presence_of_element_located((By.XPATH, "//input[@placeholder='Password']")))
+merchant_input.send_keys("Mcd6033035!")
 
 
 
 
 
 def get_captcha_number(driver, timeout=40):
-    # Wait for the outer span with all digits to appear
+    # Wait for the outer div with all digits to appear
     wait = WebDriverWait(driver, timeout)
-    outer_span = wait.until(EC.presence_of_element_located((By.CLASS_NAME, "captchaNum")))
+    outer_div = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "div[data-v-450e3340].tracking-normal")))
     
     # Now safely collect child <span> elements
-    digits = outer_span.find_elements(By.TAG_NAME, "span")
+    digits = outer_div.find_elements(By.CSS_SELECTOR, "span[data-v-450e3340]")
     
-    return ''.join([d.text for d in digits])
+    captcha_text = ''.join([d.text for d in digits])
+    print(f"[DEBUG] Found {len(digits)} spans, captcha: {captcha_text}")
+    
+    return captcha_text
 
 
 
@@ -69,19 +71,19 @@ def get_captcha_number(driver, timeout=40):
 # Wait for CAPTCHA input field to appear
 
 wait = WebDriverWait(driver, 40)
-captcha_input = wait.until(EC.presence_of_element_located((By.ID, "captcha")))
+captcha_input = wait.until(EC.presence_of_element_located((By.XPATH, "//input[@placeholder='Captcha Code']")))
 captcha_code = get_captcha_number(driver)
 captcha_input.send_keys(captcha_code)
 
 print("\033[92mExtracted CAPTCHA:", captcha_code, "\033[0m")
-captcha_input.send_keys(captcha_code + Keys.ENTER)
+captcha_input.send_keys(Keys.ENTER)
 
 # ======== Entered Main Page ========
 
 # Wait for sidebar to appear
 
 wait = WebDriverWait(driver, 40)
-menu_link = wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, 'li.treeview.a-2 > a')))
+menu_link = wait.until(EC.element_to_be_clickable((By.XPATH, "//button[.//div[text()='Finance Management']]")))
 
 
 WebDriverWait(driver, 20).until(
@@ -94,7 +96,7 @@ time.sleep(2)
 menu_link.click()
 
 # Step 2: Wait for submenu item to be visible and clickable
-submenu_item = wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, 'li.as.done > a[href="deposit"]')))
+submenu_item = wait.until(EC.element_to_be_clickable((By.XPATH, "//a[span[@class='bullet-point'] and text()='Deposit']")))
 submenu_item.click()
 
 
@@ -119,13 +121,19 @@ print("\033[94m[INFO] ajaxLoader complete\033[0m")
 
 time.sleep(2)
 
-# Wait for the <select> element to be present
-status_select_element = WebDriverWait(driver, 20).until(
-    EC.presence_of_element_located((By.ID, "status"))
+# Wait for the Status dropdown to be present and click it to open
+status_dropdown = WebDriverWait(driver, 20).until(
+    EC.element_to_be_clickable((By.XPATH, "//div[@class='label' and text()='Status']/following-sibling::div//div[contains(@class,'o-input-wrapper')]"))
 )
+status_dropdown.click()
 
-select = Select(status_select_element)
-select.select_by_visible_text("Approved")
+# Wait for dropdown to be open and select "Approved"
+time.sleep(1)  # Give dropdown time to fully open
+approved_option = WebDriverWait(driver, 10).until(
+    EC.element_to_be_clickable((By.XPATH, "//*[contains(text(),'Approved')]"))
+)
+approved_option.click()
+print("[INFO] Clicked on Approved option")
 
 # Select date section
 
@@ -150,20 +158,55 @@ print("\033[94m[INFO] Table load complete\033[0m")
 def extract_transaction_data(driver, wait_timeout=20):
     """Waits for transaction table rows to appear and extracts structured data."""
     
-    # Wait until at least one row exists
+    # Debug: Find what table elements exist
+    print("[DEBUG] Looking for table elements...")
+    tables = driver.find_elements(By.TAG_NAME, "table")
+    print(f"[DEBUG] Found {len(tables)} table elements")
+    
+    for i, table in enumerate(tables):
+        class_name = table.get_attribute("class") or "no-class"
+        print(f"[DEBUG] Table {i+1}: class='{class_name}'")
+    
+    # Try different table selectors - focus on the main data table
+    selectors_to_try = [
+        "table.tableInfo tbody tr",
+        "table.new_data-table tbody tr",
+        "table tbody tr", 
+        ".table tbody tr",
+        "tbody tr"
+    ]
+    
+    rows = []
+    working_selector = None
+    
+    for selector in selectors_to_try:
+        print(f"[DEBUG] Trying selector: {selector}")
+        test_rows = driver.find_elements(By.CSS_SELECTOR, selector)
+        print(f"[DEBUG] Found {len(test_rows)} rows with selector: {selector}")
+        if len(test_rows) > 0:
+            rows = test_rows
+            working_selector = selector
+            print(f"[SUCCESS] Using selector: {selector}")
+            break
+    
+    if not rows:
+        print("[ERROR] No table rows found with any selector!")
+        return {}
+    
+    # Wait until at least one row exists with the working selector
     WebDriverWait(driver, wait_timeout).until(
-        lambda d: len(d.find_elements(By.CSS_SELECTOR, "table.tableInfo tbody tr")) > 0
+        lambda d: len(d.find_elements(By.CSS_SELECTOR, working_selector)) > 0
     )
 
-    rows = driver.find_elements(By.CSS_SELECTOR, "table.tableInfo tbody tr")
-    print(f"[INFO] Total rows found: {len(rows)}")
+    rows = driver.find_elements(By.CSS_SELECTOR, working_selector)
+    print(f"[INFO] Total rows found: {len(rows)} using selector: {working_selector}")
 
     gateway_groups = defaultdict(list)
 
     for idx in range(len(rows)):
         try:
             # Re-find rows to avoid stale element reference
-            current_rows = driver.find_elements(By.CSS_SELECTOR, "table.tableInfo tbody tr")
+            current_rows = driver.find_elements(By.CSS_SELECTOR, working_selector)
             if idx >= len(current_rows):
                 print(f"[WARNING] Row {idx + 1} no longer exists. Skipping.")
                 continue
@@ -171,13 +214,26 @@ def extract_transaction_data(driver, wait_timeout=20):
             row = current_rows[idx]
             cols = row.find_elements(By.TAG_NAME, 'td')
             
-            if len(cols) < 22:
+            # Debug: Print column structure for first few rows
+            if idx < 3:
+                print(f"[DEBUG] Row {idx + 1} has {len(cols)} columns:")
+                for i, col in enumerate(cols):
+                    col_text = col.text.strip()[:50]  # First 50 chars
+                    print(f"  Col {i}: '{col_text}'")
+            
+            if len(cols) < 5:  # Reduce minimum column requirement
                 print(f"[WARNING] Row {idx + 1} has only {len(cols)} columns. Skipping.")
+                continue
+            
+            # Filter out summary rows
+            first_col_text = cols[0].text.strip() if len(cols) > 0 else ""
+            if "Page Summary" in first_col_text or "Total Summary" in first_col_text:
+                print(f"[INFO] Skipping summary row: '{first_col_text}'")
                 continue
 
             try:
                 # Parse amount with soft error handling
-                amount_text = cols[10].text.strip().replace("Rs", "").replace(",", "").strip()
+                amount_text = cols[9].text.strip().replace("Rs", "").replace(",", "").strip()
                 try:
                     amount = float(amount_text) if amount_text else 0.0
                 except ValueError:
@@ -185,7 +241,7 @@ def extract_transaction_data(driver, wait_timeout=20):
                     amount = 0.0
                 
                 # Parse tax fee with soft error handling
-                tax_text = cols[13].text.strip().replace(",", "")
+                tax_text = cols[12].text.strip().replace(",", "")
                 try:
                     tax_fee = float(tax_text) if tax_text else 0.0
                 except ValueError:
@@ -195,7 +251,7 @@ def extract_transaction_data(driver, wait_timeout=20):
                 record = {
                     "Gateway": cols[21].text.strip() if len(cols) > 21 else "Unknown",
                     "Order ID": cols[0].text.strip(),
-                    "Phone Number": cols[6].text.strip(),
+                    "Phone Number": cols[5].text.strip(),
                     "Amount": amount,
                     "Time": cols[20].text.strip() if len(cols) > 20 else "",
                     "Tax Fee": tax_fee
@@ -232,12 +288,18 @@ def print_grouped_results(gateway_groups):
             print(f"\033[92m{header}\033[0m")
             f.write(header)
 
-            # Sort records by time (latest first)
-            sorted_records = sorted(
-                records,
-                key=lambda r: datetime.strptime(r["Time"], "%Y-%m-%d %H:%M:%S"),
-                reverse=True
-            )
+            # Sort records by time (latest first) with error handling
+            def safe_parse_time(record):
+                try:
+                    if record["Time"] and record["Time"].strip():
+                        return datetime.strptime(record["Time"], "%Y-%m-%d %H:%M:%S")
+                    else:
+                        return datetime.min  # Put records with no time at the end
+                except ValueError:
+                    print(f"[WARNING] Invalid time format: '{record['Time']}'")
+                    return datetime.min
+
+            sorted_records = sorted(records, key=safe_parse_time, reverse=True)
 
             for i, record in enumerate(sorted_records, 1):
                 # print(f"[DEBUG] Record {i} in {gateway}: {record}")  
@@ -267,7 +329,13 @@ def print_grouped_results(gateway_groups):
         for gateway, records in gateway_groups.items():
             total_tax_amount = round(sum(float(record["Tax Fee"]) for record in records), 2)
             # Extract date from the first record's time (assuming all records are from same date)
-            transaction_date = datetime.strptime(records[0]["Time"], "%Y-%m-%d %H:%M:%S").strftime("%d/%m/%Y")
+            try:
+                if records[0]["Time"] and records[0]["Time"].strip():
+                    transaction_date = datetime.strptime(records[0]["Time"], "%Y-%m-%d %H:%M:%S").strftime("%d/%m/%Y")
+                else:
+                    transaction_date = "Unknown"
+            except (ValueError, IndexError):
+                transaction_date = "Unknown"
             gateway_tax_line = f"(depo) pg {gateway} {transaction_date} | Total Fee: Rs {total_tax_amount:.2f}\n"
             print(f"\033[95m{gateway_tax_line}\033[0m")
             f.write(gateway_tax_line)
@@ -277,7 +345,7 @@ def print_grouped_results(gateway_groups):
 def click_next_page(driver, wait_timeout=10):
     try:
         next_button = WebDriverWait(driver, wait_timeout).until(
-            EC.element_to_be_clickable((By.CSS_SELECTOR, "a.page-link.next"))
+            EC.element_to_be_clickable((By.CSS_SELECTOR, "div.ml-3 button"))
         )
         next_button.click()
         time.sleep(1)
