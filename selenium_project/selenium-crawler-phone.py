@@ -35,33 +35,36 @@ driver.maximize_window()
 
 
 
-driver.get("https://bo.backofficeltaj.com/")
+driver.get("https://v3-bo.backofficeltaj.com/en-us")
 
 wait = WebDriverWait(driver, 40)
-merchant_input = wait.until(EC.presence_of_element_located((By.ID, "mer_code")))
+merchant_input = wait.until(EC.presence_of_element_located((By.XPATH, "//input[@placeholder='Merchant Code']")))
 merchant_input.send_keys("lucky")
 
 wait = WebDriverWait(driver, 40)
-username_input = wait.until(EC.presence_of_element_located((By.ID, "username")))
-username_input.send_keys("test_8899")
+merchant_input = wait.until(EC.presence_of_element_located((By.XPATH, "//input[@placeholder='Username']")))
+merchant_input.send_keys("test_8899")
 
 wait = WebDriverWait(driver, 40)
-password_input = wait.until(EC.presence_of_element_located((By.ID, "password")))
-password_input.send_keys("Mcd6033035!")
+merchant_input = wait.until(EC.presence_of_element_located((By.XPATH, "//input[@placeholder='Password']")))
+merchant_input.send_keys("Mcd6033035!")
 
 
 
 
 
 def get_captcha_number(driver, timeout=40):
-    # Wait for the outer span with all digits to appear
+    # Wait for the outer div with all digits to appear
     wait = WebDriverWait(driver, timeout)
-    outer_span = wait.until(EC.presence_of_element_located((By.CLASS_NAME, "captchaNum")))
+    outer_div = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "div[data-v-450e3340].tracking-normal")))
     
     # Now safely collect child <span> elements
-    digits = outer_span.find_elements(By.TAG_NAME, "span")
+    digits = outer_div.find_elements(By.CSS_SELECTOR, "span[data-v-450e3340]")
     
-    return ''.join([d.text for d in digits])
+    captcha_text = ''.join([d.text for d in digits])
+    print(f"[DEBUG] Found {len(digits)} spans, captcha: {captcha_text}")
+    
+    return captcha_text
 
 
 
@@ -69,19 +72,19 @@ def get_captcha_number(driver, timeout=40):
 # Wait for CAPTCHA input field to appear
 
 wait = WebDriverWait(driver, 40)
-captcha_input = wait.until(EC.presence_of_element_located((By.ID, "captcha")))
+captcha_input = wait.until(EC.presence_of_element_located((By.XPATH, "//input[@placeholder='Captcha Code']")))
 captcha_code = get_captcha_number(driver)
 captcha_input.send_keys(captcha_code)
 
 print("\033[92mExtracted CAPTCHA:", captcha_code, "\033[0m")
-captcha_input.send_keys(captcha_code + Keys.ENTER)
+captcha_input.send_keys(Keys.ENTER)
 
 # ======== Entered Main Page ========
 
 # Wait for sidebar to appear
 
 wait = WebDriverWait(driver, 40)
-menu_link = wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, 'li.treeview.a-1 > a')))
+menu_link = wait.until(EC.element_to_be_clickable((By.XPATH, "//div[@class='sidebar-item-container']//button[.//div[text()='Member']]")))
 
 
 WebDriverWait(driver, 20).until(
@@ -94,7 +97,7 @@ time.sleep(2)
 menu_link.click()
 
 # Step 2: Wait for submenu item to be visible and clickable
-submenu_item = wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, 'li.as.done > a[href="member-info"]')))
+submenu_item = wait.until(EC.element_to_be_clickable((By.XPATH, "//a[span[@class='bullet-point'] and text()='Member Info']")))
 submenu_item.click()
 
 
@@ -125,12 +128,6 @@ print("⏸️ Paused for manual date selection.")
 input("👉 Please select the date manually in the browser, then press ENTER here to continue...")
 print("✅ Date selected, continuing...")
 
-# Wait for 'No Record' Icon dissapeared
-
-WebDriverWait(driver, 20).until(
-    EC.invisibility_of_element_located((By.CLASS_NAME, "box box-info no-record-holder"))
-)
-print("\033[94m[INFO] Table load complete\033[0m")
 
 
 # ======= Print Logic Here =======
@@ -141,13 +138,12 @@ phone_groups = defaultdict(list)
 def extract_phone_data(driver, wait_timeout=20):
     """Waits for transaction table rows to appear and extracts phone/email/affiliate data."""
 
+    # Wait until at least one row exists
     WebDriverWait(driver, wait_timeout).until(
-        lambda d: len(d.find_elements(By.CSS_SELECTOR, "table.tableInfo tbody tr")) > 0
+        lambda d: len(d.find_elements(By.CSS_SELECTOR, "table tbody tr")) > 0
     )
-    print("[INFO] Table load complete")
 
-    # ⛔ DON'T STORE OLD references
-    rows = driver.find_elements(By.CSS_SELECTOR, "table.tableInfo tbody tr")
+    rows = driver.find_elements(By.CSS_SELECTOR, "table tbody tr")
     print(f"[INFO] Total rows found: {len(rows)}")
 
     grouped = defaultdict(list)
@@ -155,30 +151,45 @@ def extract_phone_data(driver, wait_timeout=20):
 
     for idx in range(len(rows)):
         try:
-            # ✅ Re-fetch row to avoid stale reference
-            rows = driver.find_elements(By.CSS_SELECTOR, "table.tableInfo tbody tr")
-            row = rows[idx]
+            # Re-find rows to avoid stale element reference
+            current_rows = driver.find_elements(By.CSS_SELECTOR, "table tbody tr")
+            if idx >= len(current_rows):
+                print(f"[WARNING] Row {idx + 1} no longer exists. Skipping.")
+                continue
+                
+            row = current_rows[idx]
             cols = row.find_elements(By.TAG_NAME, 'td')
-
-            if len(cols) < 19:
-                print(f"[WARNING] Row {idx+1} has only {len(cols)} columns. Skipping.")
+            
+            if len(cols) < 5:  # Reduce minimum column requirement
+                print(f"[WARNING] Row {idx + 1} has only {len(cols)} columns. Skipping.")
+                continue
+            
+            # Filter out summary rows
+            first_col_text = cols[0].text.strip() if len(cols) > 0 else ""
+            if "Page Summary" in first_col_text or "Total Summary" in first_col_text:
+                print(f"[INFO] Skipping summary row: '{first_col_text}'")
                 continue
 
-            phone_number = cols[16].text.strip()
-            email = cols[18].text.strip()
-            affiliate_code = cols[6].text.strip()
+            try:
+                phone_number = cols[12].text.strip() if len(cols) > 12 else ""
+                email = cols[14].text.strip() if len(cols) > 14 else ""
+                affiliate_code = cols[5].text.strip() if len(cols) > 5 else ""
 
-            if phone_number and phone_number not in seen_numbers:
-                record = {
-                    "Phone Number": phone_number,
-                    "Email": email,
-                    "Affiliate Code": affiliate_code
-                }
-                grouped["All"].append(record)
-                seen_numbers.add(phone_number)
+                if phone_number and phone_number not in seen_numbers:
+                    record = {
+                        "Phone Number": phone_number,
+                        "Email": email,
+                        "Affiliate Code": affiliate_code
+                    }
+                    grouped["All"].append(record)
+                    seen_numbers.add(phone_number)
 
+            except Exception as e:
+                print(f"[ERROR] Failed to parse data in row {idx + 1}: {e}")
+                continue
+                
         except Exception as e:
-            print(f"[ERROR] Failed processing row {idx+1}: {e}")
+            print(f"[ERROR] Stale element or other error in row {idx + 1}: {e}")
             continue
 
     return grouped
@@ -210,8 +221,9 @@ def print_grouped_phone_results(grouped_data):
 
 def click_next_page(driver, wait_timeout=10):
     try:
+        # Search for next button specifically outside the sidebar area (in main content)
         next_button = WebDriverWait(driver, wait_timeout).until(
-            EC.element_to_be_clickable((By.CSS_SELECTOR, "a.page-link.next"))
+            EC.element_to_be_clickable((By.CSS_SELECTOR, "div:not([data-v-2b4fab24]) div.ml-3 button"))
         )
         next_button.click()
         time.sleep(1)
