@@ -1,40 +1,24 @@
 
+==== Test (24 records) | Total Amount: Rs 21,400.00 | Total Fee: Rs 1284.00 ====
 
-
-==== CPUPAY (4 records) | Total Amount: Rs 2,000.00 | Total Fee: Rs 160.00 ====
-
-Record #1
-Order ID: LTJPD99969
-Phone Number: 917018798771
-Amount: 500.00
-Time: 2025-08-12 13:41:48
-
-Record #2
-Order ID: LTJPD99923
-Phone Number: 917018798771
-Amount: 500.00
-Time: 2025-08-12 12:43:09
 
 Record #3
-Order ID: LTJPD99920
-Phone Number: 919671987288
-Amount: 500.00
-Time: 2025-08-12 12:35:57
-
-Record #4
-Order ID: LTJPD99916
-Phone Number: 917018798771
-Amount: 500.00
-Time: 2025-08-12 12:24:21
-
->> Total Amount for CPUPAY: Rs 2,000.00
+Order ID: LTJPD103418
+Phone Number: 917005797191
+Amount: 2,000.00
+Time: 2025-08-17 19:02:19
 
 
-==== GRAND TOTAL for All Gateways: Rs 66,150.00 | Total Records: 95 ====
 
-(depo) pg PASSPAY 12/08/2025 | Total Fee: Rs 477.00
-(depo) pg SKPAY 12/08/2025 | Total Fee: Rs 1819.20
-(depo) pg OSPAY 12/08/2025 | Total Fee: Rs 337.50
-(depo) pg XYPAY 12/08/2025 | Total Fee: Rs 396.00
-(depo) pg CPUPAY 12/08/2025 | Total Fee: Rs 160.00
-(depo) pg VADERPAY 12/08/2025 | Total Fee: Rs 84.00
+
+==== GRAND TOTAL for All Gateways: Rs 109,710.00 | Total Records: 156 ====
+
+(depo) pg MULTIPAY 17/08/2025 | Total Fee: Rs 1284.00
+(depo) pg VADERPAY 17/08/2025 | Total Fee: Rs 759.36
+(depo) pg PASSPAY 17/08/2025 | Total Fee: Rs 302.10
+(depo) pg SKPAY 17/08/2025 | Total Fee: Rs 1212.00
+(depo) pg BOPAY 17/08/2025 | Total Fee: Rs 288.00
+(depo) pg OSPAY 17/08/2025 | Total Fee: Rs 225.00
+(depo) pg YTPAY 17/08/2025 | Total Fee: Rs 294.00
+(depo) pg CPUPAY 17/08/2025 | Total Fee: Rs 1928.00
+(depo) pg BOMBAYPAY 17/08/2025 | Total Fee: Rs 275.00

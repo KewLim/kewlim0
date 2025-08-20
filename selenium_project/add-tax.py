@@ -76,6 +76,7 @@ def smart_click(element, verify_callback=None):
             # Wait for overlays to disappear
             if wait_for_overlay_to_disappear(driver, max_wait=10):
                 print("[INFO] Overlays cleared, trying JS click...")
+                element.send_keys(Keys.ENTER)
                 try:
                     driver.execute_script("arguments[0].click();", element)
                     if verify_callback:
