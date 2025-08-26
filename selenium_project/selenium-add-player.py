@@ -82,7 +82,23 @@ def smart_click(element, verify_callback=None):
                 return True
         raise click_error
 
-
+def click_bank_transactions_link(driver, timeout=5):
+    """
+    Waits up to `timeout` seconds for the bank transactions link to appear,
+    then clicks it. Returns True if clicked, False otherwise.
+    """
+    try:
+        link = WebDriverWait(driver, timeout).until(
+            EC.element_to_be_clickable(
+                (By.XPATH, "//a[@href='https://www.rocketgo.asia/op/bank-transactions']")
+            )
+        )
+        link.click()
+        print("[LOG] Clicked Bank Transactions link.")
+        return True
+    except TimeoutException:
+        print("[LOG] Bank Transactions link not found within timeout.")
+        return False
 
 
 profile_path = "/Users/admin/Library/Application Support/Firefox/Profiles/7oz304au.default-release"
@@ -111,6 +127,11 @@ username_input.send_keys("Admin_Json")
 wait = WebDriverWait(driver, 40)
 password_input = wait.until(EC.presence_of_element_located((By.NAME, "password")))
 password_input.send_keys("json8888"+ Keys.ENTER)
+
+time.sleep(2)
+
+click_bank_transactions_link(driver)
+wait_for_overlay_to_disappear(driver, max_wait=5)
 
 try:
     WebDriverWait(driver, 20, poll_frequency=0.2).until_not(
