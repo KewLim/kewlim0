@@ -56,10 +56,10 @@ merchant_input.send_keys("Mcd6033035!")
 def get_captcha_number(driver, timeout=40):
     # Wait for the outer div with all digits to appear
     wait = WebDriverWait(driver, timeout)
-    outer_div = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "div[data-v-450e3340].tracking-normal")))
+    outer_div = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "div[data-v-d44363e6].tracking-normal")))
     
     # Now safely collect child <span> elements
-    digits = outer_div.find_elements(By.CSS_SELECTOR, "span[data-v-450e3340]")
+    digits = outer_div.find_elements(By.CSS_SELECTOR, "span[data-v-d44363e6]")
     
     captcha_text = ''.join([d.text for d in digits])
     print(f"[DEBUG] Found {len(digits)} spans, captcha: {captcha_text}")

@@ -204,13 +204,7 @@ def add_player_details(record):
     print(f"Processing Record: {record}")
 
     # Wait for any overlay to disappear
-    try:
-        WebDriverWait(driver, 10).until_not(
-            EC.presence_of_element_located((By.CSS_SELECTOR, "div.absolute.inset-0"))
-        )
-        print("[INFO] Overlay disappeared")
-    except TimeoutException:
-        print("[WARN] Overlay still present, trying to proceed")
+
 
     time.sleep(1)
     wait = WebDriverWait(driver, 20)
