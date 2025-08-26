@@ -13,6 +13,8 @@ from datetime import datetime
 from collections import defaultdict
 import re
 from selenium.webdriver import ActionChains
+from selenium.common.exceptions import TimeoutException
+
 
 
 def wait_for_overlay_to_disappear(driver, max_wait=5):
@@ -221,7 +223,21 @@ def verify_calendar_opened(driver):
     except:
         return False
 
-
+def check_player_id_toast(driver, timeout=10):
+    """
+    Waits up to `timeout` seconds to see if the 'player id field is required' toast appears.
+    Prints log if found, returns True/False.
+    """
+    try:
+        toast = WebDriverWait(driver, timeout).until(
+            EC.presence_of_element_located(
+                (By.XPATH, "//div[contains(@class, 'toastify') and contains(text(), 'The player id field is required.')]")
+            )
+        )
+        print("[LOG] Toast appeared: Player ID field is required.")
+        return True
+    except TimeoutException:
+        return False
 
 
 
@@ -593,25 +609,24 @@ def add_transaction_details(record):
     
     time.sleep(0.5)
     
-    # Submit the form by finding and clicking the submit button
-    try:
-        submit_button = WebDriverWait(driver, 10).until(
-            EC.element_to_be_clickable((By.XPATH, "//button[contains(text(), 'Submit') or contains(text(), 'Save') or contains(text(), 'Add') or @type='submit']"))
-        )
-        smart_click(submit_button)
-        print("[INFO] Form submitted via submit button")
-    except Exception as e:
-        print(f"[WARN] Could not find submit button, trying alternative approaches: {e}")
-        # Fallback: try to submit form using Enter key on a form element
-        try:
-            form_inputs = driver.find_elements(By.CSS_SELECTOR, "input, textarea")
-            if form_inputs:
-                form_inputs[0].send_keys(Keys.ENTER)
-                print("[INFO] Form submitted via Enter key on input")
-        except Exception as e2:
-            print(f"[ERROR] Could not submit form: {e2}")
-    
-    time.sleep(.5)
+    # Check for player ID toast after form submission
+    if check_player_id_toast(driver):
+        print("\033[91m[WARN]\033[0m Player ID field validation failed - form not submitted")
+        
+        # Try pressing Enter up to 3 times with 2s interval
+        for attempt in range(5):
+            try:
+                body = driver.find_element(By.TAG_NAME, "body")
+                body.send_keys(Keys.ENTER)
+                print(f"[INFO] Sent ENTER key to dismiss toast (attempt {attempt+1}/3)")
+                time.sleep(3)
+            except Exception as e:
+                print(f"[ERROR] Could not send ENTER key: {e}")
+    else:
+        print("[INFO] No player ID toast detected - form submission successful")
+
+
+    time.sleep(0.5)
 
 
 
