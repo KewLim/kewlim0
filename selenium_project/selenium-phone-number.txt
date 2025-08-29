@@ -1,15 +1,11 @@
 
-==== All (39 records) ====
-#1 - Phone: 919712402271, Email: -, Affiliate: APK006
-#2 - Phone: 916294214197, Email: -, Affiliate: APK008
-#3 - Phone: 917907750671, Email: -, Affiliate: APK008
-#4 - Phone: 918617631165, Email: -, Affiliate: APK008
-#5 - Phone: 919101058431, Email: -, Affiliate: APK008
-#6 - Phone: 917007360502, Email: -, Affiliate: APK008
-#7 - Phone: 918509488963, Email: -, Affiliate: APK008
-#8 - Phone: 919991195599, Email: -, Affiliate: APK008
-#9 - Phone: 919336890826, Email: -, Affiliate: Melody01
+==== All (57 records) ====
+#1 - Phone: 919883369086, Email: -, Affiliate: APK006
+#2 - Phone: 919394932346, Email: -, Affiliate: FBPWA0001
+#3 - Phone: 918597691370, Email: -, Affiliate: FBPWA0001
+#4 - Phone: 918875965351, Email: -, Affiliate: FBPWA0001
+#5 - Phone: 917861079707, Email: -, Affiliate: FBPWA0001
+#6 - Phone: 919156504968, Email: -, Affiliate: APK008
+#7 - Phone: 919628663968, Email: -, Affiliate: FBPWA0001
 
-
-
-==== TOTAL: 39 phone numbers collected ====
+==== TOTAL: 57 phone numbers collected ====

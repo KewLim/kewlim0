@@ -275,7 +275,7 @@ def add_player_details(record):
     except Exception as e:
         print(f"[ERROR] Could not submit form with Enter key: {e}")
     
-    time.sleep(2)
+    time.sleep(6)
 
 
 

@@ -1,89 +1,19 @@
 
-==== YTPAY (2 records) | Total Amount: Rs 1,000.00 | Total Fee: Rs 42.00 ====
+==== BOPAY (6 records) | Total Amount: Rs 31,250.00 | Total Fee: Rs 973.50 ====
 
 Record #1
-Order ID: LTJPW8075
-Phone Number: 919805174738
-Amount: 500.00
-Time: 2025-08-26 19:12:23
-
-Record #2
-Order ID: LTJPW8068
-Phone Number: 918054969651
-Amount: 500.00
-Time: 2025-08-26 16:29:07
-
->> Total Amount for YTPAY: Rs 1,000.00
-
-==== VADERPAY (2 records) | Total Amount: Rs 12,550.00 | Total Fee: Rs 463.80 ====
-
-Record #1
-Order ID: LTJPW8060
-Phone Number: 919629201064
-Amount: 10,000.00
-Time: 2025-08-26 20:02:45
-
-Record #2
-Order ID: LTJPW8073
-Phone Number: 918102211876
-Amount: 2,550.00
-Time: 2025-08-26 18:32:51
-
->> Total Amount for VADERPAY: Rs 12,550.00
-
-==== SKPAY (5 records) | Total Amount: Rs 11,800.00 | Total Fee: Rs 384.00 ====
-
-Record #1
-Order ID: LTJPW8070
-Phone Number: 917340521869
-Amount: 2,800.00
-Time: 2025-08-26 19:28:06
-
-Record #2
-Order ID: LTJPW8069
-Phone Number: 918431232255
-Amount: 500.00
-Time: 2025-08-26 19:26:11
-
-Record #3
-Order ID: LTJPW8066
-Phone Number: 919467430371
-Amount: 1,500.00
-Time: 2025-08-26 14:21:59
-
-Record #4
-Order ID: LTJPW8064
-Phone Number: 919436016450
+Order ID: LTJPW8141
+Phone Number: 917628090395
 Amount: 2,000.00
-Time: 2025-08-26 14:09:58
+Time: 2025-08-28 20:41:37
 
-Record #5
-Order ID: LTJPW8059
-Phone Number: 919886540393
-Amount: 5,000.00
-Time: 2025-08-26 13:20:08
 
->> Total Amount for SKPAY: Rs 11,800.00
 
-==== OSPAY (2 records) | Total Amount: Rs 4,100.00 | Total Fee: Rs 135.00 ====
 
-Record #1
-Order ID: LTJPW8065
-Phone Number: 919886540393
-Amount: 2,300.00
-Time: 2025-08-26 13:56:47
 
-Record #2
-Order ID: LTJPW8063
-Phone Number: 918619922300
-Amount: 1,800.00
-Time: 2025-08-26 11:41:41
+==== GRAND TOTAL for All Gateways: Rs 68,550.00 | Total Records: 22 ====
 
->> Total Amount for OSPAY: Rs 4,100.00
-
-==== GRAND TOTAL for All Gateways: Rs 29,450.00 | Total Records: 11 ====
-
-(wd) pg YTPAY 26/08/2025 | Total Fee: Rs 42.00
-(wd) pg VADERPAY 26/08/2025 | Total Fee: Rs 463.80
-(wd) pg SKPAY 26/08/2025 | Total Fee: Rs 384.00
-(wd) pg OSPAY 26/08/2025 | Total Fee: Rs 135.00
+(wd) pg BOPAY 28/08/2025 | Total Fee: Rs 973.50
+(wd) pg SKPAY 28/08/2025 | Total Fee: Rs 450.00
+(wd) pg OSPAY 28/08/2025 | Total Fee: Rs 363.00
+(wd) pg VADERPAY 28/08/2025 | Total Fee: Rs 475.20
