@@ -99,6 +99,23 @@ def click_bank_transactions_link(driver, timeout=5):
     except TimeoutException:
         print("[LOG] Bank Transactions link not found within timeout.")
         return False
+    
+
+def check_player_id_toast(driver, timeout=10):
+    """
+    Waits up to `timeout` seconds to see if the 'player id field is required' toast appears.
+    Prints log if found, returns True/False.
+    """
+    try:
+        toast = WebDriverWait(driver, timeout).until(
+            EC.presence_of_element_located(
+                (By.XPATH, "//div[contains(@class, 'toastify') and contains(text(), 'successfully added')]")
+            )
+        )
+        print("[LOG] Toast appeared: Player ID updated successfully.")
+        return True
+    except TimeoutException:
+        return False
 
 
 profile_path = "/Users/admin/Library/Application Support/Firefox/Profiles/7oz304au.default-release"
@@ -274,8 +291,32 @@ def add_player_details(record):
         print("[INFO] Form submitted via Enter key")
     except Exception as e:
         print(f"[ERROR] Could not submit form with Enter key: {e}")
+
+
+    # time.sleep(2)
+
+        # Check for player ID toast after form submission
+    if check_player_id_toast(driver):
+        print("\033[92m[APPROVED]\033[0m Player ID form done submitted")
+        
+        
+    else:
+        print("\033[91m[WARN]\033Player ID not added - form submission failed")
+        # Try pressing Enter up to 5 times with 2s interval
+        for attempt in range(5):
+            try:
+                body = driver.find_element(By.TAG_NAME, "body")
+                body.send_keys(Keys.ENTER)
+                print(f"[INFO] Sent ENTER key to dismiss toast (attempt {attempt+1}/5)")
+                time.sleep(3)
+            except Exception as e:
+                print(f"[ERROR] Could not send ENTER key: {e}")
     
-    time.sleep(6)
+
+
+    time.sleep(0.5)
+    
+    # time.sleep(6)
 
 
 
