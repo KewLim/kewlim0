@@ -314,7 +314,7 @@ def add_player_details(record):
     
 
 
-    time.sleep(0.5)
+    time.sleep(3)
     
     # time.sleep(6)
 
